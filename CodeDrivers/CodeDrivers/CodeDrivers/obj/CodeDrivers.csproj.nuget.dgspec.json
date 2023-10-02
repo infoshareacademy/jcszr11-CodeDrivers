@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mprus\\Desktop\\CodeDrivers\\CodeDrivers\\CodeDrivers\\CodeDrivers.csproj": {}
+    "C:\\Users\\Janek\\Desktop\\Code Drivers\\CodeDrivers\\CodeDrivers\\CodeDrivers\\CodeDrivers.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mprus\\Desktop\\CodeDrivers\\CodeDrivers\\CodeDrivers\\CodeDrivers.csproj": {
+    "C:\\Users\\Janek\\Desktop\\Code Drivers\\CodeDrivers\\CodeDrivers\\CodeDrivers\\CodeDrivers.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mprus\\Desktop\\CodeDrivers\\CodeDrivers\\CodeDrivers\\CodeDrivers.csproj",
+        "projectUniqueName": "C:\\Users\\Janek\\Desktop\\Code Drivers\\CodeDrivers\\CodeDrivers\\CodeDrivers\\CodeDrivers.csproj",
         "projectName": "CodeDrivers",
-        "projectPath": "C:\\Users\\mprus\\Desktop\\CodeDrivers\\CodeDrivers\\CodeDrivers\\CodeDrivers.csproj",
-        "packagesPath": "C:\\Users\\mprus\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mprus\\Desktop\\CodeDrivers\\CodeDrivers\\CodeDrivers\\obj\\",
+        "projectPath": "C:\\Users\\Janek\\Desktop\\Code Drivers\\CodeDrivers\\CodeDrivers\\CodeDrivers\\CodeDrivers.csproj",
+        "packagesPath": "C:\\Users\\Janek\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Janek\\Desktop\\Code Drivers\\CodeDrivers\\CodeDrivers\\CodeDrivers\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\mprus\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Janek\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -60,7 +55,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.308\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
