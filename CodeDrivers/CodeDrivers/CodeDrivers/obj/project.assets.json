@@ -8,23 +8,23 @@
     "net7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\mprus\\.nuget\\packages\\": {},
+    "C:\\Users\\Spazi\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mprus\\Desktop\\CodeDrivers\\CodeDrivers\\CodeDrivers\\CodeDrivers.csproj",
+      "projectUniqueName": "D:\\Projekty ISA\\jcszr11-CodeDrivers\\CodeDrivers\\CodeDrivers\\CodeDrivers\\CodeDrivers.csproj",
       "projectName": "CodeDrivers",
-      "projectPath": "C:\\Users\\mprus\\Desktop\\CodeDrivers\\CodeDrivers\\CodeDrivers\\CodeDrivers.csproj",
-      "packagesPath": "C:\\Users\\mprus\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mprus\\Desktop\\CodeDrivers\\CodeDrivers\\CodeDrivers\\obj\\",
+      "projectPath": "D:\\Projekty ISA\\jcszr11-CodeDrivers\\CodeDrivers\\CodeDrivers\\CodeDrivers\\CodeDrivers.csproj",
+      "packagesPath": "C:\\Users\\Spazi\\.nuget\\packages\\",
+      "outputPath": "D:\\Projekty ISA\\jcszr11-CodeDrivers\\CodeDrivers\\CodeDrivers\\CodeDrivers\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\mprus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Spazi\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -67,7 +67,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.308\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }
