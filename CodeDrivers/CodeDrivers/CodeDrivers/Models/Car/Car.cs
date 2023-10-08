@@ -20,22 +20,30 @@ namespace CodeDrivers.Models.Car
             BrandToModelsDict.TryAdd(Brand.Toyota, new List<string> { "Aygo", "Yaris", "Corolla", "RAV4" });
             BrandToModelsDict.TryAdd(Brand.VW, new List<string> { "up!", "Polo", "Golf", "Passat" });
         }
+        public Car()
+        {
+
+        }
+
         public Car(Brand brand)
         {
             this.BrandId = brand;
         }
-        public int Id { get; private set; }
+        
+        public int Id { get; set; }
         public string Type { get; set; }
         private Brand BrandId { get; set; }
         public string BrandName { get; set; }
+        public List<string> Models => BrandToModelsDict.First(f => f.Key == BrandId).Value;
         public string Model { get; set; }
         public string Segment { get; set; }
         public string GearTransmission { get; set; }
         public bool IsAvailable { get; set; }
 
         private static Dictionary<Brand, List<string>> BrandToModelsDict = new Dictionary<Brand, List<string>>();
-    }
 
+    }
+   
     // prywatny statyczny słownik
     // monotstate pattern
 }

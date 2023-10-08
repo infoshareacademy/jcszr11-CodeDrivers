@@ -10,30 +10,37 @@ namespace CodeDrivers.Repository
 {
     internal interface IRepository<T>
     {
-        IEnumerable<T> GetAll(IEnumerable<T> items);
-        IEnumerable<T> GetAllAvailable(IEnumerable<T> items);
+        IEnumerable<T> GetAll();
+        IEnumerable<T> GetAllAvailable();
         void DisplayAllItems(IEnumerable<T> items);
         void DisplayAllAvailableItems(IEnumerable<T> items);
 
     }
-    internal class ListHelper : IRepository<Car>
+    internal class CarListRepository : IRepository<Car>
     {
-        public IEnumerable<Car> GetAll(IEnumerable<Car> items)
+        //fake repo
+        private IEnumerable<Car> cars = new List<Car>
         {
-            return items; // Wiem, że na razie przepisuję jedną listę w drugą.
-        }
+            new Car { Id = 1, Type = "Osobowy", BrandName = Brand.Toyota.ToString(), Model = "Corolla", Segment = "C", IsAvailable = true},
+            new Car { Id = 2, Type = "Osobowy", BrandName = Brand.VW.ToString(), Model = "Polo", Segment = "B", IsAvailable = false}
+        };
 
-        public List<Car> GetAllAvailable(IEnumerable<Car> items)
+        public IEnumerable<Car> GetAll()
         {
-            var availableCars = items.Where(item => item.IsAvailable == true).ToList();
+            return cars;
+        }
+        public IEnumerable<Car> GetAllAvailable()
+        {
+            var availableCars = cars.Where(item => item.IsAvailable == true).ToList();
             return availableCars;
         }
+
         public void DisplayAllItems(IEnumerable<Car> items)
         {
             Console.WriteLine("Wszystkie samochody z naszej ofery: ");
             foreach (var item in items)
             {
-                Console.WriteLine(item.Id.ToString(), item.Type, item.BrandName, item.Model, item.Segment, item.GearTransmission, item.IsAvailable);
+                Console.WriteLine($"{item.Id.ToString()}. {item.Type}: {item.BrandName}, {item.Model}, {item.Segment}, {item.GearTransmission}, {item.IsAvailable}");
             }
         }
         public void DisplayAllAvailableItems(IEnumerable<Car> items)
@@ -44,8 +51,6 @@ namespace CodeDrivers.Repository
                 Console.WriteLine(item.Id.ToString(), item.Type, item.BrandName, item.Model, item.Segment, item.GearTransmission, item.IsAvailable);
             }
         }
-
-
     }
     //Lista dodanych samochodów będzie możliwa do wyświetlenia dla admina i usera.
     //Marka, model, kategoria (male, rodzinne, dostawcze), rodzaj paliwa, cena wynajmu/dzien, KM , skrzynia biegow,elektryczne/spalinowe
