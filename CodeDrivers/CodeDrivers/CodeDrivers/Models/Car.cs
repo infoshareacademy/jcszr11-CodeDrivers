@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace CodeDrivers.Models
 {
+    //https://stackoverflow.com/questions/887317/monostate-vs-singleton
+    // pattern describing using of private static variables in class
     internal class Car
     {
         public enum Brand
