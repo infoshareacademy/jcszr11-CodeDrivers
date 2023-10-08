@@ -8,9 +8,11 @@ namespace CodeDrivers.Models
 {
     internal class Car
     {
-        // zrobię - Janekl
+        // zrobię - Janek
         public int Id { get; set; }
         public string Brand { get; set; }
-        public string Model { get; set; }   
+        public string Model { get; set; }
+        public string Segment { get; set; }
+        public string Type { get; set; }
     }
 }
