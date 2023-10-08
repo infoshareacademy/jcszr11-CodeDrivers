@@ -8,5 +8,9 @@ namespace CodeDrivers.Models
 {
     internal class Car
     {
+        // zrobię - Janekl
+        public int Id { get; set; }
+        public string Brand { get; set; }
+        public string Model { get; set; }   
     }
 }

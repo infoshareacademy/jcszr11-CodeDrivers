@@ -11,7 +11,8 @@ namespace CodeDrivers
     {
         private List<Car> CarInventory; 
 
-        public CarInventoryEditor(List<Car> carInventory) { 
+        public CarInventoryEditor(List<Car> carInventory) 
+        { 
           CarInventory = carInventory;
         } 
 
@@ -19,7 +20,7 @@ namespace CodeDrivers
         {
             Car result = CarInventory.Find(car => car.Id == id);
 
-            if(result !=null)
+            if(result != null)
             {
                 message = $"Product with {id} was found";
             }
@@ -89,9 +90,9 @@ namespace CodeDrivers
 
         public bool EditMotorType(int id, MotorType newMotorType, out string errorMessage)
         {
-            Car sarchResult = FindById(id, out errorMessage);
+            Car existingCar = FindById(id, out errorMessage);
 
-            if (sarchResult != null)
+            if (existingCar != null)
             {
                 // ustawianie typu silnika 
                 return true;
