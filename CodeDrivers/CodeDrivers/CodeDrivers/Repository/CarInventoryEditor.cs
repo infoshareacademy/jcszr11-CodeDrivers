@@ -4,23 +4,24 @@ using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
+using CodeDrivers.Models.Car;
 
-namespace CodeDrivers
+namespace CodeDrivers.Repository
 {
     internal class CarInventoryEditor : ICarEditor
     {
-        private List<Car> CarInventory; 
+        private List<Car> CarInventory;
 
-        public CarInventoryEditor(List<Car> carInventory) 
-        { 
-          CarInventory = carInventory;
-        } 
+        public CarInventoryEditor(List<Car> carInventory)
+        {
+            CarInventory = carInventory;
+        }
 
         private Car FindById(int id, out string message)
         {
             Car result = CarInventory.Find(car => car.Id == id);
 
-            if(result != null)
+            if (result != null)
             {
                 message = $"Product with {id} was found";
             }
@@ -36,7 +37,8 @@ namespace CodeDrivers
         {
             Car sarchResult = FindById(id);
 
-            if (sarchResult != null) { 
+            if (sarchResult != null)
+            {
                 // ustawianie marki
                 return true;
             }
@@ -55,8 +57,8 @@ namespace CodeDrivers
 
         public bool EditGearType(int id, GearType newGearType, out string errorMessage)
         {
-            
-            Car sarchResult = FindById(id,out errorMessage);
+
+            Car sarchResult = FindById(id, out errorMessage);
 
             if (sarchResult != null)
             {
@@ -78,12 +80,12 @@ namespace CodeDrivers
 
             if (sarchResult != null && newMotorPower > 0)
             {
-                
+
                 return true;
             }
-            if(newMotorPower <=0)
+            if (newMotorPower <= 0)
             {
-                errorMessage = "Motor power has to be greater than 0"; 
+                errorMessage = "Motor power has to be greater than 0";
             }
             return false;
         }

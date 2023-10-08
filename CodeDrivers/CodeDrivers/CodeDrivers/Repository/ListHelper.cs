@@ -1,11 +1,12 @@
-﻿using System;
+﻿using CodeDrivers.Models.Car;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeDrivers
+namespace CodeDrivers.Repository
 {
     internal interface IRepository<T>
     {
@@ -13,7 +14,7 @@ namespace CodeDrivers
         IEnumerable<T> GetAllAvailable(IEnumerable<T> items);
         void DisplayAllItems(IEnumerable<T> items);
         void DisplayAllAvailableItems(IEnumerable<T> items);
-       
+
     }
     internal class ListHelper : IRepository<Car>
     {
@@ -32,7 +33,7 @@ namespace CodeDrivers
             Console.WriteLine("Wszystkie samochody z naszej ofery: ");
             foreach (var item in items)
             {
-                Console.WriteLine(item.Id, item.Type, item.BrandName, item.Model, item.Segment, item.IsAutomatic, item.IsAvaiable);
+                Console.WriteLine(item.Id.ToString(), item.Type, item.BrandName, item.Model, item.Segment, item.GearTransmission, item.IsAvailable);
             }
         }
         public void DisplayAllAvailableItems(IEnumerable<Car> items)
@@ -40,7 +41,7 @@ namespace CodeDrivers
             Console.WriteLine("Samochody dostępne od ręki: ");
             foreach (var item in items)
             {
-                Console.WriteLine(item.Id, item.Type, item.BrandName, item.Model, item.Segment, item.IsAutomatic, item.IsAvaiable);
+                Console.WriteLine(item.Id.ToString(), item.Type, item.BrandName, item.Model, item.Segment, item.GearTransmission, item.IsAvailable);
             }
         }
 

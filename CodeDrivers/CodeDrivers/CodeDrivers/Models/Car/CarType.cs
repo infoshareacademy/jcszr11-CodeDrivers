@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeDrivers.Models
+namespace CodeDrivers.Models.Car
 {
-    internal class Users
+    public enum CarType
     {
+        Osobowy,
+        Użytkowy
     }
 }
