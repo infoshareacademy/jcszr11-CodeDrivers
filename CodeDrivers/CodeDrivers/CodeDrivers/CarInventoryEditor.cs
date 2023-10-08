@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,10 +15,31 @@ namespace CodeDrivers
           CarInventory = carInventory;
         } 
 
+        private Car FindById(int id, out string message)
+        {
+            Car result = CarInventory.Find(car => car.Id == id);
+
+            if(result !=null)
+            {
+                message = $"Product with {id} was found";
+            }
+            else
+            {
+                message = $"Product with {id} was not found";
+            }
+
+            return CarInventory.Find(car => car.Id == id);
+        }
 
         public bool EditBrand(int id, string brand)
         {
-            throw new NotImplementedException();
+            Car sarchResult = FindById(id);
+
+            if (sarchResult != null) { 
+                // ustawianie marki
+                return true;
+            }
+            return false;
         }
 
         public bool EditCategory(int id, string category)
@@ -30,9 +52,18 @@ namespace CodeDrivers
             throw new NotImplementedException();
         }
 
-        public bool EditGearTYpe(int id, string newGearType)
+        public bool EditGearType(int id, GearType newGearType, out string errorMessage)
         {
-            throw new NotImplementedException();
+            
+            Car sarchResult = FindById(id,out errorMessage);
+
+            if (sarchResult != null)
+            {
+                // ustawianie typu skrzyni 
+                return true;
+            }
+            return false;
+
         }
 
         public bool EditModel(int id, string model)
@@ -40,14 +71,33 @@ namespace CodeDrivers
             throw new NotImplementedException();
         }
 
-        public bool EditMotorPower(int id, int newMotorPower)
+        public bool EditMotorPower(int id, int newMotorPower, out string errorMessage)
         {
-            throw new NotImplementedException();
+            Car sarchResult = FindById(id, out errorMessage);
+
+            if (sarchResult != null && newMotorPower > 0)
+            {
+                
+                return true;
+            }
+            if(newMotorPower <=0)
+            {
+                errorMessage = "Motor power has to be greater than 0"; 
+            }
+            return false;
         }
 
-        public bool EditMotorType(int id, string newMotorType)
+        public bool EditMotorType(int id, MotorType newMotorType, out string errorMessage)
         {
-            throw new NotImplementedException();
+            Car sarchResult = FindById(id, out errorMessage);
+
+            if (sarchResult != null)
+            {
+                // ustawianie typu silnika 
+                return true;
+            }
+            return false;
+
         }
 
         public bool EditPrice(int id, decimal newPrice)
