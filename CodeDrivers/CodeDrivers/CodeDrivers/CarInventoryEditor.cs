@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CodeDrivers.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CodeDrivers
 {
-    internal class CarInventoryEditor : ICarEditor
+    internal class CarInventoryEditor 
     {
         private List<Car> CarInventory; 
 
@@ -16,7 +17,7 @@ namespace CodeDrivers
           CarInventory = carInventory;
         } 
 
-        private Car FindById(int id, out string message)
+        private Car FindById(int id, string message = null)
         {
             Car result = CarInventory.Find(car => car.Id == id);
 
@@ -53,10 +54,10 @@ namespace CodeDrivers
             throw new NotImplementedException();
         }
 
-        public bool EditGearType(int id, GearType newGearType, out string errorMessage)
+        public bool EditGearType(int id, GearType newGearType,  string errorMessage)
         {
             
-            Car sarchResult = FindById(id,out errorMessage);
+            Car sarchResult = FindById(id, errorMessage);
 
             if (sarchResult != null)
             {
@@ -71,10 +72,10 @@ namespace CodeDrivers
         {
             throw new NotImplementedException();
         }
-
+        /*
         public bool EditMotorPower(int id, int newMotorPower, out string errorMessage)
         {
-            Car sarchResult = FindById(id, out errorMessage);
+            Car sarchResult = FindById(id,  errorMessage);
 
             if (sarchResult != null && newMotorPower > 0)
             {
@@ -90,7 +91,7 @@ namespace CodeDrivers
 
         public bool EditMotorType(int id, MotorType newMotorType, out string errorMessage)
         {
-            Car existingCar = FindById(id, out errorMessage);
+            Car existingCar = FindById(id,  errorMessage);
 
             if (existingCar != null)
             {
@@ -105,5 +106,6 @@ namespace CodeDrivers
         {
             throw new NotImplementedException();
         }
+        */
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CodeDrivers.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
@@ -32,7 +33,7 @@ namespace CodeDrivers
             Console.WriteLine("Wszystkie samochody z naszej ofery: ");
             foreach (var item in items)
             {
-                Console.WriteLine(item.Id, item.Type, item.BrandName, item.Model, item.Segment, item.IsAutomatic, item.IsAvaiable);
+             //   Console.WriteLine(item.Id, item.Type, item.BrandName, item.Model, item.Segment, item.IsAutomatic, item.IsAvaiable);
             }
         }
         public void DisplayAllAvailableItems(IEnumerable<Car> items)
@@ -40,11 +41,14 @@ namespace CodeDrivers
             Console.WriteLine("Samochody dostępne od ręki: ");
             foreach (var item in items)
             {
-                Console.WriteLine(item.Id, item.Type, item.BrandName, item.Model, item.Segment, item.IsAutomatic, item.IsAvaiable);
+              //  Console.WriteLine(item.Id, item.Type, item.BrandName, item.Model, item.Segment, item.IsAutomatic, item.IsAvaiable);
             }
         }
 
-
+        IEnumerable<Car> IRepository<Car>.GetAllAvailable(IEnumerable<Car> items)
+        {
+            throw new NotImplementedException();
+        }
     }
     //Lista dodanych samochodów będzie możliwa do wyświetlenia dla admina i usera.
     //Marka, model, kategoria (male, rodzinne, dostawcze), rodzaj paliwa, cena wynajmu/dzien, KM , skrzynia biegow,elektryczne/spalinowe
