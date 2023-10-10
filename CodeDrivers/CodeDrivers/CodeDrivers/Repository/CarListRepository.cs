@@ -15,15 +15,26 @@ namespace CodeDrivers.Repository
         void DisplayAllItems(IEnumerable<T> items);
         void DisplayAllAvailableItems(IEnumerable<T> items);
 
+        bool Update(int id, Car updatesForCar, out string errorMessage);
+
+        Car GetById(int id); 
+
     }
     internal class CarListRepository : IRepository<Car>
     {
         //fake repo
-        private IEnumerable<Car> cars = new List<Car>
+        private List<Car> cars = new List<Car>
         {
             new Car { Id = 1, Type = "Osobowy", BrandName = Brand.Toyota.ToString(), Model = "Corolla", Segment = "C", IsAvailable = true},
             new Car { Id = 2, Type = "Osobowy", BrandName = Brand.VW.ToString(), Model = "Polo", Segment = "B", IsAvailable = false}
         };
+
+        private bool ValidateCar(Car updatesForCar, out string errorMessage)
+        {
+            errorMessage = "OK"; 
+
+            return true;
+        }
 
         public IEnumerable<Car> GetAll()
         {
@@ -49,6 +60,40 @@ namespace CodeDrivers.Repository
             foreach (var item in items)
             {
                 Console.WriteLine(item.Id.ToString(), item.Type, item.BrandName, item.Model, item.Segment, item.GearTransmission, item.IsAvailable);
+            }
+        }
+
+        public bool Update(int id, Car updatesForCar, out string errorMessage)
+        {
+            Car result = GetById(id, out errorMessage);
+
+            if (result != null) {
+                bool validation = ValidateCar(updatesForCar, out errorMessage);
+
+                if(validation)
+                {
+                    // tu robimy update obiektu 
+                    return true;
+                }
+
+                return false;
+            }
+            return false;
+        }
+
+        public Car GetById(int id, out string errorMessage)
+        {
+            Car result = cars.Find(car => car.Id == id);
+
+            if (result == null)
+            {
+                errorMessage = $"car with {id} was not found";
+                return null; 
+            }
+            else
+            {
+                errorMessage = "OK"; 
+                return result;
             }
         }
     }
