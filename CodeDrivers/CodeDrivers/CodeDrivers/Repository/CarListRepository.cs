@@ -18,7 +18,7 @@ namespace CodeDrivers.Repository
     }
     internal class CarListRepository : IRepository<Car>
     {
-        //fake repo
+        //fake repo - do implementacji, dopóki nie będziemy zasysali z bazy
         private IEnumerable<Car> cars = new List<Car>
         {
             new Car { Id = 1, Type = "Osobowy", BrandName = Brand.Toyota.ToString(), Model = "Corolla", Segment = "C", IsAvailable = true},
