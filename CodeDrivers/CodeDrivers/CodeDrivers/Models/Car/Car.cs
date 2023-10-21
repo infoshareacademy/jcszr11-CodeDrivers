@@ -39,6 +39,7 @@ namespace CodeDrivers.Models.Car
         public string Segment { get; set; }
         public string GearTransmission { get; set; }
         public bool IsAvailable { get; set; }
+        public decimal PricePerDay { get; set; }
 
         private static Dictionary<Brand, List<string>> BrandToModelsDict = new Dictionary<Brand, List<string>>();
 
