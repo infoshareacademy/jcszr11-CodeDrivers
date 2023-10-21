@@ -30,19 +30,19 @@ namespace CodeDrivers.Models.Car
             this.BrandId = brand;
         }
         
-        public int Id { get; set; }
-        public string Type { get; set; }
-        private Brand BrandId { get; set; }
-        public string BrandName { get; set; }
+        public int Id { get; set; } 
+        public string Type { get; set; } //gazozo
+        private Brand BrandId { get; set; } 
+        public string BrandName { get; set; }  //marka
         public List<string> Models => BrandToModelsDict.First(f => f.Key == BrandId).Value;
-        public string Model { get; set; }
-        public string Segment { get; set; }
-        public string GearTransmission { get; set; }
-        public bool IsAvailable { get; set; }
+        public string Model { get; set; } //model
+        public string Segment { get; set; } //klasa 
+        public string GearTransmission { get; set; } //skrzynia
+        public bool IsAvailable { get; set; } 
         public decimal PricePerDay { get; set; }
-
+        public int Traveled {  get; set; }
         private static Dictionary<Brand, List<string>> BrandToModelsDict = new Dictionary<Brand, List<string>>();
-
+        public int YearOfProduction { get; set; }
     }
    
     // prywatny statyczny słownik
