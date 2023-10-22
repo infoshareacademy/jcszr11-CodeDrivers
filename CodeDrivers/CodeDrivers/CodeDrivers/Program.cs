@@ -6,9 +6,9 @@ namespace CodeDrivers
     {
         static void Main(string[] args)
         {
-            Menu_tekstowe menu = new Menu_tekstowe("admin"); //Na start wyswietla panel menu
+            Menu_tekstowe menu = new Menu_tekstowe("user"); //Na start wyswietla panel menu
 
-            //var carRepo = new CarListRepository();
+            var carRepo = new CarListRepository();
             //var allCars = carRepo.GetAll();
             //var availableCars = carRepo.GetAllAvailable();
             //carRepo.DisplayAllItems(availableCars);

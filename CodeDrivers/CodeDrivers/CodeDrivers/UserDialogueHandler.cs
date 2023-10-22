@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CodeDrivers.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -78,6 +79,7 @@ namespace CodeDrivers
 		}
         void UserPanel() //Panel uzytkownika
         {
+			CarListRepository carListRepository = new CarListRepository();
             try
             {
 				Console.WriteLine("1: wyświetl auto");
@@ -97,7 +99,9 @@ namespace CodeDrivers
 				{
 					case 1:
 						Console.WriteLine("Wyswietl auto");
-						UserPanel();
+						carListRepository.DisplayAllItems(carListRepository.GetAllAvailable());
+                        Console.WriteLine("");
+                        UserPanel();
 						break;
 					case 2:
 						Console.WriteLine("Zmiana terminu rezerwacji");
