@@ -32,9 +32,6 @@ namespace CodeDrivers.Repository
         {
             cars.Add(new Car(CarBrand.Audi,"A1") { Id = SetId(), Segment = CarSegment.A, IsAvailable = true, PricePerDay = 60, GearTransmission = GearType.Manual });
             cars.Add(new Car(CarBrand.Toyota,"Aygo") { Id = SetId(), Segment = CarSegment.A, IsAvailable = true, PricePerDay = 135, GearTransmission = GearType.Manual });
-            cars.Add(new Car(CarBrand.Toyota,"Aygo") { Id = SetId(), Segment = CarSegment.A, IsAvailable = true, PricePerDay = 135, GearTransmission = GearType.Manual });
-            cars.Add(new Car(CarBrand.Toyota,"Aygo") { Id = SetId(), Segment = CarSegment.A, IsAvailable = true, PricePerDay = 135, GearTransmission = GearType.Manual });
-            cars.Add(new Car(CarBrand.Toyota,"Aygo") { Id = SetId(), Segment = CarSegment.A, IsAvailable = true, PricePerDay = 135, GearTransmission = GearType.Manual });
         }
         public void AddCar(CarBrand brand, string model, CarSegment segment, GearType transmission, decimal price)
         {
