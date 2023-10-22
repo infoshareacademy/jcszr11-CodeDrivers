@@ -95,6 +95,7 @@ namespace CodeDrivers
 					case 1:
 						Console.WriteLine("Wyswietl auto");
 						carListRepository.FillRepository();
+						carListRepository.DisplayAllItems(carListRepository.GetAllAvailable());
 						Console.WriteLine("");
 						UserPanel();
 						break;
@@ -112,7 +113,7 @@ namespace CodeDrivers
 						break;
 				}
 			}
-			catch(Exception ex)
+			catch
 			{
 				Console.WriteLine("Erorrek :(");
 				UserPanel();

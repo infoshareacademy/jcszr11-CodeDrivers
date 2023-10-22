@@ -31,7 +31,7 @@ namespace CodeDrivers.Models.Car
 		public Car(CarBrand brand, string model)
 		{
 			Brand = brand;
-			if (Models.Contains(model))
+			if (Models.Contains(brand.ToString()))
 			{
 				throw new ArgumentOutOfRangeException("Nie ma takiego modelu.");
 			}

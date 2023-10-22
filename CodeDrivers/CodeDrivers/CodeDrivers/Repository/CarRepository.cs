@@ -13,8 +13,8 @@ namespace CodeDrivers.Repository
 
     internal interface IRepository<T>
     {
-        IEnumerable<T> GetAll();
-        IEnumerable<T> GetAllAvailable();
+        List<T> GetAll();
+		List<T> GetAllAvailable();
         void DisplayAllItems(List<Car> cars);
 
     }
@@ -32,6 +32,9 @@ namespace CodeDrivers.Repository
         {
             cars.Add(new Car(CarBrand.Audi,"A1") { Id = SetId(), Segment = CarSegment.A, IsAvailable = true, PricePerDay = 60, GearTransmission = GearType.Manual });
             cars.Add(new Car(CarBrand.Toyota,"Aygo") { Id = SetId(), Segment = CarSegment.A, IsAvailable = true, PricePerDay = 135, GearTransmission = GearType.Manual });
+            cars.Add(new Car(CarBrand.Toyota,"Aygo") { Id = SetId(), Segment = CarSegment.A, IsAvailable = true, PricePerDay = 135, GearTransmission = GearType.Manual });
+            cars.Add(new Car(CarBrand.Toyota,"Aygo") { Id = SetId(), Segment = CarSegment.A, IsAvailable = true, PricePerDay = 135, GearTransmission = GearType.Manual });
+            cars.Add(new Car(CarBrand.Toyota,"Aygo") { Id = SetId(), Segment = CarSegment.A, IsAvailable = true, PricePerDay = 135, GearTransmission = GearType.Manual });
         }
         public void AddCar(CarBrand brand, string model, CarSegment segment, GearType transmission, decimal price)
         {
@@ -44,11 +47,11 @@ namespace CodeDrivers.Repository
             car.Model = model;
             cars.Add(car);
         }
-        public IEnumerable<Car> GetAll()
+        public List<Car> GetAll()
         {
             return cars;
         }
-        public IEnumerable<Car> GetAllAvailable()
+        public List<Car> GetAllAvailable()
         {
             var availableCars = cars.Where(item => item.IsAvailable == true).ToList();
             return availableCars;
