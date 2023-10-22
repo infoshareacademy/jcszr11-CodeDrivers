@@ -74,7 +74,7 @@ namespace CodeDrivers
 		}
 		void UserPanel() //Panel uzytkownika
 		{
-			CarListRepository carListRepository = new CarListRepository();
+			CarRepository carListRepository = new CarRepository();
 			try
 			{
 				Console.WriteLine("1: wyświetl auto");
@@ -95,7 +95,6 @@ namespace CodeDrivers
 					case 1:
 						Console.WriteLine("Wyswietl auto");
 						carListRepository.FillRepository();
-						carListRepository.DisplayAllAvailableItems(carListRepository.GetAllAvailable());
 						Console.WriteLine("");
 						UserPanel();
 						break;

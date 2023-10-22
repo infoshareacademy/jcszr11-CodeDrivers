@@ -8,7 +8,7 @@ namespace CodeDrivers
         {
             Menu_tekstowe menu = new Menu_tekstowe("user"); //Na start wyswietla panel menu
 
-            var carRepo = new CarListRepository();
+            var carRepo = new CarRepository();
             //var allCars = carRepo.GetAll();
             //var availableCars = carRepo.GetAllAvailable();
             //carRepo.DisplayAllItems(availableCars);

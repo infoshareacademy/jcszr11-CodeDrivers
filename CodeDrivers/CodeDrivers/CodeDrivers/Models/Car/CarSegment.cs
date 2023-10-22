@@ -6,9 +6,13 @@ using System.Threading.Tasks;
 
 namespace CodeDrivers.Models.Car
 {
-    public enum CarType
-    {
-        Osobowy,
-        Użytkowy
-    }
+	public enum CarSegment
+	{
+		A,
+		B,
+		C,
+		D,
+		Crossover,
+		SUV
+	}
 }
