@@ -21,8 +21,8 @@ namespace CodeDrivers.Repository
     }
     internal class CarListRepository : IRepository<Car>
     {
-        
-        public static List<Car> cars { get; set; }
+
+        public static List<Car> cars { get; set; } = new List<Car>();
         static int id = 0;
 
 		public static int SetId()
@@ -31,7 +31,7 @@ namespace CodeDrivers.Repository
         }
         public void FillRepository()
         {
-            cars.Add(new Car(Brand.Toyota,"Aygo") { Id = SetId(), Type = "Benzyna", Model = "800 AC", Segment = "Małe", IsAvailable = true, Traveled = 70000, PricePerDay = 60, YearOfProduction = 2007, GearTransmission = "Manualna" });
+            cars.Add(new Car(Brand.Toyota,"Aygo") { Id = SetId(), Type = "Benzyna", Model = "800 AC", Segment = "Małe", IsAvailable = true, Traveled = 70000, PricePerDay = 60, YearOfProduction = 2007, GearTransmission = "Manualna"});
             cars.Add(new Car(Brand.Toyota,"Aygo") { Id = SetId(), Type = "Benzyna", Model = "Wagon R LXI Minor", Segment = "Małe", IsAvailable = true, Traveled = 50000, PricePerDay = 135, YearOfProduction = 2007, GearTransmission = "Manualna" });
             cars.Add(new Car(Brand.Toyota,"Aygo") { Id = SetId(), Type = "Diesel", Model = "Verna 45078 SX", Segment = "Kompaktowe", IsAvailable = true, Traveled = 100000, PricePerDay = 600, YearOfProduction = 2012, GearTransmission = "Manualna" });
             cars.Add(new Car(Brand.Toyota,"Aygo") { Id = SetId(), Type = "Benzyna", Model = "RediGO T Option", Segment = "Małe", IsAvailable = true, Traveled = 46000, PricePerDay = 250, YearOfProduction = 2017, GearTransmission = "Manualna" });
