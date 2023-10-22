@@ -1,9 +1,4 @@
 ﻿using CodeDrivers.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 //Powitanie użytkownika. 
@@ -15,27 +10,27 @@ using System.Threading.Tasks;
 
 namespace CodeDrivers
 {
-    internal class Menu_tekstowe
-    {
-        public string Rang { get; set; }
-        public Menu_tekstowe(string rang)
-        {
-            Rang = rang;
+	internal class Menu_tekstowe
+	{
+		public string Rang { get; set; }
+		public Menu_tekstowe(string rang)
+		{
+			Rang = rang;
 
-            switch (rang)
-            {
-                case "admin":
-                    AdminPanel();
-                    break;
-                case "user":
-                    UserPanel();
-                    break;
-            }
-        }
-        
-        void AdminPanel() //Panel admina
-        {
-            Console.WriteLine("Tutaj pojawia sie panel admina");
+			switch (rang)
+			{
+				case "admin":
+					AdminPanel();
+					break;
+				case "user":
+					UserPanel();
+					break;
+			}
+		}
+
+		void AdminPanel() //Panel admina
+		{
+			Console.WriteLine("Tutaj pojawia sie panel admina");
 			try
 			{
 				Console.WriteLine("1: Wprowadz auta");
@@ -77,31 +72,32 @@ namespace CodeDrivers
 				AdminPanel();
 			}
 		}
-        void UserPanel() //Panel uzytkownika
-        {
+		void UserPanel() //Panel uzytkownika
+		{
 			CarListRepository carListRepository = new CarListRepository();
-            try
-            {
+			try
+			{
 				Console.WriteLine("1: wyświetl auto");
 				Console.WriteLine("2: Zmień termin rezerwacji");
 				Console.WriteLine("3: Odwolanie rezerwacji");
 				Console.WriteLine("4: Zmien range");
 				Console.WriteLine();
 				int userIntPanel = int.Parse(Console.ReadLine());
-                if (userIntPanel > 4 || userIntPanel <0)
-                {
-                    Console.Clear();
+				if (userIntPanel > 4 || userIntPanel < 0)
+				{
+					Console.Clear();
 					Console.WriteLine("Liczba nie poprawna, wprowadź ponownie");
-                    UserPanel();
-                }
+					UserPanel();
+				}
 
 				switch (userIntPanel)
 				{
 					case 1:
 						Console.WriteLine("Wyswietl auto");
-						carListRepository.DisplayAllItems(carListRepository.GetAllAvailable());
-                        Console.WriteLine("");
-                        UserPanel();
+						carListRepository.FillRepository();
+						carListRepository.DisplayAllAvailableItems(carListRepository.GetAllAvailable());
+						Console.WriteLine("");
+						UserPanel();
 						break;
 					case 2:
 						Console.WriteLine("Zmiana terminu rezerwacji");
@@ -111,18 +107,18 @@ namespace CodeDrivers
 						Console.WriteLine("Odwolanie rezerwacji");
 						UserPanel();
 						break;
-                    case 4:
-                        Console.WriteLine("Zmien range (testowe)");
-                        UserPanel();
-                        break;
+					case 4:
+						Console.WriteLine("Zmien range (testowe)");
+						UserPanel();
+						break;
 				}
-            }
-            catch
-            {
-                Console.WriteLine("Erorrek :(");
-                UserPanel();
-            }
+			}
+			catch(Exception ex)
+			{
+				Console.WriteLine("Erorrek :(");
+				UserPanel();
+			}
 		}
-    }
+	}
 }
 

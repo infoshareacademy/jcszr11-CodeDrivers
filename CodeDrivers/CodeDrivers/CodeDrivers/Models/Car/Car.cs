@@ -20,14 +20,12 @@ namespace CodeDrivers.Models.Car
             BrandToModelsDict.TryAdd(Brand.Toyota, new List<string> { "Aygo", "Yaris", "Corolla", "RAV4" });
             BrandToModelsDict.TryAdd(Brand.VW, new List<string> { "up!", "Polo", "Golf", "Passat" });
         }
-        public Car()
-        {
 
-        }
 
-        public Car(Brand brand)
+        public Car(Brand brand, string model)
         {
             this.BrandId = brand;
+			this.Model = model;
         }
         
         public int Id { get; set; } 
