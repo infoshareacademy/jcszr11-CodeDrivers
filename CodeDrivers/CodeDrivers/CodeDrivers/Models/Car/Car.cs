@@ -31,11 +31,19 @@ namespace CodeDrivers.Models.Car
 		public Car(CarBrand brand, string model)
 		{
 			Brand = brand;
-			if (Models.Contains(brand.ToString()))
+			if(BrandToModelsDict.TryGetValue(brand, out List<string> models))
 			{
-				throw new ArgumentOutOfRangeException("Nie ma takiego modelu.");
+				if(models.Contains(model))
+				{
+					Console.WriteLine(Brand);
+					Console.WriteLine(model +" To jest models");
+					Model = model;
+				}
+				else
+				{
+                    Console.WriteLine("Wartosci nie poprawne");
+                }
 			}
-			Model = model;
 		}
 	}
 }

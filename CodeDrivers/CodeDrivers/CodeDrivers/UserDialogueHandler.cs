@@ -1,4 +1,5 @@
-﻿using CodeDrivers.Repository;
+﻿using CodeDrivers.Models.Car;
+using CodeDrivers.Repository;
 
 
 //Powitanie użytkownika. 
@@ -12,9 +13,12 @@ namespace CodeDrivers
 {
 	internal class Menu_tekstowe
 	{
+		CarRepository carListRepository = new CarRepository();
+		Car car = new Car(CarBrand.BMW,"A1");
 		public string Rang { get; set; }
 		public Menu_tekstowe(string rang)
 		{
+			carListRepository.FillRepository();
 			Rang = rang;
 
 			switch (rang)
@@ -49,7 +53,28 @@ namespace CodeDrivers
 				switch (userIntPanel)
 				{
 					case 1:
-						Console.WriteLine("Wprowadz auta");
+						Console.WriteLine("Dodaj auta");
+                        Console.WriteLine("Wszystkie dostępne marki:");
+						foreach(var BrandCar in Enum.GetValues(typeof(CarBrand)))
+						{
+                            Console.WriteLine(BrandCar);
+                        }
+                        Console.WriteLine();
+                        Console.WriteLine("Wprowadz marke:");
+
+						string carBrandString = Console.ReadLine();
+						CarBrand carBrand = (CarBrand)Enum.Parse(typeof(CarBrand), carBrandString);
+                        Console.WriteLine();
+                        Console.WriteLine("Wprowadz model");
+						car.Brand = carBrand;
+						foreach(var modelList in car.Models)
+						{
+                            Console.WriteLine(modelList);
+                        }
+                        Console.WriteLine();
+                        string carModel = Console.ReadLine();
+						car.Model = carModel;
+						carListRepository.AddCar(carBrand, carModel, Models.Car.CarSegment.Crossover, Models.Car.GearType.Automatic, 500);
 						AdminPanel();
 						break;
 					case 2:
@@ -62,7 +87,8 @@ namespace CodeDrivers
 						break;
 					case 4:
 						Console.WriteLine("Zmien range (testowe)");
-						AdminPanel();
+
+						UserPanel();
 						break;
 				}
 			}
@@ -74,7 +100,6 @@ namespace CodeDrivers
 		}
 		void UserPanel() //Panel uzytkownika
 		{
-			CarRepository carListRepository = new CarRepository();
 			try
 			{
 				Console.WriteLine("1: wyświetl auto");
@@ -94,7 +119,6 @@ namespace CodeDrivers
 				{
 					case 1:
 						Console.WriteLine("Wyswietl auto");
-						carListRepository.FillRepository();
 						carListRepository.DisplayAllItems(carListRepository.GetAllAvailable());
 						Console.WriteLine("");
 						UserPanel();
@@ -109,7 +133,7 @@ namespace CodeDrivers
 						break;
 					case 4:
 						Console.WriteLine("Zmien range (testowe)");
-						UserPanel();
+						AdminPanel();
 						break;
 				}
 			}
