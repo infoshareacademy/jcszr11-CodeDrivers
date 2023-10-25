@@ -30,14 +30,14 @@ namespace CodeDrivers.Repository
         }
         public void FillRepository()
         {
-           // cars.Add(new Car(CarBrand.Audi,"A1") { Id = SetId(), Segment = CarSegment.A, IsAvailable = true, PricePerDay = 60, GearTransmission = GearType.Manual });
+            cars.Add(new Car(CarBrand.Audi,"A1") { Id = SetId(), Segment = CarSegment.A, IsAvailable = true, PricePerDay = 60, GearTransmission = GearType.Manual });
             cars.Add(new Car(CarBrand.Toyota,"Aygo") { Id = SetId(), Segment = CarSegment.A, IsAvailable = true, PricePerDay = 135, GearTransmission = GearType.Manual });
         }
         public void AddCar(CarBrand brand, string model, CarSegment segment, GearType transmission, decimal price)
         {
             Car car = new Car(brand,model);
 
-            if(car.Models.Contains(model) && car.Brand == brand)
+            if (car.Models.Contains(model) && car.Brand == brand && (Enum.IsDefined(typeof(CarSegment), segment)) && (Enum.IsDefined(typeof(GearType), transmission)))
             {
 				car.Id = SetId();
 				car.Brand = brand;
@@ -46,6 +46,16 @@ namespace CodeDrivers.Repository
 				car.PricePerDay = price; //cena
 				car.Model = model;
 				car.IsAvailable = true; cars.Add(car);
+            }
+        }
+        public void RemoveCar(int id)
+        {
+            for (int i = 0; i < GetAll().Count; i++)
+            {
+                if(id == GetAll()[i].Id)
+                {
+                    GetAll().Remove(GetAll()[i]);
+                }
             }
         }
         public List<Car> GetAll()

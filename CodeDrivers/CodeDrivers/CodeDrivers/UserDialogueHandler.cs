@@ -31,7 +31,7 @@ namespace CodeDrivers
 					break;
 			}
 		}
-
+		#region AdminPanel
 		void AdminPanel() //Panel admina
 		{
 			Console.WriteLine("Tutaj pojawia sie panel admina");
@@ -54,31 +54,12 @@ namespace CodeDrivers
 				{
 					case 1:
 						Console.WriteLine("Dodaj auta");
-                        Console.WriteLine("Wszystkie dostępne marki:");
-						foreach(var BrandCar in Enum.GetValues(typeof(CarBrand)))
-						{
-                            Console.WriteLine(BrandCar);
-                        }
-                        Console.WriteLine();
-                        Console.WriteLine("Wprowadz marke:");
-
-						string carBrandString = Console.ReadLine();
-						CarBrand carBrand = (CarBrand)Enum.Parse(typeof(CarBrand), carBrandString);
-                        Console.WriteLine();
-                        Console.WriteLine("Wprowadz model");
-						car.Brand = carBrand;
-						foreach(var modelList in car.Models)
-						{
-                            Console.WriteLine(modelList);
-                        }
-                        Console.WriteLine();
-                        string carModel = Console.ReadLine();
-						car.Model = carModel;
-						carListRepository.AddCar(carBrand, carModel, Models.Car.CarSegment.Crossover, Models.Car.GearType.Automatic, 500);
+						AddCar();
 						AdminPanel();
 						break;
 					case 2:
 						Console.WriteLine("Usun auta z listy");
+						RemoveCar();
 						AdminPanel();
 						break;
 					case 3:
@@ -98,6 +79,8 @@ namespace CodeDrivers
 				AdminPanel();
 			}
 		}
+		#endregion
+		#region UserPanel()
 		void UserPanel() //Panel uzytkownika
 		{
 			try
@@ -143,6 +126,123 @@ namespace CodeDrivers
 				UserPanel();
 			}
 		}
+		#endregion
+		#region AddCar
+		void AddCar()
+		{
+			try
+			{
+				Console.WriteLine("Wszystkie dostępne marki:");
+				foreach (var BrandCar in Enum.GetValues(typeof(CarBrand)))
+				{
+					Console.WriteLine(BrandCar);
+				}
+				Console.WriteLine();
+				Console.WriteLine("Wprowadz marke:");
+				string carBrandString = Console.ReadLine(); //Zamienia wszystkie litery na małe
+				carBrandString.ToLower();
+
+				string carBrandLetterCapitalized;
+				if (string.Equals(carBrandString, "BMW", StringComparison.OrdinalIgnoreCase) || string.Equals(carBrandString, "VW", StringComparison.OrdinalIgnoreCase))
+				{
+					carBrandLetterCapitalized = carBrandString.ToUpper();
+					carBrandString = carBrandLetterCapitalized;
+				}
+				else
+				{
+					carBrandLetterCapitalized = char.ToUpper(carBrandString[0]) + carBrandString.Substring(1); //Zamienia 1 litere na wielka
+					carBrandString = carBrandLetterCapitalized;
+				}
+				CarBrand carBrand = (CarBrand)Enum.Parse(typeof(CarBrand), carBrandString);
+				Console.WriteLine();
+				car.Brand = carBrand;
+				Console.WriteLine("Wprowadz model:");
+				foreach (var modelList in car.Models)
+				{
+					Console.WriteLine(modelList);
+				}
+				Console.WriteLine();
+				string carModel = Console.ReadLine().ToLower();
+				string carModelLetterCapitalized;
+				if(string.Equals(carModel, "RAV4", StringComparison.OrdinalIgnoreCase)) //Wyjatek
+				{
+					carModelLetterCapitalized = carModel.ToUpper();
+					carModel = carModelLetterCapitalized;
+				} 
+				else if(string.Equals(carModel, "up!", StringComparison.OrdinalIgnoreCase)) //Wyjatek
+				{
+					carModelLetterCapitalized = carModel.ToLower();
+					carModel = carModelLetterCapitalized;
+				}
+				else
+				{
+					carModelLetterCapitalized = char.ToUpper(carModel[0]) + carModel.Substring(1);
+					carModel = carModelLetterCapitalized;
+				}
+				car.Model = carModel;
+				Console.WriteLine();
+				Console.WriteLine("Wprowadż rodzaj:");
+				foreach (var segment in Enum.GetValues(typeof(CarSegment)))
+				{
+					Console.WriteLine(segment);
+				}
+				string carSegmentString = Console.ReadLine().ToLower();
+				string carSegmentLetterCapitalized;
+				if (string.Equals(carSegmentString,"SUV", StringComparison.OrdinalIgnoreCase))
+				{
+					carSegmentLetterCapitalized = carSegmentString.ToUpper();
+					carSegmentString = carSegmentLetterCapitalized;
+				}
+				else
+				{
+					carSegmentLetterCapitalized = char.ToUpper(carSegmentString[0]) + carSegmentString.Substring(1);
+					carSegmentString = carSegmentLetterCapitalized;
+				}
+				CarSegment carSegment = (CarSegment)Enum.Parse(typeof(CarSegment), carSegmentString);
+				Console.WriteLine();
+				car.Segment = carSegment;
+				Console.WriteLine("Wprowadz rodzaj napędu:");
+				foreach (var gearType in Enum.GetValues(typeof(GearType)))
+				{
+					Console.WriteLine(gearType);
+				}
+				string gearTypeString = Console.ReadLine().ToLower();
+				string gearTypeLetterCapitalized;
+				gearTypeLetterCapitalized = char.ToUpper(gearTypeString[0]) + gearTypeString.Substring(1);
+				gearTypeString = gearTypeLetterCapitalized;
+
+				GearType gearTrasmission = (GearType)Enum.Parse(typeof(GearType), gearTypeString);
+				car.GearTransmission = gearTrasmission;
+				Console.WriteLine();
+				Console.WriteLine("Podaj cene wypozyczenia za dzien:");
+				decimal pricePerDay = decimal.Parse(Console.ReadLine());
+				carListRepository.AddCar(carBrand, carModel, carSegment, gearTrasmission, pricePerDay);
+
+			} catch
+			{
+				AdminPanel();
+			}
+		}
+		#endregion
+		#region RemoveCar
+		void RemoveCar()
+		{
+			try
+			{
+				carListRepository.DisplayAllItems(carListRepository.GetAll());
+				Console.WriteLine("Wprowadz Id samochodu jaki chcesz usunac z listy:");
+				int id = int.Parse(Console.ReadLine());
+				carListRepository.RemoveCar(id);
+				AdminPanel();
+			}
+			catch
+			{
+				AdminPanel();
+			}
+
+        }
+		#endregion
+
 	}
 }
 
