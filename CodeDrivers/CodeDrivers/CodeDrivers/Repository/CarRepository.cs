@@ -17,6 +17,10 @@ namespace CodeDrivers.Repository
         IEnumerable<T> GetAllAvailable();
         void DisplayAllItems(List<Car> cars);
 
+        bool Update(int id, Car updatesForCar, out string errorMessage);
+
+        Car GetById(int id, out string errorMessag);
+
     }
     internal class CarRepository : IRepository<Car>
     {
@@ -61,6 +65,57 @@ namespace CodeDrivers.Repository
             foreach (var item in cars)
             {
                 Console.WriteLine($"{item.Id.ToString()}. {item.Brand.ToString()}, {item.Model}, {item.Segment}, {item.GearTransmission}, {item.IsAvailable}");
+            }
+        }
+
+        public bool Update(int id, Car updatesForCar, out string errorMessage)
+        {
+            Car result = GetById(id, out errorMessage);
+
+            if (result != null)
+            {
+                bool validation = ValidateCar(updatesForCar, out errorMessage);
+
+                if (validation)
+                {
+                    result.GearTransmission = updatesForCar.GearTransmission;
+                    result.IsAvailable = updatesForCar.IsAvailable;
+                    result.PricePerDay = updatesForCar.PricePerDay;
+                    result.Segment = updatesForCar.Segment;
+                    return true;
+                }
+
+                return false;
+            }
+            return false;
+        }
+
+        private bool ValidateCar(Car updatesForCar, out string errorMessage)
+        {
+            errorMessage = "OK";
+
+            if(updatesForCar.PricePerDay <=0 )
+            {
+                errorMessage = "Proces should be greater than 0!!";
+                return false;
+            }
+
+            return true;
+        }
+
+        public Car GetById(int id, out string errorMessage)
+        {
+            Car result = cars.Find(car => car.Id == id);
+
+            if (result == null)
+            {
+                errorMessage = $"car with {id} was not found";
+                return null;
+            }
+            else
+            {
+                errorMessage = "OK";
+                return result;
             }
         }
     }
