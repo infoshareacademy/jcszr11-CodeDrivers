@@ -1,9 +1,9 @@
 ﻿using System;
 namespace CodeDrivers.Repository
 {
-	public interface IReservationRepository<T>
+	internal interface IReservationRepository<T>
 	{
-
+		T Get(); 
 	}
 }
 
