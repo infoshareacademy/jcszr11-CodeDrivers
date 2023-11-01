@@ -1,4 +1,5 @@
-﻿using CodeDrivers.Models.Car;
+﻿using System;
+using CodeDrivers.Models.Car;
 using CodeDrivers.Repository;
 
 
@@ -118,9 +119,21 @@ namespace CodeDrivers
 						UserPanel();
 						break;
 					case 4:
-						DateTime? reservationStartDate = DataHandler.GetDate("Podaj date i godzine poczatku rezerwacji");
-						DateTime? reservationEndDate = DataHandler.GetDate("Podaj date konca rezerwacji"); 
-						UserPanel();
+						DateTime? reservationStartDate = null;
+						DateTime? reservationEndDate = null;
+
+						do
+						{
+							reservationStartDate = DataHandler.GetDate("Podaj date i godzine poczatku rezerwacji");
+							reservationEndDate = DataHandler.GetDate("Podaj date konca rezerwacji");
+
+							if (reservationStartDate >= reservationEndDate)
+							{
+								Console.WriteLine("Data konca rezerwacji musi byc wieksza niz data poczatku rezerwacji!!");
+							}
+						} while (reservationEndDate <= reservationStartDate);
+
+                            UserPanel();
 						break; 
 					case 5:
 						Console.WriteLine("Zmien range (testowe)");

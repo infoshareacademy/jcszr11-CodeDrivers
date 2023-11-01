@@ -15,9 +15,13 @@ namespace CodeDrivers.Models.Car
         public decimal TotalReservationPrice { get; set; }
         public Car Car { get; }
 
-        public Reservation(Car car)
+        public Reservation(Car car, DateTime reservationFrom, DateTime reservationTo, decimal totalReservationPrice)
         {
             Car = car;
+            ReservationFrom = reservationFrom;
+            ReservationTo = reservationTo;
+            DurationTime = ReservationTo - ReservationFrom;
+            TotalReservationPrice = totalReservationPrice; 
         }
     }
 }
