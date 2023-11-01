@@ -28,6 +28,11 @@ namespace CodeDrivers.Repository
         {
             throw new NotImplementedException();
         }
+
+        public List<int> GetCarsReservedInGivenPeriod(DateTime startDate, DateTime endDate)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 
