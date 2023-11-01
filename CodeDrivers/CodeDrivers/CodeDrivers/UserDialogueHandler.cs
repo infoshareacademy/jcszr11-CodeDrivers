@@ -90,7 +90,8 @@ namespace CodeDrivers
 				Console.WriteLine("1: wyświetl auto");
 				Console.WriteLine("2: Zmień termin rezerwacji");
 				Console.WriteLine("3: Odwolanie rezerwacji");
-				Console.WriteLine("4: Zmien range");
+				Console.WriteLine("4: Zarezerwuj pojazd");
+				Console.WriteLine("5: Zmien range");
 				Console.WriteLine();
 				int userIntPanel = int.Parse(Console.ReadLine());
 				if (userIntPanel > 4 || userIntPanel < 0)
@@ -117,6 +118,11 @@ namespace CodeDrivers
 						UserPanel();
 						break;
 					case 4:
+						DateTime? reservationStartDate = DataHandler.GetDate("Podaj date i godzine poczatku rezerwacji");
+						DateTime? reservationEndDate = DataHandler.GetDate("Podaj date konca rezerwacji"); 
+						UserPanel();
+						break; 
+					case 5:
 						Console.WriteLine("Zmien range (testowe)");
 						AdminPanel();
 						break;
