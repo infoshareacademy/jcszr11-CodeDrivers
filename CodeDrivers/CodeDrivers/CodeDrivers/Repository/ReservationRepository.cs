@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography;
 using CodeDrivers.Models;
 using CodeDrivers.Models.Car;
 
@@ -6,7 +7,8 @@ namespace CodeDrivers.Repository
 {
 	internal class ReservationRepository : IReservationRepository<Reservation>
 	{
-        public static List<Reservation> reservations { get; set; } = new List<Reservation>();
+        public List<Reservation> reservations { get; set; } = new List<Reservation>();
+
         static int id = 0;
 
         public ReservationRepository()
@@ -29,9 +31,20 @@ namespace CodeDrivers.Repository
             throw new NotImplementedException();
         }
 
-        public List<int> GetCarsReservedInGivenPeriod(DateTime startDate, DateTime endDate)
+        public List<int> GetCarsReservedInGivenPeriod(DateTime? startDate, DateTime? endDate)
         {
-            throw new NotImplementedException();
+            List<int> bookedCarIds = new List<int>();
+
+            foreach (Reservation reservation in reservations)
+            {
+                if(startDate >= reservation.ReservationFrom && endDate <= reservation.ReservationTo)
+                {
+                    bookedCarIds.Add(reservation.Car.Id); 
+                }
+
+            }
+
+            return bookedCarIds; 
         }
     }
 }

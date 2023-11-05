@@ -15,7 +15,8 @@ namespace CodeDrivers.Repository
     {
         List<T> GetAll();
 		List<T> GetAllAvailable();
-        void DisplayAllItems(List<Car> cars);
+        List<T> GetAllExceptCarsWithProvidedIds(List<int> providedCarIds);
+        void DisplayItems(List<Car> cars);
 
     }
     internal class CarRepository : IRepository<Car>
@@ -68,15 +69,21 @@ namespace CodeDrivers.Repository
             return availableCars;
         }
 
-        public void DisplayAllItems(List<Car> cars)
+        public void DisplayItems(List<Car> cars)
         {
             
-            Console.WriteLine("Wszystkie samochody z naszej ofery: ");
+            //.WriteLine("Wszystkie samochody z naszej ofery: ");
             foreach (var item in cars)
             {
                 Console.WriteLine($"{item.Id.ToString()}. {item.Brand.ToString()}, {item.Model}, {item.Segment}, {item.GearTransmission}, {item.IsAvailable}");
             }
         }
+
+        public List<Car> GetAllExceptCarsWithProvidedIds(List<int> providedCarIds)
+        {
+            var filteredCars = cars.Where(item => !providedCarIds.Contains(item.Id)).ToList();
+            return filteredCars;     
+       }
     }
     //Lista dodanych samochodów będzie możliwa do wyświetlenia dla admina i usera.
     //Marka, model, kategoria (male, rodzinne, dostawcze), rodzaj paliwa, cena wynajmu/dzien, KM , skrzynia biegow,elektryczne/spalinowe
