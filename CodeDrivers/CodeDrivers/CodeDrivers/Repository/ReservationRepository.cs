@@ -37,7 +37,8 @@ namespace CodeDrivers.Repository
 
             foreach (Reservation reservation in reservations)
             {
-                if(startDate >= reservation.ReservationFrom && endDate <= reservation.ReservationTo)
+                if(startDate >= reservation.ReservationFrom || startDate <= reservation.ReservationTo ||
+                    endDate >= reservation.ReservationFrom || endDate <= reservation.ReservationTo)
                 {
                     bookedCarIds.Add(reservation.Car.Id); 
                 }

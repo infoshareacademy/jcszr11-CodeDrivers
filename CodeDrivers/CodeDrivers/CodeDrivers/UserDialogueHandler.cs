@@ -304,17 +304,17 @@ namespace CodeDrivers
             DateTime? reservationStartDate = null;
             DateTime? reservationEndDate = null;
 
-			//Car c1 = carListRepository.GetAll().FirstOrDefault(item => item.Id == 1);
-			//User u1 = null;
-            //string format = "dd/MM/yyyy HH:mm";
-            //CultureInfo provider = CultureInfo.InvariantCulture;
+			Car c1 = carListRepository.GetAll().FirstOrDefault(item => item.Id == 1);
+			User u1 = null;
+            string format = "dd/MM/yyyy HH:mm";
+            CultureInfo provider = CultureInfo.InvariantCulture;
 
-            //DateTime beginning = DateTime.ParseExact("12/03/2024 13:00",format,provider);
-			//DateTime end = DateTime.ParseExact("12/04/2024 13:00",format,provider);
+            DateTime beginning = DateTime.ParseExact("12/03/2024 13:00",format,provider);
+			DateTime end = DateTime.ParseExact("12/04/2024 13:00",format,provider);
 
-			//Reservation r1 = new Reservation(c1,u1,beginning,end,200);
+			Reservation r1 = new Reservation(c1,u1,beginning,end,200);
 
-			//reservationRepository.reservations.Add(r1);
+			reservationRepository.reservations.Add(r1);
 
 
             do
@@ -333,6 +333,12 @@ namespace CodeDrivers
 			Console.WriteLine("W wybranym terminie sa dostepne nastepujace samochody");
 
 			carListRepository.DisplayItems(carListRepository.GetAllExceptCarsWithProvidedIds(bookedCarIds));
+
+			Console.WriteLine("Ktory samochod chcesz wybrac? Podaj id");
+
+			int chosenCarId = DataHandler.GetId(); 
+
+			// dalsza czesc tworzenia rezerwacji
 
             Console.WriteLine();
         }

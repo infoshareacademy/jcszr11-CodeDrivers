@@ -33,6 +33,27 @@ namespace CodeDrivers
             return result; 
 
         }
+
+        public static int GetId()
+        {
+            int result = 0;
+            bool validData = false;
+
+            Console.WriteLine("Podaj id jako liczbe calkowita");
+
+            while (!validData) { 
+                try
+                {
+                    result = int.Parse(Console.ReadLine());
+                    validData = true; 
+                }
+                catch (Exception ex) {
+                    Console.WriteLine("Podaj poprawne dane !!");
+                }
+            }
+
+            return result;
+        }
 	}
 }
 
