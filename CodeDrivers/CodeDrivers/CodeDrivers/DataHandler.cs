@@ -7,22 +7,24 @@ namespace CodeDrivers
     
     public static class DataHandler
 	{
-        static string format = "dd/MM/yyyy HH:mm";
-        static CultureInfo provider = CultureInfo.InvariantCulture;
+        private static string format = "dd/MM/yyyy HH:mm";
+        private static CultureInfo provider = CultureInfo.InvariantCulture;
 
         public static DateTime? GetDate(string inputMessage) {
 
-            bool validData = false;
+            var isDateTimeValid = false;
             DateTime? result = null; 
 
-            while (!validData)
+            while (!isDateTimeValid)
             {
                 try
                 {
                     Console.WriteLine(inputMessage + " Akceptowalny format daty: " + format);
                     string dataFromConsole = Console.ReadLine();
-                    result = DateTime.ParseExact(dataFromConsole, format, provider);
-                    validData = true; 
+                    DateTime parsedData; 
+                    isDateTimeValid = DateTime.TryParseExact(dataFromConsole, format, provider, DateTimeStyles.AssumeLocal, out  parsedData);
+                    result = parsedData;
+                    isDateTimeValid = true; 
                 }
                 catch (FormatException)
                 {
@@ -44,8 +46,7 @@ namespace CodeDrivers
             while (!validData) { 
                 try
                 {
-                    result = int.Parse(Console.ReadLine());
-                    validData = true; 
+                    validData = int.TryParse(Console.ReadLine(), out result);
                 }
                 catch (Exception ex) {
                     Console.WriteLine("Podaj poprawne dane !!");

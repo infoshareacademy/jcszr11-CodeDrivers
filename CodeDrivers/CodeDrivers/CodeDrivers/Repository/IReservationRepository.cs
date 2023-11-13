@@ -1,9 +1,10 @@
-﻿using System;
+﻿using CodeDrivers.Models.Car;
+using System;
 namespace CodeDrivers.Repository
 {
-	internal interface IReservationRepository<T>
+	internal interface IReservationRepository
 	{
-		T Get();
+		Reservation Get();
 		List<int> GetCarsReservedInGivenPeriod(DateTime? startDate, DateTime? endDate); 
 	}
 }

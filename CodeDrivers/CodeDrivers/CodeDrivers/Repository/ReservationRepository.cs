@@ -5,9 +5,9 @@ using CodeDrivers.Models.Car;
 
 namespace CodeDrivers.Repository
 {
-	internal class ReservationRepository : IReservationRepository<Reservation>
+	internal class ReservationRepository : IReservationRepository
 	{
-        public List<Reservation> reservations { get; set; } = new List<Reservation>();
+        public List<Reservation> Reservations { get; set; } = new List<Reservation>();
 
         static int id = 0;
 
@@ -35,17 +35,20 @@ namespace CodeDrivers.Repository
         {
             List<int> bookedCarIds = new List<int>();
 
-            foreach (Reservation reservation in reservations)
+            foreach (Reservation reservation in Reservations)
             {
-                if(startDate >= reservation.ReservationFrom || startDate <= reservation.ReservationTo ||
-                    endDate >= reservation.ReservationFrom || endDate <= reservation.ReservationTo)
+                if((startDate < reservation.ReservationFrom && endDate >= reservation.ReservationFrom) || 
+                   (startDate >= reservation.ReservationFrom && endDate <= reservation.ReservationTo)  ||
+                   (startDate <= reservation.ReservationTo && endDate >= reservation.ReservationTo))
                 {
                     bookedCarIds.Add(reservation.Car.Id); 
                 }
 
             }
 
-            return bookedCarIds; 
+            //var bookedCarIds = Reservations.Where(reservation => startDate >= reservation.ReservationFrom || startDate <= reservation.ReservationTo || endDate >= reservation.ReservationFrom || endDate <= reservation.ReservationTo).Select(reservation => reservation.Car.Id);
+
+            return bookedCarIds.ToList();  
         }
     }
 }
