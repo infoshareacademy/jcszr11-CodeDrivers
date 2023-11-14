@@ -35,16 +35,30 @@ namespace CodeDrivers.Models.Car
 			{
 				if(models.Contains(model))
 				{
-					Console.WriteLine(Brand);
-					Console.WriteLine(model +" To jest models");
 					Model = model;
 				}
 				else
 				{
-                    Console.WriteLine("Wartosci nie poprawne");
                 }
 			}
 		}
+		public string DisplayAvailibility()
+		{
+			if (IsAvailable)
+			{
+				return "dostępny";
+			}
+			else
+			{
+				return "niedostępny";
+			}
+		}
+		public Dictionary<CarBrand, List<string>> GetDisctionary()
+		{
+			var dictionary = BrandToModelsDict;
+			return dictionary;
+		}
+		
 	}
 }
 

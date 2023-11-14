@@ -11,13 +11,15 @@ namespace CodeDrivers.Models.Car
         public int ReservationId { get; set; }
         public DateTime ReservationFrom { get; set; }
         public DateTime ReservationTo { get; set; }
-        public TimeSpan DurationTime { get; private set; }
         public decimal TotalReservationPrice { get; set; }
-        public Car Car { get; }
+        public int CarId { get; } //carId
+        public string UserNumber { get; } //userNumber
 
-        public Reservation(Car car)
+        public Reservation(int carID, string userNumber)
         {
-            Car = car;
+            CarId= carID;
+            UserNumber= userNumber;
+
         }
     }
 }
