@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CodeDrivers
 {
-    internal class Dokonywanie_rezerwacji_przez_użytkownika
+    internal class Reservation
     {
     }
     //Użytkownik podaje swoje dane (imie, nazwisko, czy ma ważne prawo jazdy, tel kontaktowy, wybiera formę płatnosci i ewentualnie moze podaj nr karty platniczej)
