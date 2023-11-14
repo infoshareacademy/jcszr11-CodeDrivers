@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace CodeDrivers
 {
-    internal class CsvHanlder
+    internal class CsvHandler
     {
-        private string filePath = @"C:\Users\Janek\Desktop\FakeCrudentials.csv";
+        private string filePath = @"csv\fakeCredentials.csv";
         public List<string> GetCredentialsFromFile(string path)
         {
             var credentials = new List<string>();
             try
             {
-                string[] lines = File.ReadAllLines(filePath);
+                var lines = File.ReadAllLines(filePath);
                 credentials.AddRange(lines);
 
                 return credentials;
@@ -27,11 +27,11 @@ namespace CodeDrivers
 
         }
 
-        public bool SelectRequestedValues(string login, string password, List<string> credentials)
+        public bool AuthorizeUser(string login, string password, List<string> credentials)
         {
             foreach (string line in credentials)
             {
-                string[] values = line.Split(',');
+                var values = line.Split(',');
                 
                 if (values.Length == 2 && values[0].Trim() == login && values[1].Trim() == password)
                 {
