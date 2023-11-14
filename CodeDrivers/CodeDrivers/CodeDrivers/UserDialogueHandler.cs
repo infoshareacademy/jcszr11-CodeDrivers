@@ -325,6 +325,7 @@ namespace CodeDrivers
                 if (reservationStartDate >= reservationEndDate)
                 {
                     Console.WriteLine("Data konca rezerwacji musi byc wieksza niz data poczatku rezerwacji!!");
+                    reservationEndDate = DataHandler.GetDate("Podaj date konca rezerwacji");
                 }
             } while (reservationEndDate <= reservationStartDate);
 

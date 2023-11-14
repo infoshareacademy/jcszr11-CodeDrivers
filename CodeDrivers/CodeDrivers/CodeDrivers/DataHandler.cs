@@ -24,7 +24,10 @@ namespace CodeDrivers
                     DateTime parsedData; 
                     isDateTimeValid = DateTime.TryParseExact(dataFromConsole, format, provider, DateTimeStyles.AssumeLocal, out  parsedData);
                     result = parsedData;
-                    isDateTimeValid = true; 
+                    if (!isDateTimeValid)
+                    {
+                        Console.WriteLine("Niepoprawny format daty !! Powtorz wpisywanie");
+                    }
                 }
                 catch (FormatException)
                 {
