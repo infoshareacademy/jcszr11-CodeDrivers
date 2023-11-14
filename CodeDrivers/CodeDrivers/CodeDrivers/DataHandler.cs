@@ -50,6 +50,10 @@ namespace CodeDrivers
                 try
                 {
                     validData = int.TryParse(Console.ReadLine(), out result);
+                    if (!validData)
+                    {
+                        Console.WriteLine("Podales niepoprawna wartosc !!!! Ponow probe" );
+                    }
                 }
                 catch (Exception ex) {
                     Console.WriteLine("Podaj poprawne dane !!");
