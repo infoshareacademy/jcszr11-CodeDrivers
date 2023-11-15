@@ -1,4 +1,4 @@
-﻿using CodeDrivers.Models.Car;
+using CodeDrivers.Models.Car;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +15,6 @@ namespace CodeDrivers.Repository
     {
         List<T> GetAll();
 		List<T> GetAllAvailable();
-       // List<T> GetAllExceptCarsWithProvidedIds(List<int> providedCarIds);
         void DisplayItems(List<Car> cars);
 
     }
@@ -48,6 +47,10 @@ namespace CodeDrivers.Repository
 				car.Model = model;
 				car.IsAvailable = true; cars.Add(car);
             }
+            else
+            {
+                Console.WriteLine("Wprowadzono nie poprawne dane.");
+            }
         }
         public void RemoveCar(int id)
         {
@@ -72,18 +75,12 @@ namespace CodeDrivers.Repository
         public void DisplayItems(List<Car> cars)
         {
             
-            //.WriteLine("Wszystkie samochody z naszej ofery: ");
+            Console.WriteLine("* Wszystkie dostępne samochody z naszej ofery: ");
             foreach (var item in cars)
             {
-                Console.WriteLine($"{item.Id.ToString()}. {item.Brand.ToString()}, {item.Model}, {item.Segment}, {item.GearTransmission}, {item.IsAvailable}");
+                Console.WriteLine($"{item.Id.ToString()}. {item.Brand.ToString()}, {item.Model}, {item.Segment}, {item.GearTransmission}, {item.PricePerDay}, | {item.DisplayAvailibility()}");
             }
         }
-
-        //public List<Car> GetAllExceptCarsWithProvidedIds(List<int> providedCarIds)
-        //{
-        //    var filteredCars = cars.Where(item => !providedCarIds.Contains(item.Id)).ToList();
-        //    return filteredCars;     
-       //}
     }
     //Lista dodanych samochodów będzie możliwa do wyświetlenia dla admina i usera.
     //Marka, model, kategoria (male, rodzinne, dostawcze), rodzaj paliwa, cena wynajmu/dzien, KM , skrzynia biegow,elektryczne/spalinowe

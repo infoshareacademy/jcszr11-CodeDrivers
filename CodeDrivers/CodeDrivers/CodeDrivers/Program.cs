@@ -1,4 +1,4 @@
-﻿using CodeDrivers.Repository;
+using CodeDrivers.Repository;
 using System.Security.Claims;
 
 namespace CodeDrivers
@@ -12,7 +12,7 @@ namespace CodeDrivers
             var carRepo = new CarRepository();
             var allCars = carRepo.GetAll();
             var availableCars = carRepo.GetAllAvailable();
-            carRepo.DisplayAllItems(availableCars);
+            carRepo.DisplayItems(availableCars);
 
             //var csvHandler = new CsvHandler();
             //var credentials = csvHandler.GetCredentialsFromFile(@"csv\fakeCredentials.csv");

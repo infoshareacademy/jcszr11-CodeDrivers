@@ -1,9 +1,8 @@
-﻿using System;
-using System.Globalization;
-using System.Runtime.CompilerServices;
 using CodeDrivers.Models;
 using CodeDrivers.Models.Car;
 using CodeDrivers.Repository;
+using System.Globalization;
+using System.Linq;
 
 
 //Powitanie użytkownika. 
@@ -40,16 +39,21 @@ namespace CodeDrivers
 		#region AdminPanel
 		void AdminPanel() //Panel admina
 		{
-			Console.WriteLine("Tutaj pojawia sie panel admina");
+
+			Console.WriteLine("");
 			try
 			{
-				Console.WriteLine("1: Wprowadz auta");
-				Console.WriteLine("2: Usun auta z listy");
-				Console.WriteLine("3: Edycja pozycji");
-				Console.WriteLine("4: Zmien range");
-				Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("######################");
+                Console.WriteLine("1: Dodaj auto do listy");
+				Console.WriteLine("2: Usuń auto z listy");
+				Console.WriteLine("3: Edytuj pozycję samochodu");
+				Console.WriteLine("4: Zmień range (na usera)");
+                Console.WriteLine("######################");
+                Console.WriteLine();
 				int userIntPanel = int.Parse(Console.ReadLine());
-				if (userIntPanel > 4 || userIntPanel < 0)
+                Console.WriteLine();
+                if (userIntPanel > 4 || userIntPanel < 0)
 				{
 					Console.Clear();
 					Console.WriteLine("Liczba nie poprawna, wprowadź ponownie");
@@ -59,23 +63,27 @@ namespace CodeDrivers
 				switch (userIntPanel)
 				{
 					case 1:
-						Console.WriteLine("Dodaj auta");
-						AddCar();
+						Console.WriteLine("Dodaj auto do listy");
+                        Console.WriteLine();
+                        AddCar();
 						AdminPanel();
 						break;
 					case 2:
-						Console.WriteLine("Usun auta z listy");
-						RemoveCar();
+						Console.WriteLine("Usuń auto z listy");
+                        Console.WriteLine();
+                        RemoveCar();
 						AdminPanel();
 						break;
 					case 3:
-						Console.WriteLine("Edycja pozycji");
-						EditPosition();
+						Console.WriteLine("Edytuj wartości samochodu z listy");
+                        Console.WriteLine();
+                        EditPosition();
 						AdminPanel();
 						break;
 					case 4:
-						Console.WriteLine("Zmien range (testowe)");
-
+						Console.WriteLine("Zmien range (na usera)");
+                        Console.WriteLine();
+                        Console.Clear();
 						UserPanel();
 						break;
 				}
@@ -93,36 +101,42 @@ namespace CodeDrivers
 		{
 			try
 			{
-				Console.WriteLine("1: wyświetl auto");
+                Console.WriteLine();
+                Console.WriteLine("######################");
+                Console.WriteLine("1: Wyświetl wszystkie dostępne auta");
 				Console.WriteLine("2: Zmień termin rezerwacji");
-				Console.WriteLine("3: Odwolanie rezerwacji");
+				Console.WriteLine("3: Odwolaj rezerwacji");
 				Console.WriteLine("4: Zarezerwuj pojazd");
-				Console.WriteLine("5: Zmien range");
-				Console.WriteLine();
+				Console.WriteLine("5: Zmień range (na admina)");
+                Console.WriteLine("######################");
+                Console.WriteLine();
 				int userIntPanel = int.Parse(Console.ReadLine());
-				if (userIntPanel > 4 || userIntPanel < 0)
+                Console.WriteLine();
+                if (userIntPanel > 5 || userIntPanel < 0)
 				{
 					Console.Clear();
 					Console.WriteLine("Liczba nie poprawna, wprowadź ponownie");
 					UserPanel();
+					return;
 				}
 
 				switch (userIntPanel)
 				{
 					case 1:
-						Console.WriteLine("Wyswietl auto");
-                        Console.WriteLine("Wszystkie samochody z naszej ofery: ");
-                        carListRepository.DisplayItems(carListRepository.GetAllAvailable());
+						Console.WriteLine("Wyświetl wszystkie dostępne auta");
+						carListRepository.DisplayItems(carListRepository.GetAllAvailable());
 						Console.WriteLine("");
 						UserPanel();
 						break;
 					case 2:
-						Console.WriteLine("Zmiana terminu rezerwacji");
-						UserPanel();
+						Console.WriteLine("Zmień termin rezerwacji");
+                        Console.WriteLine();
+                        UserPanel();
 						break;
 					case 3:
-						Console.WriteLine("Odwolanie rezerwacji");
-						UserPanel();
+						Console.WriteLine("Odwołaj rezerwacje");
+                        Console.WriteLine();
+                        UserPanel();
 						break;
 					case 4:
 						AddReservation();
@@ -130,6 +144,7 @@ namespace CodeDrivers
 						break; 
 					case 5:
 						Console.WriteLine("Zmien range (testowe)");
+                        Console.Clear();
 						AdminPanel();
 						break;
 				}
@@ -160,11 +175,11 @@ namespace CodeDrivers
 		{
 			try
 			{
-                Console.WriteLine("Wszystkie samochody z naszej ofery: ");
-                carListRepository.DisplayItems(carListRepository.GetAll());
-				Console.WriteLine("Wprowadz Id samochodu jaki chcesz usunac z listy:");
+				carListRepository.DisplayItems(carListRepository.GetAll());
+				Console.WriteLine("* Wprowadź Id samochodu jaki chcesz usunąć z listy:");
 				int id = int.Parse(Console.ReadLine());
-				carListRepository.RemoveCar(id);
+                Console.WriteLine();
+                carListRepository.RemoveCar(id);
 				AdminPanel();
 			}
 			catch
@@ -179,11 +194,11 @@ namespace CodeDrivers
         void EditPosition()
 		{
 			bool canEdit = false;
-            Console.WriteLine("Wszystkie samochody z naszej ofery: ");
-            carListRepository.DisplayItems(carListRepository.GetAll());
-            Console.WriteLine("Wpisz ID aby zmienic pozycje");
+			carListRepository.DisplayItems(carListRepository.GetAll());
+            Console.WriteLine("* Wpisz ID aby zmienić wartości danego samochodu:");
 			int id = int.Parse(Console.ReadLine());
-			for (int i = 0; i < carListRepository.GetAll().Count; i++)
+            Console.WriteLine();
+            for (int i = 0; i < carListRepository.GetAll().Count; i++)
 			{
 				if(id == carListRepository.GetAll()[i].Id)
 				{
@@ -201,31 +216,38 @@ namespace CodeDrivers
         #region CarEditInformation
 		void CarEditInformation(int i, int id)
 		{
-            Console.WriteLine("Wszystkie dostępne marki:");
+            Console.WriteLine("* Wszystkie dostępne marki:");
             foreach (var BrandCar in Enum.GetValues(typeof(CarBrand)))
             {
                 Console.WriteLine(BrandCar);
             }
             Console.WriteLine();
-            Console.WriteLine("Wprowadz marke:");
-            string carBrandString = Console.ReadLine(); //Zamienia wszystkie litery na małe
-            carBrandString.ToLower();
-
+            Console.WriteLine("* Wprowadz marke:");
+            string carBrandString = Console.ReadLine();
+            Console.WriteLine();
+            carBrandString.ToLower(); //Zamienia wszystkie litery na małe
+			CarBrand carBrand1;
             string carBrandLetterCapitalized;
             if (string.Equals(carBrandString, "BMW", StringComparison.OrdinalIgnoreCase) || string.Equals(carBrandString, "VW", StringComparison.OrdinalIgnoreCase))
             {
                 carBrandLetterCapitalized = carBrandString.ToUpper();
                 carBrandString = carBrandLetterCapitalized;
             }
-            else
+            else if(Enum.TryParse(carBrandString,true,out carBrand1))
             {
                 carBrandLetterCapitalized = char.ToUpper(carBrandString[0]) + carBrandString.Substring(1); //Zamienia 1 litere na wielka
                 carBrandString = carBrandLetterCapitalized;
+			}
+			else
+			{
+                Console.WriteLine("Marka nie poprawna");
+                Console.WriteLine("");
+                return;
             }
             CarBrand carBrand = (CarBrand)Enum.Parse(typeof(CarBrand), carBrandString);
             Console.WriteLine();
             car.Brand = carBrand;
-            Console.WriteLine("Wprowadz model:");
+            Console.WriteLine("* Wprowadz model:");
             foreach (var modelList in car.Models)
             {
                 Console.WriteLine(modelList);
@@ -235,13 +257,29 @@ namespace CodeDrivers
             string carModelLetterCapitalized;
             if (string.Equals(carModel, "RAV4", StringComparison.OrdinalIgnoreCase)) //Wyjatek
             {
-                carModelLetterCapitalized = carModel.ToUpper();
-                carModel = carModelLetterCapitalized;
+				if(carBrand == CarBrand.Toyota)
+				{
+                    carModelLetterCapitalized = carModel.ToUpper();
+                    carModel = carModelLetterCapitalized;
+				}
+				else
+				{
+                    Console.WriteLine("Marka nie poprawna");
+                    return;
+				}
             }
             else if (string.Equals(carModel, "up!", StringComparison.OrdinalIgnoreCase)) //Wyjatek
             {
-                carModelLetterCapitalized = carModel.ToLower();
-                carModel = carModelLetterCapitalized;
+				if(carBrand == CarBrand.VW)
+				{
+                    carModelLetterCapitalized = carModel.ToLower();
+                    carModel = carModelLetterCapitalized;
+				}
+				else
+				{
+                    Console.WriteLine("Marka nie poprawna");
+                    return;
+				}
             }
             else
             {
@@ -250,74 +288,99 @@ namespace CodeDrivers
             }
             car.Model = carModel;
             Console.WriteLine();
-            Console.WriteLine("Wprowadż rodzaj:");
+            Console.WriteLine("* Wprowadż rodzaj:");
             foreach (var segment in Enum.GetValues(typeof(CarSegment)))
             {
                 Console.WriteLine(segment);
             }
             string carSegmentString = Console.ReadLine().ToLower();
+            Console.WriteLine();
             string carSegmentLetterCapitalized;
+			CarSegment carSegment1;
             if (string.Equals(carSegmentString, "SUV", StringComparison.OrdinalIgnoreCase))
             {
                 carSegmentLetterCapitalized = carSegmentString.ToUpper();
                 carSegmentString = carSegmentLetterCapitalized;
             }
-            else
+            else if(Enum.TryParse(carSegmentString,true,out carSegment1))
             {
                 carSegmentLetterCapitalized = char.ToUpper(carSegmentString[0]) + carSegmentString.Substring(1);
                 carSegmentString = carSegmentLetterCapitalized;
-            }
+			}
+			else
+			{
+                Console.WriteLine("Nie poprawny rodzaj");
+                return;
+			}
             CarSegment carSegment = (CarSegment)Enum.Parse(typeof(CarSegment), carSegmentString);
             Console.WriteLine();
             car.Segment = carSegment;
-            Console.WriteLine("Wprowadz rodzaj napędu:");
+            Console.WriteLine("* Wprowadz rodzaj napędu:");
             foreach (var gearType in Enum.GetValues(typeof(GearType)))
             {
                 Console.WriteLine(gearType);
             }
             string gearTypeString = Console.ReadLine().ToLower();
             string gearTypeLetterCapitalized;
-            gearTypeLetterCapitalized = char.ToUpper(gearTypeString[0]) + gearTypeString.Substring(1);
-            gearTypeString = gearTypeLetterCapitalized;
-
+            GearType gearType1;
+			if(Enum.TryParse(gearTypeString,true,out gearType1))
+			{
+                gearTypeLetterCapitalized = char.ToUpper(gearTypeString[0]) + gearTypeString.Substring(1);
+                gearTypeString = gearTypeLetterCapitalized;
+			}
+			else
+			{
+                Console.WriteLine("Nie poprawny napęd");
+				return;
+            }
             GearType gearTrasmission = (GearType)Enum.Parse(typeof(GearType), gearTypeString);
             car.GearTransmission = gearTrasmission;
             Console.WriteLine();
-            Console.WriteLine("Podaj cene wypozyczenia za dzien:");
-            decimal pricePerDay = decimal.Parse(Console.ReadLine());
-			if(i == 0) //Add
+            Console.WriteLine("* Podaj cene wypozyczenia za dzień:");
+			try
 			{
-                carListRepository.AddCar(carBrand, carModel, carSegment, gearTrasmission, pricePerDay);
-            }else if (i == 1) //Edit
+                decimal pricePerDay = decimal.Parse(Console.ReadLine());
+                if (i == 0) //Add
+                {
+                    carListRepository.AddCar(carBrand, carModel, carSegment, gearTrasmission, pricePerDay);
+                }
+                else if (i == 1) //Edit
+                {
+                    carListRepository.GetAll()[id].Brand = carBrand;
+                    carListRepository.GetAll()[id].Model = carModel;
+                    carListRepository.GetAll()[id].Segment = carSegment;
+                    carListRepository.GetAll()[id].GearTransmission = gearTrasmission;
+                    carListRepository.GetAll()[id].PricePerDay = pricePerDay;
+                }
+            }
+			catch
 			{
-				carListRepository.GetAll()[id].Brand = carBrand;
-				carListRepository.GetAll()[id].Model = carModel;
-				carListRepository.GetAll()[id].Segment = carSegment;
-				carListRepository.GetAll()[id].GearTransmission = gearTrasmission;
-				carListRepository.GetAll()[id].PricePerDay = pricePerDay;
-			}
+                Console.WriteLine("* Nie poprawna wartośc wprowadzonej ceny");
+            }
+
         }
         #endregion
 
-		void AddReservation()
+        #region AddReservation
+        void AddReservation()
 		{
             DateTime? reservationStartDate = null;
             DateTime? reservationEndDate = null;
 
-			//Car c1 = carListRepository.GetAll().FirstOrDefault(item => item.Id == 1);
-			//User u1 = null;
-            //string format = "dd/MM/yyyy HH:mm";
-            //CultureInfo provider = CultureInfo.InvariantCulture;
+			/*Car c1 = carListRepository.GetAll().FirstOrDefault(item => item.Id == 1);
+			User u1 = null;
+			string format = "dd/MM/yyyy HH:mm";
+			CultureInfo provider = CultureInfo.InvariantCulture;
 
-            //DateTime beginning = DateTime.ParseExact("12/03/2024 13:00",format,provider);
-			//DateTime end = DateTime.ParseExact("12/04/2024 13:00",format,provider);
+			DateTime beginning = DateTime.ParseExact("12/03/2024 13:00", format, provider);
+			DateTime end = DateTime.ParseExact("12/04/2024 13:00", format, provider);
 
-			//Reservation r1 = new Reservation(c1,u1,beginning,end,200);
+			Reservation r1 = new Reservation(c1, u1, beginning, end, 200);
 
-			//reservationRepository.Reservations.Add(r1);
+			reservationRepository.Reservations.Add(r1);*/
 
 
-            do
+			do
             {
                 reservationStartDate = DataHandler.GetDate("Podaj date i godzine poczatku rezerwacji");
                 reservationEndDate = DataHandler.GetDate("Podaj date konca rezerwacji");
@@ -344,6 +407,7 @@ namespace CodeDrivers
 
             Console.WriteLine();
         }
+        #endregion
     }
 }
 
