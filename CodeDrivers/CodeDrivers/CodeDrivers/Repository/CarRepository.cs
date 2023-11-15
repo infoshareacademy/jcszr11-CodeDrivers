@@ -75,7 +75,7 @@ namespace CodeDrivers.Repository
         public void DisplayAllItems(List<Car> cars)
         {
             
-            Console.WriteLine("* Wszystkie samochody z naszej ofery: ");
+            Console.WriteLine("* Wszystkie dostępne samochody z naszej ofery: ");
             foreach (var item in cars)
             {
                 Console.WriteLine($"{item.Id.ToString()}. {item.Brand.ToString()}, {item.Model}, {item.Segment}, {item.GearTransmission}, {item.PricePerDay}, | {item.DisplayAvailibility()}");

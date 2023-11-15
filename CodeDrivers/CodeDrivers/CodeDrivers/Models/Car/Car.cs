@@ -18,7 +18,7 @@ namespace CodeDrivers.Models.Car
 		private static Dictionary<CarBrand, List<string>> BrandToModelsDict = new Dictionary<CarBrand, List<string>>();
 		static Car()
 		{
-			BrandToModelsDict.TryAdd(CarBrand.Audi, new List<string> { "A1", "Arona", "Leon" });
+			BrandToModelsDict.TryAdd(CarBrand.Audi, new List<string> { "A3", "A4", "Arona" });
 			BrandToModelsDict.TryAdd(CarBrand.BMW, new List<string> { "1", "2", "3", "4", "5", "X1", "X2", "X3", "X5" });
 			BrandToModelsDict.TryAdd(CarBrand.Fiat, new List<string> { "500", "500X", "Panda" });
 			BrandToModelsDict.TryAdd(CarBrand.Ford, new List<string> { "Fiesta", "Focus", "Mondeo" });
