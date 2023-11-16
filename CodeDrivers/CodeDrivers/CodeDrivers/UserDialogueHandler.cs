@@ -222,29 +222,32 @@ namespace CodeDrivers
                 Console.WriteLine(BrandCar);
             }
             Console.WriteLine();
-            Console.WriteLine("* Wprowadz marke:");
-            string carBrandString = Console.ReadLine();
-            Console.WriteLine();
-            carBrandString.ToLower(); //Zamienia wszystkie litery na małe
-			CarBrand carBrand1;
+			CarBrand carBrand;
+			string carBrandString;
             string carBrandLetterCapitalized;
-            if (string.Equals(carBrandString, "BMW", StringComparison.OrdinalIgnoreCase) || string.Equals(carBrandString, "VW", StringComparison.OrdinalIgnoreCase))
-            {
-                carBrandLetterCapitalized = carBrandString.ToUpper();
-                carBrandString = carBrandLetterCapitalized;
-            }
-            else if(Enum.TryParse(carBrandString,true,out carBrand1))
-            {
-                carBrandLetterCapitalized = char.ToUpper(carBrandString[0]) + carBrandString.Substring(1); //Zamienia 1 litere na wielka
-                carBrandString = carBrandLetterCapitalized;
-			}
-			else
+			do
 			{
-                Console.WriteLine("Marka nie poprawna");
-                Console.WriteLine("");
-                return;
-            }
-            CarBrand carBrand = (CarBrand)Enum.Parse(typeof(CarBrand), carBrandString);
+                Console.WriteLine("* Wprowadz marke:");
+                carBrandString = Console.ReadLine();
+                Console.WriteLine();
+                carBrandString.ToLower(); //Zamienia wszystkie litery na małe
+                CarBrand carBrand1;
+                if (string.Equals(carBrandString, "BMW", StringComparison.OrdinalIgnoreCase) || string.Equals(carBrandString, "VW", StringComparison.OrdinalIgnoreCase))
+                {
+                    carBrandLetterCapitalized = carBrandString.ToUpper();
+                    carBrandString = carBrandLetterCapitalized;
+                }
+                else if (Enum.TryParse(carBrandString, true, out carBrand1))
+                {
+                    carBrandLetterCapitalized = char.ToUpper(carBrandString[0]) + carBrandString.Substring(1); //Zamienia 1 litere na wielka
+                    carBrandString = carBrandLetterCapitalized;
+                }
+                else
+                {
+                    Console.WriteLine("* Marka nie poprawna, Wprowadź ponownie");
+                    Console.WriteLine("");
+                }
+            } while (!Enum.TryParse(carBrandString, true, out carBrand));
             Console.WriteLine();
             car.Brand = carBrand;
             Console.WriteLine("* Wprowadz model:");
@@ -253,65 +256,84 @@ namespace CodeDrivers
                 Console.WriteLine(modelList);
             }
             Console.WriteLine();
-            string carModel = Console.ReadLine().ToLower();
-            string carModelLetterCapitalized;
-            if (string.Equals(carModel, "RAV4", StringComparison.OrdinalIgnoreCase)) //Wyjatek
+            string carModel;
+
+            do
             {
-				if(carBrand == CarBrand.Toyota)
-				{
-                    carModelLetterCapitalized = carModel.ToUpper();
+                carModel = Console.ReadLine().ToLower();
+                string carModelLetterCapitalized;
+
+                if (string.Equals(carModel, "RAV4", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (carBrand == CarBrand.Toyota)
+                    {
+                        carModelLetterCapitalized = carModel.ToUpper();
+                        carModel = carModelLetterCapitalized;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Marka nie poprawna");
+                        return;
+                    }
+                }
+                else if (string.Equals(carModel, "up!", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (carBrand == CarBrand.VW)
+                    {
+                        carModelLetterCapitalized = carModel.ToLower();
+                        carModel = carModelLetterCapitalized;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Marka nie poprawna");
+                        return;
+                    }
+                }
+                else
+                {
+                    carModelLetterCapitalized = char.ToUpper(carModel[0]) + carModel.Substring(1);
                     carModel = carModelLetterCapitalized;
-				}
-				else
-				{
-                    Console.WriteLine("Marka nie poprawna");
-                    return;
-				}
-            }
-            else if (string.Equals(carModel, "up!", StringComparison.OrdinalIgnoreCase)) //Wyjatek
-            {
-				if(carBrand == CarBrand.VW)
-				{
-                    carModelLetterCapitalized = carModel.ToLower();
-                    carModel = carModelLetterCapitalized;
-				}
-				else
-				{
-                    Console.WriteLine("Marka nie poprawna");
-                    return;
-				}
-            }
-            else
-            {
-                carModelLetterCapitalized = char.ToUpper(carModel[0]) + carModel.Substring(1);
-                carModel = carModelLetterCapitalized;
-            }
-            car.Model = carModel;
+                }
+
+                if (!car.Models.Contains(carModel))
+                {
+                    Console.WriteLine("* Model niepoprawny. Wprowadź ponownie.");
+                }
+
+            } while (!car.Models.Contains(carModel));
             Console.WriteLine();
             Console.WriteLine("* Wprowadż rodzaj:");
             foreach (var segment in Enum.GetValues(typeof(CarSegment)))
             {
                 Console.WriteLine(segment);
             }
-            string carSegmentString = Console.ReadLine().ToLower();
-            Console.WriteLine();
-            string carSegmentLetterCapitalized;
-			CarSegment carSegment1;
-            if (string.Equals(carSegmentString, "SUV", StringComparison.OrdinalIgnoreCase))
+            string carSegmentString;
+
+            do
             {
-                carSegmentLetterCapitalized = carSegmentString.ToUpper();
-                carSegmentString = carSegmentLetterCapitalized;
-            }
-            else if(Enum.TryParse(carSegmentString,true,out carSegment1))
-            {
-                carSegmentLetterCapitalized = char.ToUpper(carSegmentString[0]) + carSegmentString.Substring(1);
-                carSegmentString = carSegmentLetterCapitalized;
-			}
-			else
-			{
-                Console.WriteLine("Nie poprawny rodzaj");
-                return;
-			}
+                carSegmentString = Console.ReadLine().ToLower();
+                Console.WriteLine();
+
+                string carSegmentLetterCapitalized;
+                CarSegment carSegment1;
+
+                if (string.Equals(carSegmentString, "SUV", StringComparison.OrdinalIgnoreCase))
+                {
+                    carSegmentLetterCapitalized = carSegmentString.ToUpper();
+                    carSegmentString = carSegmentLetterCapitalized;
+                }
+                else if (Enum.TryParse(carSegmentString, true, out carSegment1))
+                {
+                    carSegmentLetterCapitalized = char.ToUpper(carSegmentString[0]) + carSegmentString.Substring(1);
+                    carSegmentString = carSegmentLetterCapitalized;
+                }
+                else
+                {
+                    Console.WriteLine("* Niepoprawny rodzaj. Wprowadź ponownie.");
+                }
+
+            } while (!Enum.GetNames(typeof(CarSegment)).Any(x => string.Equals(x, carSegmentString, StringComparison.OrdinalIgnoreCase)));
+
             CarSegment carSegment = (CarSegment)Enum.Parse(typeof(CarSegment), carSegmentString);
             Console.WriteLine();
             car.Segment = carSegment;
@@ -320,44 +342,70 @@ namespace CodeDrivers
             {
                 Console.WriteLine(gearType);
             }
-            string gearTypeString = Console.ReadLine().ToLower();
-            string gearTypeLetterCapitalized;
-            GearType gearType1;
-			if(Enum.TryParse(gearTypeString,true,out gearType1))
-			{
-                gearTypeLetterCapitalized = char.ToUpper(gearTypeString[0]) + gearTypeString.Substring(1);
-                gearTypeString = gearTypeLetterCapitalized;
-			}
-			else
-			{
-                Console.WriteLine("Nie poprawny napęd");
-				return;
-            }
-            GearType gearTrasmission = (GearType)Enum.Parse(typeof(GearType), gearTypeString);
-            car.GearTransmission = gearTrasmission;
+            string gearTypeString;
+            do
+            {
+                gearTypeString = Console.ReadLine().ToLower();
+                Console.WriteLine();
+
+                string gearTypeLetterCapitalized;
+                GearType gearType1;
+
+                if (Enum.TryParse(gearTypeString, true, out gearType1))
+                {
+                    gearTypeLetterCapitalized = char.ToUpper(gearTypeString[0]) + gearTypeString.Substring(1);
+                    gearTypeString = gearTypeLetterCapitalized;
+                }
+                else
+                {
+                    Console.WriteLine("* Niepoprawny napęd. Wprowadź ponownie.");
+                }
+
+            } while (!Enum.GetNames(typeof(GearType)).Any(x => string.Equals(x, gearTypeString, StringComparison.OrdinalIgnoreCase)));
+
+            GearType gearTransmission = (GearType)Enum.Parse(typeof(GearType), gearTypeString);
+            car.GearTransmission = gearTransmission;
+
             Console.WriteLine();
-            Console.WriteLine("* Podaj cene wypozyczenia za dzień:");
-			try
-			{
-                decimal pricePerDay = decimal.Parse(Console.ReadLine());
-                if (i == 0) //Add
+            decimal pricePerDay;
+            do
+            {
+                Console.WriteLine("* Podaj cenę wypożyczenia za dzień:");
+
+                // Wczytaj dane z konsoli
+                string input = Console.ReadLine();
+
+                // Próba przekształcenia wczytanej wartości do decimal
+                if (decimal.TryParse(input, out pricePerDay))
                 {
-                    carListRepository.AddCar(carBrand, carModel, carSegment, gearTrasmission, pricePerDay);
+                    Console.WriteLine("Wczytano cenę wypożyczenia za dzień: " + pricePerDay);
                 }
-                else if (i == 1) //Edit
+                else
                 {
-                    carListRepository.GetAll()[id].Brand = carBrand;
-                    carListRepository.GetAll()[id].Model = carModel;
-                    carListRepository.GetAll()[id].Segment = carSegment;
-                    carListRepository.GetAll()[id].GearTransmission = gearTrasmission;
-                    carListRepository.GetAll()[id].PricePerDay = pricePerDay;
+                    Console.WriteLine("Nie udało się przekształcić wprowadzonej wartości na liczbę dziesiętną. Spróbuj ponownie.");
                 }
+
+            } while (!IsValidPricePerDay(pricePerDay)); // Wykonuj pętlę, dopóki cena za dzień nie jest poprawna
+
+            if (i == 0) //Add
+            {
+                carListRepository.AddCar(carBrand, carModel, carSegment, gearTransmission, pricePerDay);
+                Console.WriteLine("Dodano samochód do listy");
             }
-			catch
-			{
-                Console.WriteLine("* Nie poprawna wartośc wprowadzonej ceny");
+            else if (i == 1) //Edit
+            {
+                carListRepository.GetAll()[id].Brand = carBrand;
+                carListRepository.GetAll()[id].Model = carModel;
+                carListRepository.GetAll()[id].Segment = carSegment;
+                carListRepository.GetAll()[id].GearTransmission = gearTransmission;
+                carListRepository.GetAll()[id].PricePerDay = pricePerDay;
             }
 
+        }
+        static bool IsValidPricePerDay(decimal price)
+        {
+            // Tutaj możesz dodać dodatkowe warunki walidacyjne, jeśli są potrzebne
+            return price > 0; // Przykładowy warunek - cena musi być większa niż 0
         }
         #endregion
 
