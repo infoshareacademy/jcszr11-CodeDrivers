@@ -2,12 +2,14 @@
 using System.Security.Cryptography;
 using CodeDrivers.Models;
 using CodeDrivers.Models.Car;
+using CodeDrivers.Repository;
 
 namespace CodeDrivers.Repository
 {
 	internal class ReservationRepository : IReservationRepository
 	{
         public List<Reservation> Reservations { get; set; } = new List<Reservation>();
+        Car Car { get; set; }
 
         static int id = 0;
 
@@ -41,9 +43,8 @@ namespace CodeDrivers.Repository
                    (startDate >= reservation.ReservationFrom && endDate <= reservation.ReservationTo)  ||
                    (startDate <= reservation.ReservationTo && endDate >= reservation.ReservationTo))
                 {
-                    bookedCarIds.Add(reservation.Car.Id); 
+                    bookedCarIds.Add(reservation.Car.Id);
                 }
-
             }
 
             //var bookedCarIds = Reservations.Where(reservation => startDate >= reservation.ReservationFrom || startDate <= reservation.ReservationTo || endDate >= reservation.ReservationFrom || endDate <= reservation.ReservationTo).Select(reservation => reservation.Car.Id);

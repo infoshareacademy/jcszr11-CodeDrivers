@@ -1,6 +1,8 @@
 using CodeDrivers.Models;
 using CodeDrivers.Models.Car;
 using CodeDrivers.Repository;
+using System.Collections.Generic;
+using System.Data;
 using System.Globalization;
 using System.Linq;
 
@@ -14,219 +16,231 @@ using System.Linq;
 
 namespace CodeDrivers
 {
-	internal class Menu_tekstowe
-	{
-		CarRepository carListRepository = new CarRepository();
-		ReservationRepository reservationRepository = new ReservationRepository();
+    internal class Menu_tekstowe
+    {
+        CarRepository carListRepository = new CarRepository();
+        ReservationRepository reservationRepository = new ReservationRepository();
 
-		Car car = new Car(CarBrand.BMW,"A1");
-		public string Rang { get; set; }
-		public Menu_tekstowe(string rang)
-		{
-			carListRepository.FillRepository();
-			Rang = rang;
+        Car car = new Car(CarBrand.BMW, "A1");
+        public string Rang { get; set; }
+        public Menu_tekstowe(string rang)
+        {
+            carListRepository.FillRepository();
+            Rang = rang;
 
-			switch (rang)
-			{
-				case "admin":
-					AdminPanel();
-					break;
-				case "user":
-					UserPanel();
-					break;
-			}
-		}
-		#region AdminPanel
-		void AdminPanel() //Panel admina
-		{
+            switch (rang)
+            {
+                case "admin":
+                    AdminPanel();
+                    break;
+                case "user":
+                    UserPanel();
+                    break;
+            }
+        }
+        #region AdminPanel
+        void AdminPanel() //Panel admina
+        {
 
-			Console.WriteLine("");
-			try
-			{
-                Console.WriteLine();
-                Console.WriteLine("######################");
-                Console.WriteLine("1: Dodaj auto do listy");
-				Console.WriteLine("2: Usuń auto z listy");
-				Console.WriteLine("3: Edytuj pozycję samochodu");
-				Console.WriteLine("4: Zmień range (na usera)");
-                Console.WriteLine("######################");
-                Console.WriteLine();
-				int userIntPanel = int.Parse(Console.ReadLine());
-                Console.WriteLine();
-                if (userIntPanel > 4 || userIntPanel < 0)
-				{
-					Console.Clear();
-					Console.WriteLine("Liczba nie poprawna, wprowadź ponownie");
-					AdminPanel();
-				}
-
-				switch (userIntPanel)
-				{
-					case 1:
-						Console.WriteLine("Dodaj auto do listy");
-                        Console.WriteLine();
-                        AddCar();
-						AdminPanel();
-						break;
-					case 2:
-						Console.WriteLine("Usuń auto z listy");
-                        Console.WriteLine();
-                        RemoveCar();
-						AdminPanel();
-						break;
-					case 3:
-						Console.WriteLine("Edytuj wartości samochodu z listy");
-                        Console.WriteLine();
-                        EditPosition();
-						AdminPanel();
-						break;
-					case 4:
-						Console.WriteLine("Zmien range (na usera)");
-                        Console.WriteLine();
-                        Console.Clear();
-						UserPanel();
-						break;
-				}
-			}
-			catch
-			{
-				Console.WriteLine("Erorr :(");
-				AdminPanel();
-			}
-		}
-		#endregion
-
-		#region UserPanel()
-		void UserPanel() //Panel uzytkownika
-		{
-			try
-			{
+            Console.WriteLine("");
+            try
+            {
                 Console.WriteLine();
                 Console.WriteLine("######################");
                 Console.WriteLine("1: Wyświetl wszystkie dostępne auta");
-				Console.WriteLine("2: Zmień termin rezerwacji");
-				Console.WriteLine("3: Odwolaj rezerwacji");
-				Console.WriteLine("4: Zarezerwuj pojazd");
-				Console.WriteLine("5: Zmień range (na admina)");
+                Console.WriteLine("2: Dodaj auto do listy");
+                Console.WriteLine("3: Usuń auto z listy");
+                Console.WriteLine("4: Edytuj pozycję samochodu");
+                Console.WriteLine("5: Zmień range (na usera)");
                 Console.WriteLine("######################");
                 Console.WriteLine();
-				int userIntPanel = int.Parse(Console.ReadLine());
+                int userIntPanel = int.Parse(Console.ReadLine());
+                Console.WriteLine();
+                if (userIntPanel > 4 || userIntPanel < 0)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Liczba nie poprawna, wprowadź ponownie");
+                    AdminPanel();
+                }
+
+                switch (userIntPanel)
+                {
+                    case 1:
+                        Console.WriteLine("Wyświetl wszystkie dostępne auta");
+                        Console.WriteLine();
+                        carListRepository.DisplayItems(carListRepository.GetAllAvailable());
+                        AdminPanel();
+                        break;
+                    case 2:
+                        Console.WriteLine("Dodaj auto do listy");
+                        Console.WriteLine();
+                        AddCar();
+                        AdminPanel();
+                        break;
+                    case 3:
+                        Console.WriteLine("Usuń auto z listy");
+                        Console.WriteLine();
+                        RemoveCar();
+                        AdminPanel();
+                        break;
+                    case 4:
+                        Console.WriteLine("Edytuj wartości samochodu z listy");
+                        Console.WriteLine();
+                        EditPosition();
+                        AdminPanel();
+                        break;
+                    case 5:
+                        Console.WriteLine("Zmien range (na usera)");
+                        Console.WriteLine();
+                        Console.Clear();
+                        UserPanel();
+                        break;
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Erorr :(");
+                AdminPanel();
+            }
+        }
+        #endregion
+
+        #region UserPanel()
+        void UserPanel() //Panel uzytkownika
+        {
+            try
+            {
+                Console.WriteLine();
+                Console.WriteLine("######################");
+                Console.WriteLine("1: Wyświetl wszystkie dostępne auta");
+                Console.WriteLine("2: Zmień termin rezerwacji");
+                Console.WriteLine("3: Odwolaj rezerwacji");
+                Console.WriteLine("4: Zarezerwuj pojazd");
+                Console.WriteLine("5: Zmień range (na admina)");
+                Console.WriteLine("######################");
+                Console.WriteLine();
+                int userIntPanel = int.Parse(Console.ReadLine());
                 Console.WriteLine();
                 if (userIntPanel > 5 || userIntPanel < 0)
-				{
-					Console.Clear();
-					Console.WriteLine("Liczba nie poprawna, wprowadź ponownie");
-					UserPanel();
-					return;
-				}
+                {
+                    Console.Clear();
+                    Console.WriteLine("Liczba nie poprawna, wprowadź ponownie");
+                    UserPanel();
+                    return;
+                }
 
-				switch (userIntPanel)
-				{
-					case 1:
-						Console.WriteLine("Wyświetl wszystkie dostępne auta");
-						carListRepository.DisplayItems(carListRepository.GetAllAvailable());
-						Console.WriteLine("");
-						UserPanel();
-						break;
-					case 2:
-						Console.WriteLine("Zmień termin rezerwacji");
+                switch (userIntPanel)
+                {
+                    case 1:
+                        Console.WriteLine("Wyświetl wszystkie dostępne auta");
+                        carListRepository.DisplayItems(carListRepository.GetAllAvailable());
+                        Console.WriteLine("");
+                        UserPanel();
+                        break;
+                    case 2:
+                        Console.WriteLine("Zmień termin rezerwacji");
                         Console.WriteLine();
                         UserPanel();
-						break;
-					case 3:
-						Console.WriteLine("Odwołaj rezerwacje");
+                        break;
+                    case 3:
+                        Console.WriteLine("Odwołaj rezerwacje");
                         Console.WriteLine();
                         UserPanel();
-						break;
-					case 4:
-						AddReservation();
+                        break;
+                    case 4:
+                        AddReservation();
                         UserPanel();
-						break; 
-					case 5:
-						Console.WriteLine("Zmien range (testowe)");
+                        break;
+                    case 5:
+                        Console.WriteLine("Zmien range (testowe)");
                         Console.Clear();
-						AdminPanel();
-						break;
-				}
-			}
-			catch
-			{
-				Console.WriteLine("Erorrek :(");
-				UserPanel();
-			}
-		}
-		#endregion
+                        AdminPanel();
+                        break;
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Erorrek :(");
+                UserPanel();
+            }
+        }
+        #endregion
 
-		#region AddCar
-		void AddCar()
-		{
-			try
-			{
-                CarEditInformation(0,0);
-			} catch
-			{
-				AdminPanel();
-			}
-		}
-		#endregion
+        #region AddCar
+        void AddCar()
+        {
+            try
+            {
+                CarEditInformation(0, 0);
+            }
+            catch
+            {
+                AdminPanel();
+            }
+        }
+        #endregion
 
-		#region RemoveCar
-		void RemoveCar()
-		{
-			try
-			{
-				carListRepository.DisplayItems(carListRepository.GetAll());
-				Console.WriteLine("* Wprowadź Id samochodu jaki chcesz usunąć z listy:");
-				int id = int.Parse(Console.ReadLine());
+        #region RemoveCar
+        void RemoveCar()
+        {
+            try
+            {
+                Console.Clear();
+                carListRepository.DisplayItems(carListRepository.GetAll());
+                Console.WriteLine("* Wprowadź Id samochodu jaki chcesz usunąć z listy:");
+                int id = int.Parse(Console.ReadLine());
                 Console.WriteLine();
                 carListRepository.RemoveCar(id);
-				AdminPanel();
-			}
-			catch
-			{
-				AdminPanel();
-			}
+                Console.Clear();
+                Console.WriteLine($"Samochód został usunięty z listy");
+                carListRepository.DisplayItems(carListRepository.GetAll());
+                AdminPanel();
+            }
+            catch
+            {
+                AdminPanel();
+            }
 
         }
         #endregion
 
         #region EditPosition
         void EditPosition()
-		{
-			bool canEdit = false;
-			carListRepository.DisplayItems(carListRepository.GetAll());
+        {
+            bool canEdit = false;
+            carListRepository.DisplayItems(carListRepository.GetAll());
             Console.WriteLine("* Wpisz ID aby zmienić wartości danego samochodu:");
-			int id = int.Parse(Console.ReadLine());
+            int id = int.Parse(Console.ReadLine());
             Console.WriteLine();
             for (int i = 0; i < carListRepository.GetAll().Count; i++)
-			{
-				if(id == carListRepository.GetAll()[i].Id)
-				{
-					canEdit = true; 
-					break;
-				}
-			}
-			if (canEdit)
-			{
-				CarEditInformation(1,id);
-			}
+            {
+                if (id == carListRepository.GetAll()[i].Id)
+                {
+                    canEdit = true;
+                    break;
+                }
+            }
+            if (canEdit)
+            {
+                CarEditInformation(1, id);
+            }
         }
-		#endregion
+        #endregion
 
         #region CarEditInformation
-		void CarEditInformation(int i, int id)
-		{
+        void CarEditInformation(int i, int id)
+        {
             Console.WriteLine("* Wszystkie dostępne marki:");
             foreach (var BrandCar in Enum.GetValues(typeof(CarBrand)))
             {
                 Console.WriteLine(BrandCar);
             }
             Console.WriteLine();
-			CarBrand carBrand;
-			string carBrandString;
+            CarBrand carBrand;
+            string carBrandString;
             string carBrandLetterCapitalized;
-			do
-			{
+            do
+            {
                 Console.WriteLine("* Wprowadz marke:");
                 carBrandString = Console.ReadLine();
                 Console.WriteLine();
@@ -411,11 +425,13 @@ namespace CodeDrivers
 
         #region AddReservation
         void AddReservation()
-		{
+        {
             DateTime? reservationStartDate = null;
             DateTime? reservationEndDate = null;
+            DateTime timeNow = DateTime.Now;
+            UserHandler newUser = new UserHandler();
 
-			/*Car c1 = carListRepository.GetAll().FirstOrDefault(item => item.Id == 1);
+            /*Car c1 = carListRepository.GetAll().FirstOrDefault(item => item.Id == 1);
 			User u1 = null;
 			string format = "dd/MM/yyyy HH:mm";
 			CultureInfo provider = CultureInfo.InvariantCulture;
@@ -428,35 +444,80 @@ namespace CodeDrivers
 			reservationRepository.Reservations.Add(r1);*/
 
 
-			do
-            {
-                reservationStartDate = DataHandler.GetDate("Podaj date i godzine poczatku rezerwacji");
-                reservationEndDate = DataHandler.GetDate("Podaj date konca rezerwacji");
+            //do
+            //{
+            //    reservationStartDate = DataHandler.GetDate("Podaj date i godzine poczatku rezerwacji");
+            //    reservationEndDate = DataHandler.GetDate("Podaj date konca rezerwacji");
 
-                if (reservationStartDate >= reservationEndDate)
-                {
-                    Console.WriteLine("Data konca rezerwacji musi byc wieksza niz data poczatku rezerwacji!!");
-                    reservationEndDate = DataHandler.GetDate("Podaj date konca rezerwacji");
-                }
-            } while (reservationEndDate <= reservationStartDate);
+            //    if (reservationStartDate >= reservationEndDate)
+            //    {
+            //        Console.WriteLine("Data zakończenia rezerwacji musi być większa niż data początku rezerwacji!!");
+            //        reservationEndDate = DataHandler.GetDate("Podaj date konca rezerwacji");
+            //    }
+            //} while (reservationEndDate <= reservationStartDate);
 
-			List<int> bookedCarIds = reservationRepository.GetCarsReservedInGivenPeriod(reservationStartDate, reservationEndDate);
+            //List<int> bookedCarIds = reservationRepository.GetCarsReservedInGivenPeriod(reservationStartDate, reservationEndDate);
 
-			Console.WriteLine("W wybranym terminie sa dostepne nastepujace samochody");
+            //Console.WriteLine("W wybranym terminie sa dostepne nastepujace samochody");
 
             //carListRepository.DisplayItems(carListRepository.GetAllExceptCarsWithProvidedIds(bookedCarIds));
-            carListRepository.DisplayItems(carListRepository.GetAll().Where(car => !bookedCarIds.Contains(car.Id)).ToList());
+            //carListRepository.DisplayItems(carListRepository.GetAll().Where(car => !bookedCarIds.Contains(car.Id)).ToList());
             //GetAll().Where(car => !bookedCarIds.Contains(car.Id));
 
-            Console.WriteLine("Ktory samochod chcesz wybrac? Podaj id");
+            //Console.WriteLine("Ktory samochod chcesz wybrac? Podaj id");
 
-			int chosenCarId = DataHandler.GetId(); 
+            //int chosenCarId = DataHandler.GetId();
 
-			// dalsza czesc tworzenia rezerwacji
+            ////dalsza czesc tworzenia rezerwacji
 
+            //Console.WriteLine();
+            Console.Clear();
+            carListRepository.DisplayItems(carListRepository.GetAll());
             Console.WriteLine();
+            while (true)
+            {
+                reservationStartDate = DataHandler.GetDate("Podaj datę i godzinę początku rezerwacji");
+                if (reservationStartDate.HasValue && reservationStartDate < timeNow)
+                {
+                    Console.WriteLine("Sorry.....Nie możesz cofnąć się w czasie!");
+                    continue;
+                }
+                while (true)
+                {
+                    reservationEndDate = DataHandler.GetDate("Podaj date konca rezerwacji");
+                    if (reservationEndDate.HasValue && reservationStartDate >= reservationEndDate)
+                    {
+                        Console.WriteLine("Data zakończenia rezerwacji musi być większa niż data początku rezerwacji!!");
+                        continue;
+                    }
+                    Console.Clear();
+                    Console.WriteLine($"Wszystkie dostępne samochody w termminie {reservationStartDate}-{reservationEndDate}: ");
+                    Console.WriteLine();
+                    carListRepository.DisplayAvailableItems(carListRepository.GetAllAvailable());
+                    while (true)
+                    {
+                        Console.WriteLine();
+                        int chosenCarId = DataHandler.GetId();
+                        if (chosenCarId > carListRepository.GetAll().Count && chosenCarId < carListRepository.GetAll().Count)
+                        {
+                            Console.WriteLine("Niepoprawne id. Wprowadź ponownie:");
+                            continue;
+                        }
+                        while (true)
+                        {
+                            newUser.AddUser();
+                            Console.WriteLine("Rezerwacja zakończona ");
+                            return;
+                        }
+
+                    }
+
+                    //carListRepository.DisplayItems(carListRepository.GetAllExceptCarsWithProvidedIds(bookedCarIds));
+                    //carListRepository.DisplayItems(carListRepository.GetAll().Where(car => !bookedCarIds.Contains(car.Id)).ToList());
+                }
+            }
+
         }
-        #endregion
     }
 }
-
+#endregion

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CodeDrivers.Repository;
+using System;
 using System.Globalization;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -19,7 +20,7 @@ namespace CodeDrivers
             {
                 try
                 {
-                    Console.WriteLine(inputMessage + " Akceptowalny format daty: " + format);
+                    Console.WriteLine(inputMessage + "\nAkceptowalny format daty: " + format);
                     string dataFromConsole = Console.ReadLine();
                     DateTime parsedData; 
                     isDateTimeValid = DateTime.TryParseExact(dataFromConsole, format, provider, DateTimeStyles.AssumeLocal, out  parsedData);
@@ -44,7 +45,7 @@ namespace CodeDrivers
             int result = 0;
             bool validData = false;
 
-            Console.WriteLine("Podaj id jako liczbe calkowita");
+            Console.WriteLine("Podaj id samochodu, który chcesz zarezerwować:");
 
             while (!validData) { 
                 try
