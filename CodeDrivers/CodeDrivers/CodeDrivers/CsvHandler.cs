@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CodeDrivers.Models.Car;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,23 +9,23 @@ namespace CodeDrivers
 {
     internal class CsvHandler
     {
-        private string filePath = @"csv\fakeCredentials.csv";
-        public List<string> GetCredentialsFromFile(string path)
+        // private string credentialsFilePath = @"csv\fakeCredentials.csv";
+        // private string carsFilePath = @"csv\fakeCars.csv";
+        public List<string> GetRawDataFromFile(string path)
         {
-            var credentials = new List<string>();
+            var fileContent = new List<string>();
             try
             {
-                var lines = File.ReadAllLines(filePath);
-                credentials.AddRange(lines);
+                var lines = File.ReadAllLines(path);
+                fileContent.AddRange(lines);
 
-                return credentials;
+                return fileContent;
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Wystąpił błąd podczas odczytu pliku CSV: " + ex.Message);
                 return null;
             }
-
         }
 
         public bool AuthorizeUser(string login, string password, List<string> credentials)
@@ -47,7 +48,7 @@ namespace CodeDrivers
         {
             try
             {
-                using (StreamWriter sw = File.AppendText(filePath))
+                using (StreamWriter sw = File.AppendText(path))
                 {
                     sw.WriteLine($"{login},{password}");
                 }
@@ -57,6 +58,23 @@ namespace CodeDrivers
             catch (Exception ex)
             {
                 Console.WriteLine("Wystąpił błąd podczas dodawania nowych danych uwierzytelniających: " + ex.Message);
+            }
+        }
+
+        public void AddNewCar(int id, CarBrand brand, string model, CarSegment segment, GearType transmission, decimal price, bool availability, string path)
+        {
+            try
+            {
+                using (StreamWriter sw = File.AppendText(path))
+                {
+                    sw.WriteLine($"{id},{brand},{model},{segment},{transmission},{price},{availability}");
+                }
+
+                Console.WriteLine($"Samochód {brand} {model} został dodany do pliku.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Wystąpił błąd podczas dodawania pojazdu: " + ex.Message);
             }
         }
     }

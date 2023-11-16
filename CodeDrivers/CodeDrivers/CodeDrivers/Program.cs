@@ -7,20 +7,22 @@ namespace CodeDrivers
     {
         static void Main(string[] args)
         {
-            Menu_tekstowe menu = new Menu_tekstowe("user"); //Na start wyswietla panel menu
+            //Menu_tekstowe menu = new Menu_tekstowe("user"); //Na start wyswietla panel menu
 
-            var carRepo = new CarRepository();
-            var allCars = carRepo.GetAll();
-            var availableCars = carRepo.GetAllAvailable();
-            carRepo.DisplayItems(availableCars);
+            //var carRepo = new CarRepository();
+            //var allCars = carRepo.GetAll();
+            //var availableCars = carRepo.GetAllAvailable();
+            //carRepo.DisplayItems(availableCars);
 
-            //var csvHandler = new CsvHandler();
-            //var credentials = csvHandler.GetCredentialsFromFile(@"csv\fakeCredentials.csv");
-            //csvHandler.AuthorizeUser("anna.kowalska@gmail.com", "aneczka111", credentials);
-            //csvHandler.AddNewCredentials("jankowalski@gmail.com", "janek1234!", @"csv\fakeCredentials.csv");
+            CsvHandler handler = new CsvHandler();
+            var cars = handler.GetRawDataFromFile(@"csv\fakeCars.csv");
+            handler.AddNewCar(1, Models.Car.CarBrand.VW, "Polo", Models.Car.CarSegment.B, Models.Car.GearType.Automatic, 75, true, @"csv\fakeCars.csv");
 
-            //CredentialsValidator validator = new CredentialsValidator();
-            //CredentialsValidator.ValidatePassword();
+            foreach (var item in cars)
+            {
+                Console.WriteLine(item);
+            }
+
         }
     }
 }
