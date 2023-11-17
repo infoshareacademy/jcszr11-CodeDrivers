@@ -72,27 +72,40 @@ namespace CodeDrivers.Repository
             var availableCars = cars.Where(item => item.IsAvailable == true).ToList();
             return availableCars;
         }
-        public void DisplayAvailableItems(List<Car> availableCars)
-        {
-            Console.WriteLine("======================================================================");
-            Console.WriteLine("=ID=|=Marka=|=Model=|=Segment=|=Skrzynia biegów=|=Stawka dzienna=|=Dostępność=");
-            foreach (var car in availableCars)
-            {
-                Console.WriteLine($" {car.Id.ToString()}  | {car.Brand.ToString()} | {car.Model} | {car.Segment} | {car.GearTransmission} | {car.PricePerDay}  | {car.DisplayAvailibility()} ");
-            }
-        }
+        //public void DisplayAvailableItems(List<Car> availableCars)
+        //{
+        //    Console.WriteLine("======================================================================");
+        //    Console.WriteLine("=ID=|=Marka=|=Model=|=Segment=|=Skrzynia biegów=|=Stawka dzienna=|=Dostępność=");
+        //    foreach (var car in availableCars)
+        //    {
+        //        Console.WriteLine($" {car.Id.ToString()}  | {car.Brand.ToString()} | {car.Model} | {car.Segment} | {car.GearTransmission} | {car.PricePerDay}  | {car.DisplayAvailibility()} ");
+        //    }
+        //}
 
 
         public void DisplayItems(List<Car> cars)
         {
             Console.WriteLine("Wszystkie dostępne samochody z naszej ofery: ");
             Console.WriteLine("===============================================================================");
-            Console.WriteLine("=ID=|=Marka=|=Model=|=Segment=|=Skrzynia biegów=|=Stawka dzienna=|");
+            Console.WriteLine("=ID=|=Marka=|=Model=|=Segment=|=Skrzynia biegów=|=Stawka dzienna=|= Dostępność = ");
             foreach (var item in cars)
             {
-                Console.WriteLine($" {item.Id.ToString()}  | {item.Brand.ToString()} | {item.Model} | {item.Segment} | {item.GearTransmission} | {item.PricePerDay} ");
+                Console.WriteLine($" {item.Id.ToString()}  | {item.Brand.ToString()} | {item.Model} | {item.Segment} | {item.GearTransmission} | {item.PricePerDay} | {item.DisplayAvailibility()} ");
             }
         }
+        public void RentCar(Car car) 
+        {
+            if (car.IsAvailable)
+            {
+                Console.WriteLine($"Samochód {car.Brand} {car.Model} o ID {car.Id} został zarezerwowany.");
+                car.IsAvailable = false;
+            }
+            else
+            {
+                Console.WriteLine("Nie można wynająć tego samochodu.");
+            }
+        }
+
     }
 }
     //Lista dodanych samochodów będzie możliwa do wyświetlenia dla admina i usera.

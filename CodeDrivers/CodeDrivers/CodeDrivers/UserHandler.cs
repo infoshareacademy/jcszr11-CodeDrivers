@@ -38,7 +38,7 @@ namespace CodeDrivers
                     while (true)
                     {
                         Console.WriteLine();
-                        Console.WriteLine("Podaj datę uroodznia dd.mm.yyyy:");
+                        Console.WriteLine("Podaj datę urodzenia dd.mm.yyyy:");
                         string dateOfBirth = Console.ReadLine();
                         if (string.IsNullOrEmpty(dateOfBirth))
                         {
@@ -99,6 +99,7 @@ namespace CodeDrivers
                                             Console.WriteLine("Numer nie może być pusty.");
                                             continue;
                                         }
+                                        Console.Clear();
                                         string id = Guid.NewGuid().ToString().Substring(0, 4);
                                         Console.WriteLine();
                                         Console.WriteLine($"Id użytkownika to {id} ");
@@ -108,12 +109,7 @@ namespace CodeDrivers
                                         users.Add(newUser);
                                         Console.WriteLine("*****Użytkownik został dodany do listy*****");
                                         DisplayUser(users);
-                                        
-                                        string close = Console.ReadLine();
-                                        if (close.Equals("X", StringComparison.InvariantCultureIgnoreCase))
-                                        {
-                                            return;
-                                        }
+                                        Console.WriteLine();
                                         break;
                                     }
                                     break;
@@ -128,21 +124,22 @@ namespace CodeDrivers
                 }
                 break;
             }
-            
+
+            return;
         }
 
         static void DisplayUser(List<User> users)
         {
             Console.WriteLine("Twoje dane zostały wprowadzone:");
             Console.WriteLine();
-            Console.WriteLine(" # ID  |  Imię  |  Nazwisko  |  Data urodzenia  |  Email  |  Nr telefonu  |  Nr prawa jazdy |  Zarezerwowany samochód  | ");
+            Console.WriteLine(" # ID  |  Imię  |  Nazwisko  |  Data urodzenia  |  Email  |  Nr telefonu  |  Nr prawa jazdy |");
             Console.WriteLine("=============================================================================================");
             foreach (var user in users)
             {
                 Console.WriteLine($" # {user.Id}  |  {user.Name}  |  {user.LastName}  |  {user.DateOfBirth:dd-MM-yyyy}  |  {user.Email}  |  {user.PhoneNumber}  |  {user.DrivingLicenceNumber}  | ");
             }
-
         }
     }
+        
 }
 
