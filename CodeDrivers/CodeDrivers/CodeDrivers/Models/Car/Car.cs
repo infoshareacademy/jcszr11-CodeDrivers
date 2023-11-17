@@ -1,19 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CsvHelper.Configuration.Attributes;
 namespace CodeDrivers.Models.Car
 {
-	internal class Car
+    public class Car
 	{
+		[Index(0)]
 		public int Id { get; set; }
-		public CarBrand Brand { get; set; } 
+		[Index(1)]
+		public CarBrand Brand { get; set; }
 		public List<string> Models => BrandToModelsDict.First(f => f.Key == Brand).Value;
+		[Index(2)]
 		public string Model { get; set; } //Model
+		[Index(3)]
 		public CarSegment Segment { get; set; } //A,B,C,D,Crossover,SUV (najlepiej enum)
+		[Index(4)]
 		public GearType GearTransmission { get; set; }
+		[Index(6)]
 		public bool IsAvailable { get; set; }
+		[Index(5)]
 		public decimal PricePerDay { get; set; }
 		private static Dictionary<CarBrand, List<string>> BrandToModelsDict = new Dictionary<CarBrand, List<string>>();
 		static Car()
@@ -28,6 +31,12 @@ namespace CodeDrivers.Models.Car
 			BrandToModelsDict.TryAdd(CarBrand.Toyota, new List<string> { "Aygo", "Yaris", "Corolla", "RAV4" });
 			BrandToModelsDict.TryAdd(CarBrand.VW, new List<string> { "up!", "Polo", "Golf", "Passat" });
 		}
+
+		public Car()
+		{
+
+		}
+
 		public Car(CarBrand brand, string model)
 		{
 			Brand = brand;

@@ -114,9 +114,9 @@ namespace CodeDrivers
                 Console.WriteLine("######################");
                 Console.WriteLine("1: Wyświetl wszystkie dostępne auta");
                 Console.WriteLine("2: Zmień termin rezerwacji");
-                Console.WriteLine("3: Odwolaj rezerwacj");
+                Console.WriteLine("3: Odwolaj rezerwację");
                 Console.WriteLine("4: Zarezerwuj pojazd");
-                Console.WriteLine("5: Zmień range (na admina)");
+                Console.WriteLine("5: Zmień rangę (na admina)");
                 Console.WriteLine("######################");
                 Console.WriteLine();
                 int userIntPanel = int.Parse(Console.ReadLine());
@@ -124,7 +124,7 @@ namespace CodeDrivers
                 if (userIntPanel > 5 || userIntPanel < 0)
                 {
                     Console.Clear();
-                    Console.WriteLine("Liczba nie poprawna, wprowadź ponownie");
+                    Console.WriteLine("Liczba niepoprawna. Wprowadź ponownie");
                     UserPanel();
                     return;
                 }
@@ -143,7 +143,7 @@ namespace CodeDrivers
                         UserPanel();
                         break;
                     case 3:
-                        Console.WriteLine("Odwołaj rezerwacje");
+                        Console.WriteLine("Odwołaj rezerwację");
                         Console.WriteLine();
                         UserPanel();
                         break;

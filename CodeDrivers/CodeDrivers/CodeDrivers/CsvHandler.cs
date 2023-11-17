@@ -1,6 +1,9 @@
 ﻿using CodeDrivers.Models.Car;
+using CsvHelper;
+using CsvHelper.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,8 +12,15 @@ namespace CodeDrivers
 {
     internal class CsvHandler
     {
-        // private string credentialsFilePath = @"csv\fakeCredentials.csv";
-        // private string carsFilePath = @"csv\fakeCars.csv";
+        private readonly string path;
+
+        public CsvHandler(string path)
+        {
+            this.path = path;
+        }
+
+        // private string credentialsFilePath "csv\fakeCars.csv"= @"csv\fakeCredentials.csv";
+        // private string carsFilePath = @;
         public List<string> GetRawDataFromFile(string path)
         {
             var fileContent = new List<string>();
@@ -77,5 +87,55 @@ namespace CodeDrivers
                 Console.WriteLine("Wystąpił błąd podczas dodawania pojazdu: " + ex.Message);
             }
         }
-    }
+
+
+        public List<Car> ReadCars()
+        {
+			
+            var cars = new List<Car>();
+
+            var lines = File.ReadAllLines(path);
+			
+			foreach (var line in lines)
+			{
+				var values = line.Split(',');
+
+                var car = new Car
+                {
+                    Id = int.Parse(values[0]),
+                    Brand = Enum.Parse<CarBrand>(values[1]),
+                    Model = values[2],
+                    Segment = Enum.Parse<CarSegment>(values[3]),
+                    GearTransmission = Enum.Parse<GearType>(values[4]),
+                    PricePerDay = decimal.Parse(values[5]),
+                    IsAvailable = bool.Parse(values[6]),
+                };
+
+                cars.Add(car);
+			}
+			return cars;
+		}
+
+		//public void ReadCars(string path)
+		//{
+		//	var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+		//	{
+		//		Delimiter = ",",
+		//		HasHeaderRecord = false
+		//	};
+
+		//	try
+		//	{
+  //              using var fileStream = new FileStream(path, FileMode.Open);
+  //              using var reader = new StreamReader(fileStream);
+		//		  var text = reader.ReadToEnd();
+		//		using var csv = new CsvReader(reader, config);
+  //              var cars = csv.GetRecords<Car>().ToList();
+
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//	}
+		//}
+	}
 }

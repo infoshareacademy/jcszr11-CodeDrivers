@@ -21,8 +21,14 @@ namespace CodeDrivers.Repository
     internal class CarRepository : IRepository<Car>
     {
 
+        public CarRepository()
+        {
+            csvHelper = new CsvHandler("csv\\fakeCars.csv");
+        }
+
         public static List<Car> cars { get; set; } = new List<Car>();
         static int id = 0;
+        private readonly CsvHandler csvHelper;
 
         public static int SetId()
         {
@@ -47,10 +53,11 @@ namespace CodeDrivers.Repository
                 car.Model = model;
                 car.IsAvailable = true; 
                 cars.Add(car);
+                csvHelper.AddNewCar(id = car.Id, brand = car.Brand, model = car.Model, segment = car.Segment, transmission = car.GearTransmission, price = car.PricePerDay, true, "csv\\fakeCars.csv");
             }
             else
             {
-                Console.WriteLine("Wprowadzono nie poprawne dane.");
+                Console.WriteLine("Wprowadzono niepoprawne dane.");
             }
         }
         public void RemoveCar(int id)
@@ -65,24 +72,12 @@ namespace CodeDrivers.Repository
         }
         public List<Car> GetAll()
         {
-            return cars;
+            return csvHelper.ReadCars();
         }
         public List<Car> GetAllAvailable()
         {
-            var availableCars = cars.Where(item => item.IsAvailable == true).ToList();
-            return availableCars;
+            return csvHelper.ReadCars().Where(item => item.IsAvailable == true).ToList();
         }
-        //public void DisplayAvailableItems(List<Car> availableCars)
-        //{
-        //    Console.WriteLine("======================================================================");
-        //    Console.WriteLine("=ID=|=Marka=|=Model=|=Segment=|=Skrzynia biegów=|=Stawka dzienna=|=Dostępność=");
-        //    foreach (var car in availableCars)
-        //    {
-        //        Console.WriteLine($" {car.Id.ToString()}  | {car.Brand.ToString()} | {car.Model} | {car.Segment} | {car.GearTransmission} | {car.PricePerDay}  | {car.DisplayAvailibility()} ");
-        //    }
-        //}
-
-
         public void DisplayItems(List<Car> cars)
         {
             Console.WriteLine("Wszystkie dostępne samochody z naszej ofery: ");
@@ -105,10 +100,6 @@ namespace CodeDrivers.Repository
                 Console.WriteLine("Nie można wynająć tego samochodu.");
             }
         }
-
     }
 }
-    //Lista dodanych samochodów będzie możliwa do wyświetlenia dla admina i usera.
-    //Marka, model, kategoria (male, rodzinne, dostawcze), rodzaj paliwa, cena wynajmu/dzien, KM , skrzynia biegow,elektryczne/spalinowe
-
 
