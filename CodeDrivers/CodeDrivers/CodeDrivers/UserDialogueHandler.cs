@@ -431,7 +431,6 @@ namespace CodeDrivers
             DateTime timeNow = DateTime.Now;
             UserHandler newUser = new UserHandler();
             CarRepository carRepository = new CarRepository();
-            carRepository.FillRepository();
             List<Car> availableCar = carRepository.GetAllAvailable();
 
             /*Car c1 = carListRepository.GetAll().FirstOrDefault(item => item.Id == 1);
