@@ -50,8 +50,8 @@ namespace CodeDrivers
                             int age = DateTime.Today.Year - date.Year;
                             if (age <= 17)
                             {
-                                Console.WriteLine("User nie ma 18 lat, nie posiada prawa jazdy.");
-                                return;
+                                Console.WriteLine("Wprowadź poprawnie datę urodzenia. Musisz być pełnoletni.");
+                                continue;
                             }
                         }
                         while (true)
@@ -59,7 +59,7 @@ namespace CodeDrivers
                             Console.WriteLine();
                             Console.WriteLine("Podaj adres email:");
                             string email = Console.ReadLine();
-                            if (string.IsNullOrEmpty(email))
+                            if (string.IsNullOrEmpty(email) || !(email.Contains("@")))
                             {
                                 Console.WriteLine("Mail nie może być pusty. Jeszcze raz:");
                                 continue;
@@ -67,13 +67,14 @@ namespace CodeDrivers
                             while (true)
                             {
                                 Console.WriteLine();
-                                Console.WriteLine("Wprowadź hasło:");
-                                string password = Console.ReadLine();
-                                if (string.IsNullOrEmpty(password))
-                                {
-                                    Console.WriteLine("Error. Hasło nie może być puste. Jeszcze raz:");
-                                    continue;
-                                }
+                                var password = CredentialsValidator.ValidatePassword();
+                                //Console.WriteLine("Wprowadź hasło:");
+                                //string password = Console.ReadLine();
+                                //if (string.IsNullOrEmpty(password))
+                                //{
+                                //    Console.WriteLine("Error. Hasło nie może być puste. Jeszcze raz:");
+                                //    continue;
+                                //}
                                 while (true)
                                 {
                                     Console.WriteLine();
