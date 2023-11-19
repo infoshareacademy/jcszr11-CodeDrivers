@@ -3,6 +3,7 @@ using CodeDrivers.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,114 +18,23 @@ namespace CodeDrivers
             Console.Clear();
             Console.WriteLine("Aby dokonać rezerwacji wprowadź dane:");
             Console.WriteLine("=====================================");
-            while (true)
-            {
-                Console.WriteLine();
-                Console.WriteLine("Podaj imię:");
-                string name = Console.ReadLine();
-                if (string.IsNullOrEmpty(name))
-                {
-                    Console.WriteLine("Imię nie może być puste. Wprowadź ponownie:");
-                    continue;
-                }
-                while (true)
-                {
-                    Console.WriteLine();
-                    Console.WriteLine("Podaj nazwisko:");
-                    string lastName = Console.ReadLine();
-                    if (string.IsNullOrEmpty(lastName))
-                    {
-                        Console.WriteLine("Nazwisko nie może być puste. Wprowadź ponownie:");
-                        continue;
-                    }
-                    while (true)
-                    {
-                        Console.WriteLine();
-                        Console.WriteLine("Podaj datę urodzenia dd.mm.yyyy:");
-                        string dateOfBirth = Console.ReadLine();
-                        if (string.IsNullOrEmpty(dateOfBirth))
-                        {
-                            Console.WriteLine("Data urodzenia nie może być pusta. Wprowadź jeszcze raz:");
-                            continue;
-                        }
-                        if (DateTime.TryParseExact(dateOfBirth, "dd.MM.yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime date))
-                        {
-                            int age = DateTime.Today.Year - date.Year;
-                            if (age <= 17)
-                            {
-                                Console.WriteLine("Wprowadź poprawnie datę urodzenia. Musisz być pełnoletni.");
-                                continue;
-                            }
-                        }
-                        while (true)
-                        {
-                            Console.WriteLine();
-                            Console.WriteLine("Podaj adres email:");
-                            string email = Console.ReadLine();
-                            if (string.IsNullOrEmpty(email) || !(email.Contains("@")))
-                            {
-                                Console.WriteLine("Mail nie może być pusty. Jeszcze raz:");
-                                continue;
-                            }
-                            while (true)
-                            {
-                                Console.WriteLine();
-                                var password = CredentialsValidator.ValidatePassword();
-                                //Console.WriteLine("Wprowadź hasło:");
-                                //string password = Console.ReadLine();
-                                //if (string.IsNullOrEmpty(password))
-                                //{
-                                //    Console.WriteLine("Error. Hasło nie może być puste. Jeszcze raz:");
-                                //    continue;
-                                //}
-                                while (true)
-                                {
-                                    Console.WriteLine();
-                                    Console.WriteLine("Podaj nr telefonu:");
-                                    string phoneNumber = Console.ReadLine();
-                                    if (string.IsNullOrEmpty(phoneNumber))
-                                    {
-                                        Console.WriteLine("Nr nie może być pusty. Jeszcze raz:");
-                                        continue;
-                                    }
-                                    if (Convert.ToInt32(phoneNumber.Length) <= 8 || Convert.ToInt32(phoneNumber.Length) > 9)
-                                    {
-                                        Console.WriteLine("Nieprawidłowy numer. Wpisz 9 cyfrowy nr telefonu:");
-                                        continue;
-                                    }
-                                    while (true)
-                                    {
-                                        Console.WriteLine();
-                                        Console.WriteLine("Podaj nr prawa jazdy:");
-                                        string drivingLicenceNumber = Console.ReadLine();
-                                        if (string.IsNullOrEmpty(drivingLicenceNumber))
-                                        {
-                                            Console.WriteLine("Numer nie może być pusty.");
-                                            continue;
-                                        }
-                                        Console.Clear();
-                                        string id = Guid.NewGuid().ToString().Substring(0, 4);
-                                        Console.WriteLine();
-                                        Console.WriteLine($"Id użytkownika to {id} ");
-                                        User newUser = new User(id, name, lastName, dateOfBirth, email, password, phoneNumber, drivingLicenceNumber);
-                                        users.Add(newUser);
-                                        Console.WriteLine("*****Użytkownik został dodany do listy*****");
-                                        DisplayUser(users);
-                                        Console.WriteLine();
-                                        break;
-                                    }
-                                    break;
-                                }
-                                break;
-                            }
-                            break;
-                        }
-                        break;
-                    }
-                    break;
-                }
-                break;
-            }
+            var name = GetAndValidateName();
+            var lastName = GetAndValidateLastName();
+            var dateOfBirth = GetAndValidateDateOfBirth();
+            var email = GetAndValidateEmail();
+            var password = CredentialsValidator.ValidatePassword();
+            var phoneNumber = GetAndValidatePhoneNumber();
+            var drivingLicenceNumber = GetAndValidateDrivingLicence();
+
+            Console.Clear();
+            string id = Guid.NewGuid().ToString().Substring(0, 4);
+            Console.WriteLine();
+            Console.WriteLine($"Id użytkownika to {id} ");
+            User newUser = new User(id, name, lastName, dateOfBirth, email, password, phoneNumber, drivingLicenceNumber);
+            users.Add(newUser);
+            Console.WriteLine("*****Użytkownik został dodany do listy*****");
+            DisplayUser(users);
+            Console.WriteLine();
 
             return;
         }
@@ -143,6 +53,104 @@ namespace CodeDrivers
         public List<User> GetUser()
         {
             return users;
+        }
+
+        public string GetAndValidateName()
+        {
+            while (true)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Podaj imię:");
+                string name = Console.ReadLine();
+                if (!string.IsNullOrEmpty(name))
+                {
+                    return name;
+                }
+                Console.WriteLine("Imię nie może być puste. Wprowadź ponownie:");
+            }
+        }
+        public string GetAndValidateLastName()
+        {
+            while (true)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Podaj nazwisko:");
+                string lastName = Console.ReadLine();
+                if (!string.IsNullOrEmpty(lastName))
+                {
+                    return lastName;
+                }
+                Console.WriteLine("Nazwisko nie może być puste. Wprowadź ponownie:");
+            }
+        }
+        public string GetAndValidateDateOfBirth()
+        {
+            while (true)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Podaj datę urodzenia dd.mm.yyyy:");
+                string dateOfBirth = Console.ReadLine();
+                if (string.IsNullOrEmpty(dateOfBirth))
+                {
+                    Console.WriteLine("Data urodzenia nie może być pusta. Wprowadź jeszcze raz:");
+                    continue;
+                }
+                if (DateTime.TryParseExact(dateOfBirth, "dd.MM.yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime date))
+                {
+                    int age = DateTime.Today.Year - date.Year;
+                    if (age <= 17)
+                    {
+                        Console.WriteLine("Wprowadź poprawnie datę urodzenia. Musisz być pełnoletni.");
+                        continue;
+                    }
+                }
+                return dateOfBirth;
+            }
+        }
+        public string GetAndValidateEmail()
+        {
+            while (true)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Podaj adres e-mail:");
+                string email = Console.ReadLine();
+                if (!string.IsNullOrEmpty(email) || !(email.Contains("@")))
+                {
+                    return email;
+                }
+                Console.WriteLine("E-mail nie może być puste. Wprowadź ponownie:");
+            }
+        }
+
+        public string GetAndValidatePhoneNumber()
+        {
+            while (true)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Podaj nr telefonu:");
+                string phoneNumber = Console.ReadLine();
+                if (string.IsNullOrEmpty(phoneNumber) || (Convert.ToInt32(phoneNumber.Length) <= 8 || Convert.ToInt32(phoneNumber.Length) > 9))
+                {
+                    Console.WriteLine("Nr nie może być pusty. Jeszcze raz:");
+                    continue;
+                }
+                return phoneNumber;
+            }
+        }
+
+        public string GetAndValidateDrivingLicence()
+        {
+            while (true)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Podaj numer prawa jazdy:");
+                string drivingLicenceNumber = Console.ReadLine();
+                if (!string.IsNullOrEmpty(drivingLicenceNumber))
+                {
+                    return drivingLicenceNumber;
+                }
+                Console.WriteLine("Numer prawa jazdy nie może być pusty. Wprowadź ponownie:");
+            }
         }
         public void DisplayAllUsers(List<User> users)
         {
@@ -163,6 +171,6 @@ namespace CodeDrivers
             }
         }
     }
-        
+
 }
 
