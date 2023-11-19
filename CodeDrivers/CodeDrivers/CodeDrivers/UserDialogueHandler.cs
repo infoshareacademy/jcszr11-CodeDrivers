@@ -118,9 +118,9 @@ namespace CodeDrivers
                 Console.WriteLine("######################");
                 Console.WriteLine("1: Wyświetl wszystkie dostępne auta");
                 Console.WriteLine("2: Zmień termin rezerwacji");
-                Console.WriteLine("3: Odwolaj rezerwacj");
+                Console.WriteLine("3: Odwolaj rezerwację");
                 Console.WriteLine("4: Zarezerwuj pojazd");
-                Console.WriteLine("5: Zmień range (na admina)");
+                Console.WriteLine("5: Zmień rangę (na admina)");
                 Console.WriteLine("######################");
                 Console.WriteLine();
                 int userIntPanel = int.Parse(Console.ReadLine());
@@ -128,7 +128,7 @@ namespace CodeDrivers
                 if (userIntPanel > 5 || userIntPanel < 0)
                 {
                     Console.Clear();
-                    Console.WriteLine("Liczba nie poprawna, wprowadź ponownie");
+                    Console.WriteLine("Liczba niepoprawna, wprowadź ponownie");
                     UserPanel();
                     return;
                 }
@@ -147,7 +147,7 @@ namespace CodeDrivers
                         UserPanel();
                         break;
                     case 3:
-                        Console.WriteLine("Odwołaj rezerwacje");
+                        Console.WriteLine("Odwołaj rezerwację");
                         Console.WriteLine();
                         UserPanel();
                         break;
@@ -156,7 +156,7 @@ namespace CodeDrivers
                         UserPanel();
                         break;
                     case 5:
-                        Console.WriteLine("Zmien range (testowe)");
+                        Console.WriteLine("Zmien rangę (testowe)");
                         Console.Clear();
                         AdminPanel();
                         break;
@@ -191,7 +191,7 @@ namespace CodeDrivers
             {
                 Console.Clear();
                 carListRepository.DisplayItems(carListRepository.GetAll());
-                Console.WriteLine("* Wprowadź Id samochodu jaki chcesz usunąć z listy:");
+                Console.WriteLine("* Wprowadź Id samochodu, jaki chcesz usunąć z listy:");
                 int id = int.Parse(Console.ReadLine());
                 Console.WriteLine();
                 carListRepository.RemoveCar(id);
@@ -435,49 +435,8 @@ namespace CodeDrivers
             DateTime timeNow = DateTime.Now;
             CarRepository carRepository = new CarRepository();
             List<Car> availableCar = carRepository.GetAllAvailable();
-
-            /*Car c1 = carListRepository.GetAll().FirstOrDefault(item => item.Id == 1);
-			User u1 = null;
-			string format = "dd/MM/yyyy HH:mm";
-			CultureInfo provider = CultureInfo.InvariantCulture;
-
-			DateTime beginning = DateTime.ParseExact("12/03/2024 13:00", format, provider);
-			DateTime end = DateTime.ParseExact("12/04/2024 13:00", format, provider);
-
-			Reservation r1 = new Reservation(c1, u1, beginning, end, 200);
-
-			reservationRepository.Reservations.Add(r1);*/
-
-
-            //do
-            //{
-            //    reservationStartDate = DataHandler.GetDate("Podaj date i godzine poczatku rezerwacji");
-            //    reservationEndDate = DataHandler.GetDate("Podaj date konca rezerwacji");
-
-            //    if (reservationStartDate >= reservationEndDate)
-            //    {
-            //        Console.WriteLine("Data zakończenia rezerwacji musi być większa niż data początku rezerwacji!!");
-            //        reservationEndDate = DataHandler.GetDate("Podaj date konca rezerwacji");
-            //    }
-            //} while (reservationEndDate <= reservationStartDate);
-
-            //List<int> bookedCarIds = reservationRepository.GetCarsReservedInGivenPeriod(reservationStartDate, reservationEndDate);
-
-            //Console.WriteLine("W wybranym terminie sa dostepne nastepujace samochody");
-
-            //carListRepository.DisplayItems(carListRepository.GetAllExceptCarsWithProvidedIds(bookedCarIds));
-            //carListRepository.DisplayItems(carListRepository.GetAll().Where(car => !bookedCarIds.Contains(car.Id)).ToList());
-            //GetAll().Where(car => !bookedCarIds.Contains(car.Id));
-
-            //Console.WriteLine("Ktory samochod chcesz wybrac? Podaj id");
-
-            //int chosenCarId = DataHandler.GetId();
-
-            ////dalsza czesc tworzenia rezerwacji
-
-            //Console.WriteLine();
             Console.Clear();
-            //carListRepository.DisplayItems(carListRepository.GetAll()); 
+
             carListRepository.DisplayItems(carListRepository.GetAllAvailable());
             Console.WriteLine();
 
@@ -525,9 +484,6 @@ namespace CodeDrivers
                         }
 
                     }
-
-                    //carListRepository.DisplayItems(carListRepository.GetAllExceptCarsWithProvidedIds(bookedCarIds));
-                    //carListRepository.DisplayItems(carListRepository.GetAll().Where(car => !bookedCarIds.Contains(car.Id)).ToList());
                 }
             }
 

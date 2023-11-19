@@ -41,9 +41,9 @@ namespace CodeDrivers.Repository
             {
                 car.Id = SetId();
                 car.Brand = brand;
-                car.Segment = segment; //klasa
-                car.GearTransmission = transmission; //skrzynia
-                car.PricePerDay = price; //cena
+                car.Segment = segment; 
+                car.GearTransmission = transmission;
+                car.PricePerDay = price; 
                 car.Model = model;
                 car.IsAvailable = true; 
                 cars.Add(car);
@@ -72,16 +72,6 @@ namespace CodeDrivers.Repository
             var availableCars = cars.Where(item => item.IsAvailable == true).ToList();
             return availableCars;
         }
-        //public void DisplayAvailableItems(List<Car> availableCars)
-        //{
-        //    Console.WriteLine("======================================================================");
-        //    Console.WriteLine("=ID=|=Marka=|=Model=|=Segment=|=Skrzynia biegów=|=Stawka dzienna=|=Dostępność=");
-        //    foreach (var car in availableCars)
-        //    {
-        //        Console.WriteLine($" {car.Id.ToString()}  | {car.Brand.ToString()} | {car.Model} | {car.Segment} | {car.GearTransmission} | {car.PricePerDay}  | {car.DisplayAvailibility()} ");
-        //    }
-        //}
-
 
         public void DisplayItems(List<Car> cars)
         {
