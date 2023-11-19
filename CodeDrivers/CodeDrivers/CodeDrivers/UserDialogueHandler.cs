@@ -20,7 +20,7 @@ namespace CodeDrivers
     {
         CarRepository carListRepository = new CarRepository();
         ReservationRepository reservationRepository = new ReservationRepository();
-
+        UserHandler newUser = new UserHandler();
         Car car = new Car(CarBrand.BMW, "A1");
         public string Rang { get; set; }
         public Menu_tekstowe(string rang)
@@ -48,15 +48,16 @@ namespace CodeDrivers
                 Console.WriteLine();
                 Console.WriteLine("######################");
                 Console.WriteLine("1: Wyświetl wszystkie dostępne auta");
-                Console.WriteLine("2: Dodaj auto do listy");
-                Console.WriteLine("3: Usuń auto z listy");
-                Console.WriteLine("4: Edytuj pozycję samochodu");
-                Console.WriteLine("5: Zmień range (na usera)");
+                Console.WriteLine("2: Wyświetl wszystkich dostępnych użytkowników");
+                Console.WriteLine("3: Dodaj auto do listy");
+                Console.WriteLine("4: Usuń auto z listy");
+                Console.WriteLine("5: Edytuj pozycję samochodu");
+                Console.WriteLine("6: Zmień range (na usera)");
                 Console.WriteLine("######################");
                 Console.WriteLine();
                 int userIntPanel = int.Parse(Console.ReadLine());
                 Console.WriteLine();
-                if (userIntPanel > 5 || userIntPanel < 0)
+                if (userIntPanel > 6 || userIntPanel < 0)
                 {
                     Console.Clear();
                     Console.WriteLine("Liczba nie poprawna, wprowadź ponownie");
@@ -71,25 +72,28 @@ namespace CodeDrivers
                         AdminPanel();
                         break;
                     case 2:
-                        Console.Clear();
+                        newUser.DisplayAllUsers(newUser.GetUser());
+                        AdminPanel();
+                        break;
+                    case 3:
                         Console.WriteLine("Dodaj auto do listy");
                         Console.WriteLine();
                         AddCar();
                         AdminPanel();
                         break;
-                    case 3:
+                    case 4:
                         Console.WriteLine("Usuń auto z listy");
                         Console.WriteLine();
                         RemoveCar();
                         AdminPanel();
                         break;
-                    case 4:
+                    case 5:
                         Console.WriteLine("Edytuj wartości samochodu z listy");
                         Console.WriteLine();
                         EditPosition();
                         AdminPanel();
                         break;
-                    case 5:
+                    case 6:
                         Console.WriteLine("Zmien range (na usera)");
                         Console.WriteLine();
                         Console.Clear();
@@ -429,7 +433,6 @@ namespace CodeDrivers
             DateTime? reservationStartDate = null;
             DateTime? reservationEndDate = null;
             DateTime timeNow = DateTime.Now;
-            UserHandler newUser = new UserHandler();
             CarRepository carRepository = new CarRepository();
             List<Car> availableCar = carRepository.GetAllAvailable();
 

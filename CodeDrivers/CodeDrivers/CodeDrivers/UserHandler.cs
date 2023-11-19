@@ -8,8 +8,10 @@ using System.Threading.Tasks;
 
 namespace CodeDrivers
 {
-    public class UserHandler
+    internal class UserHandler
     {
+        static List<User> users { get; set; } = new List<User>();
+
         public void AddUser()
         {
             Console.Clear();
@@ -104,9 +106,7 @@ namespace CodeDrivers
                                         string id = Guid.NewGuid().ToString().Substring(0, 4);
                                         Console.WriteLine();
                                         Console.WriteLine($"Id użytkownika to {id} ");
-                                        List<User> Users = new List<User>();
                                         User newUser = new User(id, name, lastName, dateOfBirth, email, password, phoneNumber, drivingLicenceNumber);
-                                        List<User> users = new List<User>();
                                         users.Add(newUser);
                                         Console.WriteLine("*****Użytkownik został dodany do listy*****");
                                         DisplayUser(users);
@@ -129,7 +129,7 @@ namespace CodeDrivers
             return;
         }
 
-        static void DisplayUser(List<User> users)
+        public void DisplayUser(List<User> users)
         {
             Console.WriteLine("Twoje dane zostały wprowadzone:");
             Console.WriteLine();
@@ -138,6 +138,28 @@ namespace CodeDrivers
             foreach (var user in users)
             {
                 Console.WriteLine($" # {user.Id}  |  {user.Name}  |  {user.LastName}  |  {user.DateOfBirth:dd-MM-yyyy}  |  {user.Email}  |  {user.PhoneNumber}  |  {user.DrivingLicenceNumber}  | ");
+            }
+        }
+        public List<User> GetUser()
+        {
+            return users;
+        }
+        public void DisplayAllUsers(List<User> users)
+        {
+            if (users.Count == 0)
+            {
+                Console.WriteLine("Brak użytkowników");
+            }
+            else
+            {
+                Console.WriteLine("Wszyscy użytkownicy:");
+                Console.WriteLine();
+                Console.WriteLine(" # ID  |  Imię  |  Nazwisko  |  Data urodzenia  |  Email  |  Nr telefonu  |  Nr prawa jazdy |");
+                Console.WriteLine("=============================================================================================");
+                foreach (var user in users)
+                {
+                    Console.WriteLine($" # {user.Id}  |  {user.Name}  |  {user.LastName}  |  {user.DateOfBirth:dd-MM-yyyy}  |  {user.Email}  |  {user.PhoneNumber}  |  {user.DrivingLicenceNumber}  | ");
+                }
             }
         }
     }
