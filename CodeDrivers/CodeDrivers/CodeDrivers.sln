@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeDrivers", "CodeDrivers\CodeDrivers.csproj", "{8D83DEC4-F74B-4FA5-81E6-B125A51192B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeDrivers", "CodeDrivers\CodeDrivers.csproj", "{8D83DEC4-F74B-4FA5-81E6-B125A51192B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeDriversLogic", "CodeDriversLogic\CodeDriversLogic.csproj", "{3400BB85-BDCB-4E5B-940F-8C10CAD0F795}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeDriversMVC", "CodeDriversMVC\CodeDriversMVC.csproj", "{B84BF869-605A-44B7-89C7-B12B94A466FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{8D83DEC4-F74B-4FA5-81E6-B125A51192B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D83DEC4-F74B-4FA5-81E6-B125A51192B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D83DEC4-F74B-4FA5-81E6-B125A51192B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3400BB85-BDCB-4E5B-940F-8C10CAD0F795}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3400BB85-BDCB-4E5B-940F-8C10CAD0F795}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3400BB85-BDCB-4E5B-940F-8C10CAD0F795}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3400BB85-BDCB-4E5B-940F-8C10CAD0F795}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B84BF869-605A-44B7-89C7-B12B94A466FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B84BF869-605A-44B7-89C7-B12B94A466FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B84BF869-605A-44B7-89C7-B12B94A466FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B84BF869-605A-44B7-89C7-B12B94A466FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

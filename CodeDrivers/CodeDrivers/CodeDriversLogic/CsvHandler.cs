@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CodeDrivers
 {
-    internal class CsvHandler
+    public class CsvHandler
     {
         // private string credentialsFilePath = @"csv\fakeCredentials.csv";
         // private string carsFilePath = @"csv\fakeCars.csv";

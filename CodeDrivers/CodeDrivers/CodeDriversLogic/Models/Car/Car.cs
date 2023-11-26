@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 namespace CodeDrivers.Models.Car
 {
-	internal class Car
+	public class Car
 	{
 		public int Id { get; set; }
 		public CarBrand Brand { get; set; } 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CodeDrivers.Models.Car
 {
-    internal enum GearType
+    public enum GearType
     {
         Automatic,
         Manual
