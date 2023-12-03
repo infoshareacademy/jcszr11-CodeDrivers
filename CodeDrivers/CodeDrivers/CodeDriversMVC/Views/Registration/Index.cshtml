@@ -1,0 +1,74 @@
+﻿@model CodeDrivers.Models.User
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Formularz rejestracji</h1>
+
+<p>Aby dokonać rezerwacji pojazdu, uzupełnij poniższe pola.</p>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Register">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Imię</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label">Nazwisko</label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfBirth" class="control-label">Data urodzenia</label>
+                <input asp-for="DateOfBirth" class="form-control" />
+                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label">Adres e-mail</label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label">Hasło</label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label">Numer telefonu</label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DrivingLicenceNumber" class="control-label">Numer prawa jazdy</label>
+                <input asp-for="DrivingLicenceNumber" class="form-control" />
+                <span asp-validation-for="DrivingLicenceNumber" class="text-danger"></span>
+            </div>
+
+            <div class="input-group date" data-provide="datepicker">
+                <input type="text" class="form-control">
+                <div class="input-group-addon">
+                    <span class="glyphicon glyphicon-th"></span>
+
+                </div>
+
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CodeDrivers.Models
 {
-    internal class User
+    public class User
     {
         private string dateOfBirth;
 
@@ -29,6 +29,11 @@ namespace CodeDrivers.Models
             Password = password;
             PhoneNumber = phoneNumber;
             DrivingLicenceNumber = drivingLicenceNumber;
+        }
+
+        public User()
+        {
+            
         }
     }
 }
