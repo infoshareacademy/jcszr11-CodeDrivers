@@ -16,7 +16,9 @@ namespace CodeDriversMVC.Controllers
         [HttpPost]
         public ActionResult Register(User user)
         {
-            return View();
+            TempData["Success message"] = "Zostałeś poprawnie zarejestrowany.";
+
+            return RedirectToAction("Index", "Home");
         }
 
 

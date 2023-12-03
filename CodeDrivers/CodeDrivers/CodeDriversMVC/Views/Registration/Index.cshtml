@@ -49,18 +49,12 @@
                 <span asp-validation-for="DrivingLicenceNumber" class="text-danger"></span>
             </div>
 
-            <div class="input-group date" data-provide="datepicker">
-                <input type="text" class="form-control">
-                <div class="input-group-addon">
-                    <span class="glyphicon glyphicon-th"></span>
-
-                </div>
-
-            </div>
             <br />
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
+           
+ 
         </form>
     </div>
 </div>
@@ -71,4 +65,5 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
 }
