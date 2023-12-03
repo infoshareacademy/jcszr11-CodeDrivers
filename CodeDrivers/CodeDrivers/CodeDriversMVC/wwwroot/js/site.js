@@ -2,4 +2,6 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
-$('.datepicker').datepicker();
+$("#toastButton").click(function () {
+    $("#toast1").toast("show");
+});

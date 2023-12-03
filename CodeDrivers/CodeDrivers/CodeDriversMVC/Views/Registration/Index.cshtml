@@ -25,8 +25,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="DateOfBirth" class="control-label">Data urodzenia</label>
-                <input asp-for="DateOfBirth" class="form-control" />
+                <input asp-for="DateOfBirth" type="date" class="form-control" />
                 <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+
             </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label">Adres e-mail</label>
@@ -51,19 +52,35 @@
 
             <br />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" id="toastButton" value="Create" class="btn btn-primary" />
             </div>
-           
- 
+
+          
+
         </form>
     </div>
 </div>
 
 <div>
     <a asp-action="Index">Back to List</a>
+@*     <button id="toastButton" type="button" class="btn btn-primary">Wyświetl toast</button> *@
+</div>
+
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="toast1" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto">Bootstrap</strong>
+            <small>11 mins ago</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Hello, world! This is a toast message.
+        </div>
+    </div>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+  
     
 }
