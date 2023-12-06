@@ -17,9 +17,9 @@ namespace CodeDriversMVC.Controllers
 
         public IActionResult Index()
         {
-            Car car = new Car(CarBrand.Audi, "A4");
-            CsvHandler csvHandler = new CsvHandler();
-            var a = csvHandler.GetRawDataFromFile(@"C:\\Users\Janek\Desktop\fakeCredentials.csv");
+            //Car car = new Car(CarBrand.Audi, "A4");
+            //CsvHandler csvHandler = new CsvHandler();
+            //var a = csvHandler.GetRawDataFromFile(@"C:\\Users\Janek\Desktop\fakeCredentials.csv");
 
             return View();
         }
