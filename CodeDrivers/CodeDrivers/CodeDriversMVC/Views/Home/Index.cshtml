@@ -2,8 +2,34 @@
     ViewData["Title"] = "Home Page";
 }
 
-@TempData["Success message"];
+
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<div class="position-absolute top-50 start-50 translate-middle" style="z-index: 11">
+    <div id="toast1" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto">Sukces!</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Zostałeś poprawnie zarejestrowany!
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        var showToast = @(ViewBag.ShowToast);
+
+        document.addEventListener('DOMContentLoaded', function () {
+            if (showToast = "true") {
+                var myToast = new bootstrap.Toast(document.getElementById('toast1'));
+                myToast.show();
+            }
+        });
+    </script>
+}

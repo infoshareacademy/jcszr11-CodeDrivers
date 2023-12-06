@@ -2,6 +2,6 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
-$("#toastButton").click(function () {
-    $("#toast1").toast("show");
-});
+//$("#toastButton").click(function () {
+//    $("#toast1").toast("show");
+//});

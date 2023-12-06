@@ -1,4 +1,5 @@
 ﻿using CodeDrivers.Models;
+using CodeDriversMVC.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,18 +8,27 @@ namespace CodeDriversMVC.Controllers
     public class RegistrationController : Controller
     {
         // GET: RegistrationController
+        RegistationService _registrationService = new RegistationService();
         
         public ActionResult Index()
         {
+            if (TempData["ShowToast"] != null)
+            {
+                ViewBag.ShowToast = true;
+                TempData.Remove("ShowToast");
+
+            }
             return View();
         }
         
         [HttpPost]
         public ActionResult Register(User user)
         {
-            TempData["Success message"] = "Zostałeś poprawnie zarejestrowany.";
+            _registrationService.AddNewUser(user);
+            TempData["ShowToast"] = true;
 
             return RedirectToAction("Index", "Home");
+
         }
 
 
