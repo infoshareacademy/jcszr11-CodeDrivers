@@ -1,0 +1,19 @@
+﻿
+.navbar-contener{
+    position: center;
+    justify-content: space-between 5px;
+    text-align:center;
+    align-content: end;
+}
+
+.navbar-contener button {
+    border-radius: 50px !important;
+    margin-left: 0.5rem;
+}
+
+.carlist-filter{
+    margin: auto;
+    width: 50rem;
+    height: 45rem;
+    background-color: red;
+}
