@@ -1,0 +1,71 @@
+﻿@model IEnumerable<CodeDrivers.Models.Car.Car>
+
+@{
+    ViewData["Title"] = "Cars";
+}
+
+<h1>Baza pojazdów</h1>
+
+<p>
+    <a asp-action="Create">Dodaj nowy pojazd</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Marka
+            </th>
+            <th>
+                Model
+            </th>
+            <th>
+                Segment
+            </th>
+            <th>
+                Skrzynia biegów
+            </th>
+            <th>
+                Dostępność
+            </th>
+            <th>
+                Stawka za dzień
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Segment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GearTransmission)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsAvailable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PricePerDay)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

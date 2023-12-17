@@ -28,6 +28,9 @@
                         </li>
                         <li>
                             <button>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Index">Cars</a>
+                            </button>
+                            <button>
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Index">Login</a>
                             </button>
                             <button>
@@ -39,6 +42,31 @@
             </div>
         </nav>
     </header>
+    <div class="position-absolute top-50 start-50 translate-middle" style="z-index: 11">
+        <div id="toast1" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">Sukces!</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Zostałeś poprawnie zarejestrowany!
+            </div>
+        </div>
+    </div>
+
+
+    @section Scripts {
+        <script>
+            var showToast = @(ViewData.ContainsKey("ShowToast") && (bool)ViewData["ShowToast"] ? "true" : "false");
+
+            document.addEventListener('DOMContentLoaded', function () {
+                if (showToast) {
+                    var myToast = new bootstrap.Toast(document.getElementById('toast1'));
+                    myToast.show();
+                }
+            });
+        </script>
+    }
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()

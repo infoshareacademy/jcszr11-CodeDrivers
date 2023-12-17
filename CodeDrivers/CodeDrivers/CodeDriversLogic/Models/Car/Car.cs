@@ -42,6 +42,11 @@ namespace CodeDrivers.Models.Car
                 }
 			}
 		}
+
+		public Car()
+		{
+
+		}
 		public string DisplayAvailibility()
 		{
 			if (IsAvailable)

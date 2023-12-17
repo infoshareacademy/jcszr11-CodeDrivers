@@ -21,10 +21,9 @@
 
 @section Scripts {
     <script>
-        var showToast = @(ViewBag.ShowToast);
-
+        var showToast = '@(ViewData.ContainsKey("ShowToast") && (bool)ViewData["ShowToast"] ? "true" : "false")';
         document.addEventListener('DOMContentLoaded', function () {
-            if (showToast = "true") {
+            if (showToast) {
                 var myToast = new bootstrap.Toast(document.getElementById('toast1'));
                 myToast.show();
             }

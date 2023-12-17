@@ -15,56 +15,63 @@
             
             <div class="form-group">
                 <label asp-for="Name" class="control-label">Imię</label>
-                <input asp-for="Name" class="form-control" />
+                <input asp-for="Name" class="form-control" data-val="true" data-val-required="To pole jest wymagane." />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="LastName" class="control-label">Nazwisko</label>
-                <input asp-for="LastName" class="form-control" />
+                <input asp-for="LastName" class="form-control" data-val="true" data-val-required="To pole jest wymagane." />
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DateOfBirth" class="control-label">Data urodzenia</label>
-                <input asp-for="DateOfBirth" type="date" class="form-control" />
+                <input asp-for="DateOfBirth" type="date" class="form-control" data-val="true" data-val-required="To pole jest wymagane." />
                 <span asp-validation-for="DateOfBirth" class="text-danger"></span>
 
             </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label">Adres e-mail</label>
-                <input asp-for="Email" class="form-control" />
+                <input asp-for="Email" class="form-control" data-val="true" data-val-required="To pole jest wymagane." />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Password" class="control-label">Hasło</label>
-                <input asp-for="Password" class="form-control" />
+                <div class="input-group">
+                    <input asp-for="Password" class="form-control" type="password" data-val="true" data-val-required="To pole jest wymagane." id="passwordTextField" />
+                </div>
                 <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-text">
+                        <input class="form-check-input" type="checkbox" id="passwordShowCheckbox">
+                        <label class="form-check-label" for="passwordShowCheckbox">
+                            Pokaż hasło
+                        </label>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <label asp-for="PhoneNumber" class="control-label">Numer telefonu</label>
-                <input asp-for="PhoneNumber" class="form-control" />
+                <input asp-for="PhoneNumber" class="form-control" data-val="true" data-val-required="To pole jest wymagane." />
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DrivingLicenceNumber" class="control-label">Numer prawa jazdy</label>
-                <input asp-for="DrivingLicenceNumber" class="form-control" />
+                <input asp-for="DrivingLicenceNumber" class="form-control" data-val="true" data-val-required="To pole jest wymagane." />
                 <span asp-validation-for="DrivingLicenceNumber" class="text-danger"></span>
             </div>
-
             <br />
             <div class="form-group">
-                <input type="submit" id="toastButton" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
-
-          
-
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
-@*     <button id="toastButton" type="button" class="btn btn-primary">Wyświetl toast</button> *@
-</div>
+    <a asp-action="Index">Back to List</a></div>
 
 
 

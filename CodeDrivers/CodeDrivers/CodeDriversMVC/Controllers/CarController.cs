@@ -1,46 +1,34 @@
-﻿using CodeDrivers.Models;
+﻿using CodeDrivers.Models.Car;
 using CodeDriversMVC.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CodeDriversMVC.Controllers
 {
-    public class RegistrationController : Controller
+    public class CarController : Controller
     {
-        // GET: RegistrationController
-        RegistationService _registrationService = new RegistationService();
-
+        CarService _carService = new CarService();
+        // GET: CarController
         public ActionResult Index()
         {
-            ViewData["ShowToast"] = true;
-
-            return View();
+            var cars = _carService.DisplayCars();
+            return View(cars);
         }
 
-        [HttpPost]
-        public ActionResult Register(User user)
-        {
-            _registrationService.AddNewUser(user);
-            ViewData["ShowToast"] = true;
-
-            return RedirectToAction("Index", "Home");
-
-        }
-
-
-        // GET: RegistrationController/Details/5
+        // GET: CarController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: RegistrationController/Create
-        public ActionResult Create()
+        // GET: CarController/Create
+        public ActionResult Create(Car car)
         {
+            _carService.AddNewCar(car);
             return View();
         }
 
-        // POST: RegistrationController/Create
+        // POST: CarController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -55,13 +43,13 @@ namespace CodeDriversMVC.Controllers
             }
         }
 
-        // GET: RegistrationController/Edit/5
+        // GET: CarController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: RegistrationController/Edit/5
+        // POST: CarController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -76,13 +64,13 @@ namespace CodeDriversMVC.Controllers
             }
         }
 
-        // GET: RegistrationController/Delete/5
+        // GET: CarController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: RegistrationController/Delete/5
+        // POST: CarController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
