@@ -69,6 +69,14 @@
     }
     <div class="container">
         <main role="main" class="pb-3">
+            @if (TempData.ContainsKey("Success"))
+            {
+                <p class="alert alert-success">@TempData["Success"]</p>
+            }
+            @if (TempData.ContainsKey("Delete"))
+            {
+                <p class="alert alert-danger">@TempData["Delete"]</p>
+            }
             @RenderBody()
         </main>
     </div>
