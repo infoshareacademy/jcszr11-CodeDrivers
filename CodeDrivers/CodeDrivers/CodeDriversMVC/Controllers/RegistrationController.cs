@@ -2,6 +2,7 @@
 using CodeDriversMVC.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection;
 
 namespace CodeDriversMVC.Controllers
 {
@@ -20,11 +21,25 @@ namespace CodeDriversMVC.Controllers
         [HttpPost]
         public ActionResult Register(User user)
         {
-            _registrationService.AddNewUser(user);
-            ViewData["ShowToast"] = true;
+            if (ValidatePassword(user.Password, Request.Form["PasswordConfirmation"]))
+            {
+                _registrationService.AddNewUser(user);
+                ViewData["ShowToast"] = true;
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ModelState.AddModelError("Password", "Hasła nie są zgodne lub nie spełniają wymaganych kryteriów.");
+            }
 
-            return RedirectToAction("Index", "Home");
+            // Jeśli ModelState nie jest prawidłowy, zwróć użytkownika do widoku rejestracji z błędami
+            return View(user);
 
+        }
+        private bool ValidatePassword(string password, string passwordConfirmation)
+        {
+            // Logika walidacji hasła
+            return password == passwordConfirmation && password.Length >= 8 && password.Any(char.IsDigit) && password.Any(char.IsUpper);
         }
 
 

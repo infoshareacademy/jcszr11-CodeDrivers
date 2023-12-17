@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,6 +13,7 @@ namespace CodeDrivers.Models
     {
         private string dateOfBirth;
 
+        [BindProperty]
         public string Id { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
@@ -20,9 +23,9 @@ namespace CodeDrivers.Models
         public string PhoneNumber { get; set; }
         public string DrivingLicenceNumber { get; set; }
         List<User> Users { get; set; } = new List<User>();
-        public User(string id, string name, string lastName, DateTime dateOfBirth, string email, string password, string phoneNumber, string drivingLicenceNumber)
+        public User(string name, string lastName, DateTime dateOfBirth, string email, string password, string phoneNumber, string drivingLicenceNumber)
         {
-            Id = id;
+            Id = Guid.NewGuid().ToString();
             Name = name;
             LastName = lastName;
             DateOfBirth = dateOfBirth;

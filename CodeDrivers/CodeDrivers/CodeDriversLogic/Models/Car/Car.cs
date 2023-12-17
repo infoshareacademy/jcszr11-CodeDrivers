@@ -8,8 +8,9 @@ namespace CodeDrivers.Models.Car
 	public class Car
 	{
 		public int Id { get; set; }
-		public CarBrand Brand { get; set; } 
-		public List<string> Models => BrandToModelsDict.First(f => f.Key == Brand).Value;
+		public CarBrand Brand { get; set; }
+        public List<string> CarBrandNames => Enum.GetNames(typeof(CarBrand)).ToList();
+        public List<string> Models => BrandToModelsDict.First(f => f.Key == Brand).Value;
 		public string Model { get; set; } //Model
 		public CarSegment Segment { get; set; } //A,B,C,D,Crossover,SUV (najlepiej enum)
 		public GearType GearTransmission { get; set; }

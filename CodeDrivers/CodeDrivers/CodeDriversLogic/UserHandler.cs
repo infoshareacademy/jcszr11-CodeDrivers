@@ -30,7 +30,7 @@ namespace CodeDrivers
             string id = Guid.NewGuid().ToString().Substring(0, 4);
             Console.WriteLine();
             Console.WriteLine($"Id użytkownika to {id} ");
-            User newUser = new User(id, name, lastName, DateTime.Parse(dateOfBirth), email, password, phoneNumber, drivingLicenceNumber);
+            User newUser = new User(name, lastName, DateTime.Parse(dateOfBirth), email, password, phoneNumber, drivingLicenceNumber);
             users.Add(newUser);
             Console.WriteLine("*****Użytkownik został dodany do listy*****");
             DisplayUser(users);

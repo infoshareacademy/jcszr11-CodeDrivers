@@ -31,8 +31,7 @@ namespace CodeDriversMVC.Controllers
         // GET: CarController/Create
         public ActionResult Create()
         {
-            _carService.AddNewCar(car);
-            return View();
+            return View(new Car());
         }
 
         // POST: CarController/Create
@@ -44,16 +43,11 @@ namespace CodeDriversMVC.Controllers
             TempData["Success"] = "Auto zostało dodane";
             return RedirectToAction(nameof(Index));
         }
-            catch
-            {
-                return View();
-            }
-        }
 
         // GET: CarController/Edit/5
         public ActionResult Edit(int id)
         {
-            var allCars= carService.GetById(id);
+            var allCars = carService.GetById(id);
             return View(allCars);
         }
 
@@ -65,16 +59,11 @@ namespace CodeDriversMVC.Controllers
             carService.Update(allCars);
             return RedirectToAction(nameof(Index));
         }
-            catch
-            {
-                return View();
-            }
-        }
 
         // GET: CarController/Delete/5
         public ActionResult Delete(int id)
         {
-            var allCars=carService.GetById(id);
+            var allCars = carService.GetById(id);
             return View(allCars);
         }
 
@@ -86,11 +75,6 @@ namespace CodeDriversMVC.Controllers
             carService.RemoveCar(id);
             TempData["Delete"] = "Auto zostało usunięte.";
             return RedirectToAction(nameof(Index));
-        }
-            catch
-            {
-                return View();
-            }
         }
     }
 }
