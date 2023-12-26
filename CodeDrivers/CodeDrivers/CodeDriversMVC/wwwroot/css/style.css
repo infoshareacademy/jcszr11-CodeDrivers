@@ -1,19 +1,72 @@
 ﻿
-.navbar-contener{
-    position: center;
-    justify-content: space-between 5px;
-    text-align:center;
+.navbar-contener {
     align-content: end;
+    background-color: white;
+    height:5rem;
+    margin-right:auto;
+    padding-top:1rem;
 }
 
-.navbar-contener button {
+.navbar-style{
+    display:inline;
+    width: 100%;
+    height: 100%;
+    text-align:right;
+    position:center;
+}
+.navbar-contener button:first-child {
+    text-align:center;
+    float: left;
+    color: black;
+    border-color: white;
+    border-inline-color: white;
+    background-color: white;
+    border: none;
+    text-decoration: none;
+    font-size: 1.15rem;
+    font-weight: bold;
+}
+.navbar-contener button:not(:first-child) {
     border-radius: 50px !important;
-    margin-left: 0.5rem;
+}
+.carlist-filter {
+    margin: auto;
+    width: 80rem;
+    height: 90rem;
+    background-color: purple;
+}
+body {
+    color: white;
+    height: 100%;
+    padding: 0;
+    margin:0;
+    background: rgb(173,0,255);
+    background: linear-gradient(rgba(173,0,255,1) 0%, rgba(87,16,150,1) 25%, rgba(2,0,36,1) 100%);
+}
+.table{
+    color: white;
+    text-decoration: none;
+}
+ .custom-link {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
 }
 
-.carlist-filter{
-    margin: auto;
-    width: 50rem;
-    height: 45rem;
-    background-color: red;
+.footer-container {
+    bottom:0;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    max-height: 1rem;
+    width:100%;
 }
+    .footer-container p {
+        margin: 0;
+        position: center;
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        background-color: rgba(2,0,36,1);
+        color: white;
+    }

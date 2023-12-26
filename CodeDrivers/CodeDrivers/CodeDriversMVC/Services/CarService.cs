@@ -25,7 +25,7 @@ namespace CodeDriversMVC.Services
         }
         public void Update(Car car)
         {
-            var allCars=GetById(car.Id);
+            Car allCars =GetById(car.Id);
             allCars.Brand=car.Brand;
             allCars.Model=car.Model;
             allCars.Segment=car.Segment;
