@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="libphonenumber-csharp" Version="8.13.27" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CodeDriversLogic\CodeDriversLogic.csproj" />
   </ItemGroup>
 

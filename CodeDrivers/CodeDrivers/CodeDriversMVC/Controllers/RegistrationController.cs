@@ -1,7 +1,9 @@
-﻿using CodeDrivers.Models;
+﻿using CodeDrivers;
+using CodeDrivers.Models;
 using CodeDriversMVC.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Configuration;
 using System.Reflection;
 
 namespace CodeDriversMVC.Controllers
@@ -21,27 +23,30 @@ namespace CodeDriversMVC.Controllers
         [HttpPost]
         public ActionResult Register(User user)
         {
-            if (ValidatePassword(user.Password, Request.Form["PasswordConfirmation"]))
+            var validator = new CodeDrivers.CredentialsValidator();
+
+            if (!validator.ValidatePassword(user.Password))
+            {
+                ModelState.AddModelError("PasswordValidationError", "Hasło musi składać się z co najmniej 8 znaków w tym co najmniej jednej cyfry.");
+                return View("Index", user);
+            }
+            else if (!validator.ConfirmPassword(user.Password, Request.Form["PasswordConfirmation"]))
+            {
+                ModelState.AddModelError("PasswordValidationError", "Hasła nie są zgodne!");
+                return View("Index", user);
+            }
+            else if (!validator.ValidatePhoneNumber(user.PhoneNumber))
+            {
+                ModelState.AddModelError("PhoneValidationError", "Numer telefonu powinien składać się z 9 cyfr nieodzielonych odstępami.");
+                return View("Index", user);
+            }
+            else
             {
                 _registrationService.AddNewUser(user);
                 ViewData["ShowToast"] = true;
                 return RedirectToAction("Index", "Home");
             }
-            else
-            {
-                ModelState.AddModelError("Password", "Hasła nie są zgodne lub nie spełniają wymaganych kryteriów.");
-            }
-
-            // Jeśli ModelState nie jest prawidłowy, zwróć użytkownika do widoku rejestracji z błędami
-            return View(user);
-
         }
-        private bool ValidatePassword(string password, string passwordConfirmation)
-        {
-            // Logika walidacji hasła
-            return password == passwordConfirmation && password.Length >= 8 && password.Any(char.IsDigit) && password.Any(char.IsUpper);
-        }
-
 
         // GET: RegistrationController/Details/5
         public ActionResult Details(int id)
