@@ -1,8 +1,8 @@
 ﻿
 .navbar-contener {
     align-content: end;
-    background-color: white;
-    height:5rem;
+    background-color: black;
+    height:3rem;
     margin-right:auto;
     padding-top:1rem;
 }
@@ -11,24 +11,53 @@
     display:inline;
     width: 100%;
     height: 100%;
-    text-align:right;
-    position:center;
-}
-.navbar-contener button:first-child {
     text-align:center;
-    float: left;
-    color: black;
-    border-color: white;
-    border-inline-color: white;
-    background-color: white;
-    border: none;
-    text-decoration: none;
-    font-size: 1.15rem;
+    position:center;
+
+}
+.nav-item {
+    background: black;
+    font-size: 1.3rem;
     font-weight: bold;
+    color: white;
+    text-decoration-color: none;
+    outline-color: red;
 }
-.navbar-contener button:not(:first-child) {
-    border-radius: 50px !important;
+    .nav-item a {
+        text-decoration: none;
+        color: white;
+    }
+.navbar-contener {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 0px 5px 0px;
 }
+
+    .navbar-contener a {
+        display: inline-block;
+        width: 10rem;
+        height: 2.5rem;
+        background-color: black;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 1.4rem;
+        border: none;
+        text-align: center;
+        line-height: 2.5rem;
+        margin-right: 2.5rem;
+    }
+
+        .navbar-contener a:first-child {
+            font-size: 18px;
+            display: inline-block;
+            margin-right: 42rem;
+        }
+        .navbar-contener a:hover{
+            background-color: white;
+            color: black;
+        }
 .carlist-filter {
     margin: auto;
     width: 80rem;
@@ -36,19 +65,18 @@
     background-color: purple;
 }
 body {
-    color: white;
+    color: black;
     height: 100%;
     padding: 0;
-    margin:0;
-    background: rgb(173,0,255);
-    background: linear-gradient(rgba(173,0,255,1) 0%, rgba(87,16,150,1) 25%, rgba(2,0,36,1) 100%);
+    margin: 0;
+    background: rgba(243, 234, 238, 0.8);
 }
-.table{
-    color: white;
+.table {
+    color: black;
     text-decoration: none;
 }
- .custom-link {
-    color: white;
+.custom-link {
+    color: black;
     text-decoration: none;
     font-weight: bold;
 }
@@ -67,6 +95,6 @@ body {
         text-align: center;
         font-size: 1.5rem;
         font-weight: bold;
-        background-color: rgba(2,0,36,1);
+        background-color: black;
         color: white;
     }

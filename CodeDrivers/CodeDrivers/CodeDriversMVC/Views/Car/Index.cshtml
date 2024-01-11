@@ -61,9 +61,9 @@
                 @Html.DisplayFor(modelItem => item.PricePerDay)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit",new { @class="custom-link"/* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { @class = "custom-link" /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete",new { @class = "custom-link" /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Edit", "Edit",new {id=item.Id }, new {@class = "custom-link"}) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "custom-link" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "custom-link" })
             </td>
         </tr>
 }
