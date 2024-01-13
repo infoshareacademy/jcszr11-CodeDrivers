@@ -10,6 +10,8 @@ namespace CodeDriversMVC.Controllers
 {
     public class RegistrationController : Controller
     {
+        private const string Path = @"fakeUsers.csv";
+
         // GET: RegistrationController
         RegistationService _registrationService = new RegistationService();
 
@@ -43,6 +45,7 @@ namespace CodeDriversMVC.Controllers
             else
             {
                 _registrationService.AddNewUser(user);
+                _registrationService.SaveUserInCsv(user.Name, user.LastName, user.DateOfBirth, user.Email, user.PhoneNumber, user.Password, user.DrivingLicenceNumber, Path);
                 ViewData["ShowToast"] = true;
                 return RedirectToAction("Index", "Home");
             }
