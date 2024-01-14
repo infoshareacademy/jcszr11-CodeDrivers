@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CodeDrivers.Models.Car
 {
-    internal class Reservation
+    public class Reservation
     {
         public int ReservationId { get; set; }
         public DateTime ReservationFrom { get; set; }
