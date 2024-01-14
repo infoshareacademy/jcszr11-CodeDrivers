@@ -11,8 +11,9 @@ namespace CodeDrivers.Models.Car
 		public CarBrand Brand { get; set; }
         public List<string> CarBrandNames => Enum.GetNames(typeof(CarBrand)).ToList();
         public List<string> Models => BrandToModelsDict.First(f => f.Key == Brand).Value;
-		public string Model { get; set; } //Model
-		public CarSegment Segment { get; set; } //A,B,C,D,Crossover,SUV (najlepiej enum)
+		public string Model { get; set; }
+		public CarSegment Segment { get; set; } 
+		public MotorType Motor { get; set; } 
 		public GearType GearTransmission { get; set; }
 		public bool IsAvailable { get; set; }
 		public decimal PricePerDay { get; set; }
@@ -29,20 +30,21 @@ namespace CodeDrivers.Models.Car
 			BrandToModelsDict.TryAdd(CarBrand.Toyota, new List<string> { "Aygo", "Yaris", "Corolla", "RAV4" });
 			BrandToModelsDict.TryAdd(CarBrand.VW, new List<string> { "up!", "Polo", "Golf", "Passat" });
 		}
-		public Car(CarBrand brand, string model)
-		{
-			Brand = brand;
-			if(BrandToModelsDict.TryGetValue(brand, out List<string> models))
-			{
-				if(models.Contains(model))
-				{
-					Model = model;
-				}
-				else
-				{
+
+        public Car(CarBrand brand, string model)
+        {
+            Brand = brand;
+            if (BrandToModelsDict.TryGetValue(brand, out List<string> models))
+            {
+                if (models.Contains(model))
+                {
+                    Model = model;
                 }
-			}
-		}
+                else
+                {
+                }
+            }
+        }
 
         public Car()
         {

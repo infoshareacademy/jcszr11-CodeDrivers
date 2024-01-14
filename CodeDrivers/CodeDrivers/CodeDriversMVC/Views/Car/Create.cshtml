@@ -14,42 +14,37 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
-                <label asp-for="Brand" class="control-label">Wybierz markę pojazdu:</label>
-                <select asp-for="Brand" class="form-control" id="brandDropdown" name="brandDropdown">
-                    <option value="">Wybierz markę</option>
-                    @foreach (var car in Model.CarBrandNames)
-                    {
-                        <option value="@car">@car</option>
-                    }
+                <label asp-for="Brand" class="control-label">Marka pojazdu</label>
+                <select asp-for="Brand" class="form-control" asp-items="Html.GetEnumSelectList<CodeDrivers.Models.Car.CarBrand>()">
                 </select>
             </div>
             <div class="form-group">
-                <label asp-for="Model" class="control-label">Model</label>
+                <label asp-for="Model" class="control-label">Model pojazdu</label>
                 <span asp-validation-for="Model" class="text-danger"></span>
-                <select asp-for="Model" class="form-control" id="modelDropdown" name="modelDropdown">
-                    <option value="">Wybierz model</option>
+                <select asp-for="Model" class="form-control">
                     @foreach (var car in Model.Models)
                     {
                         <option value="@car">@car</option>
                     }
                 </select>
             </div>
-
+         
             <div class="form-group">
                 <label asp-for="Segment" class="control-label">Segment</label>
-                <input asp-for="Segment" class="form-control" data-val="true" data-val-required="To pole jest wymagane." />
                 <span asp-validation-for="Segment" class="text-danger"></span>
+                <select asp-for="Segment" class="form-control" asp-items="Html.GetEnumSelectList<CodeDrivers.Models.Car.CarSegment>()">
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Motor" class="control-label">Rodzaj napędu</label>
+                <select asp-for="Motor" class="form-control" asp-items="Html.GetEnumSelectList<CodeDrivers.Models.Car.MotorType>()">
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="GearTransmission" class="control-label">Skrzynia biegów</label>
-                <input asp-for="GearTransmission" class="form-control" data-val="true" data-val-required="To pole jest wymagane." />
-                <span asp-validation-for="GearTransmission" class="text-danger"></span>
+                <select asp-for="GearTransmission" class="form-control" asp-items="Html.GetEnumSelectList<CodeDrivers.Models.Car.GearType>()">
+                </select>
             </div>
-@*             <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsAvailable" /> @Html.DisplayNameFor(model => model.IsAvailable)
-                </label>
-            </div> *@
             <div class="form-group">
                 <label asp-for="PricePerDay" class="control-label">Stawka za dzień</label>
                 <input asp-for="PricePerDay" class="form-control" data-val="true" data-val-required="To pole jest wymagane." />
