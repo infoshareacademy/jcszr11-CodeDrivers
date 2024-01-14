@@ -21,9 +21,10 @@
 
 @section Scripts {
     <script>
-        var showToast = '@(ViewData.ContainsKey("ShowToast") && (bool)ViewData["ShowToast"] ? "true" : "false")';
+        var showToast = '@TempData["ShowToast"]';
+        console.log(showToast);
         document.addEventListener('DOMContentLoaded', function () {
-            if (showToast) {
+            if (showToast === "success") {
                 var myToast = new bootstrap.Toast(document.getElementById('toast1'));
                 myToast.show();
             }

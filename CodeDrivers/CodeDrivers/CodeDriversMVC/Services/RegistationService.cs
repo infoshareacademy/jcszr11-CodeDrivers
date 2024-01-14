@@ -1,5 +1,6 @@
 ﻿using CodeDrivers.Models;
 using CodeDrivers.Models.Car;
+using Newtonsoft.Json;
 using System.Web.Mvc;
 
 namespace CodeDriversMVC.Services
@@ -8,21 +9,18 @@ namespace CodeDriversMVC.Services
     {
         private static List<User> users = new List<User>();
 
-        public void AddNewUser(User user)
+        public void SaveUserInJson(User user, string path)
         {
-            users.Add(user);
-        }
+            user.Id = Guid.NewGuid().ToString().Substring(0, 6);
 
-        public void SaveUserInCsv(string name, string lastName, DateTime dateOfBirth, string eMail, string phoneNumber, string password, string driversLicenceNumber, string path)
-        {
+            string json = JsonConvert.SerializeObject(user);
+
             using (StreamWriter sw = File.AppendText(path))
             {
-                sw.WriteLine($"{name}, {lastName}, {dateOfBirth.ToString("yyyy-MM-dd")}, {eMail}, {password}, {phoneNumber}, {driversLicenceNumber}");
+                sw.WriteLine(json);
             }
         }
 
-        // private string credentialsFilePath = @"csv\fakeCredentials.csv";
-        // private string carsFilePath = @"csv\fakeCars.csv";
         public List<string> GetRawDataFromFile(string path)
         {
             var fileContent = new List<string>();
@@ -89,7 +87,5 @@ namespace CodeDriversMVC.Services
                 Console.WriteLine("Wystąpił błąd podczas dodawania pojazdu: " + ex.Message);
             }
         }
-
-
     }
 }

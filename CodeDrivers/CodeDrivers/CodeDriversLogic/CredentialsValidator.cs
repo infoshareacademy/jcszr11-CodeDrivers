@@ -41,5 +41,15 @@ namespace CodeDrivers
                 return false;
             }
         }
+        public bool AgeValidator(DateTime dateOfBirth)
+        {
+            int age = DateTime.Today.Year - dateOfBirth.Year;
+            if (age < 18)
+            {
+                return false;
+            }
+            return true;
+        }
     }
+
 }

@@ -2,3 +2,4 @@ Opel, Polak, jan.kran@wp.pl, 12.12.2000 00:00:00, Carsmile123, 691837881
 Jan, Kran, 7, jan.kran@wp.pl, Idea1234, 691837881, ABC123456
 Jan, Testowy, 12.12.2000 00:00:00, jan.kran@wp.pl, Idea1234, 691837881, ABC123456
 Anna, Majewska, 2000-06-06, jan.kran@wp.pl, Idea1234, 515861963, ABC123456
+{"Id":null,"Name":"Jan","LastName":"Kran","DateOfBirth":"2000-12-12T00:00:00","Email":"jan.kran@wp.pl","Password":"Idea1234","PhoneNumber":"691837881","DrivingLicenceNumber":"ABC123456"}

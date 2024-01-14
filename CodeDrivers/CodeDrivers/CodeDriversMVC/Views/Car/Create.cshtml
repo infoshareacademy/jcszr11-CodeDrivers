@@ -14,25 +14,27 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
-                <label asp-for="Brand" class="control-label">Marka</label>
-                <input asp-for="Brand" class="form-control" data-val="true" data-val-required="To pole jest wymagane." />
-                <span asp-validation-for="Brand" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Model" class="control-label">Model</label>
-                <input asp-for="Model" class="form-control" data-val="true" data-val-required="To pole jest wymagane." />
-                <span asp-validation-for="Model" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Model" class="control-label">Select a car:</label>
-                <select asp-for="Model" class="form-control" id="carDropdown" name="carDropdown">
-                    <option value="">Select a car</option>
+                <label asp-for="Brand" class="control-label">Wybierz markę pojazdu:</label>
+                <select asp-for="Brand" class="form-control" id="brandDropdown" name="brandDropdown">
+                    <option value="">Wybierz markę</option>
                     @foreach (var car in Model.CarBrandNames)
                     {
                         <option value="@car">@car</option>
                     }
                 </select>
             </div>
+            <div class="form-group">
+                <label asp-for="Model" class="control-label">Model</label>
+                <span asp-validation-for="Model" class="text-danger"></span>
+                <select asp-for="Model" class="form-control" id="modelDropdown" name="modelDropdown">
+                    <option value="">Wybierz model</option>
+                    @foreach (var car in Model.Models)
+                    {
+                        <option value="@car">@car</option>
+                    }
+                </select>
+            </div>
+
             <div class="form-group">
                 <label asp-for="Segment" class="control-label">Segment</label>
                 <input asp-for="Segment" class="form-control" data-val="true" data-val-required="To pole jest wymagane." />

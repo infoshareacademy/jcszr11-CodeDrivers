@@ -10,7 +10,7 @@ namespace CodeDriversMVC.Controllers
 {
     public class RegistrationController : Controller
     {
-        private const string Path = @"fakeUsers.csv";
+        private const string Path = @"fakeUsers.json";
 
         // GET: RegistrationController
         RegistationService _registrationService = new RegistationService();
@@ -42,11 +42,15 @@ namespace CodeDriversMVC.Controllers
                 ModelState.AddModelError("PhoneValidationError", "Numer telefonu powinien składać się z 9 cyfr nieodzielonych odstępami.");
                 return View("Index", user);
             }
+            else if (!validator.AgeValidator(user.DateOfBirth))
+            {
+                ModelState.AddModelError("DateOfBirthValidationError", "Aby zarezerwować samochód, musisz mieć ukończone 18 lat.");
+                return View("Index", user);
+            }
             else
             {
-                _registrationService.AddNewUser(user);
-                _registrationService.SaveUserInCsv(user.Name, user.LastName, user.DateOfBirth, user.Email, user.PhoneNumber, user.Password, user.DrivingLicenceNumber, Path);
-                ViewData["ShowToast"] = true;
+                _registrationService.SaveUserInJson(user, Path);
+                TempData["ShowToast"] = "success";
                 return RedirectToAction("Index", "Home");
             }
         }
