@@ -61,7 +61,7 @@ namespace CodeDrivers.Models.Car
 				return "niedostępny";
 			}
 		}
-		public Dictionary<CarBrand, List<string>> GetDisctionary()
+		public static Dictionary<CarBrand, List<string>> GetDisctionary()
 		{
 			var dictionary = BrandToModelsDict;
 			return dictionary;

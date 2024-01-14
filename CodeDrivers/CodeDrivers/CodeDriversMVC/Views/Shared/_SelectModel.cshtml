@@ -1,0 +1,14 @@
+﻿@model List<string>
+
+
+<div class="form-group">
+    <label class="control-label">Model</label>
+    <span class="text-danger"></span>
+    <select class="form-control" id="modelDropdown" name="modelDropdown">
+        <option value="">Wybierz model</option>
+        @foreach (var car in Model)
+        {
+            <option value="@car">@car</option>
+        }
+    </select>
+</div>
