@@ -21,9 +21,9 @@ namespace CodeDrivers.Models
         public string Email { get; set; }
         public string Password { get; set; }
         public string PhoneNumber { get; set; }
-        public string DrivingLicenceNumber { get; set; }
+        public string DriversLicenceNumber { get; set; }
         List<User> Users { get; set; } = new List<User>();
-        public User(string name, string lastName, DateTime dateOfBirth, string email, string password, string phoneNumber, string drivingLicenceNumber)
+        public User(string name, string lastName, DateTime dateOfBirth, string email, string password, string phoneNumber, string driversLicenceNumber)
         {
             Id = Guid.NewGuid().ToString();
             Name = name;
@@ -32,7 +32,7 @@ namespace CodeDrivers.Models
             Email = email;
             Password = password;
             PhoneNumber = phoneNumber;
-            DrivingLicenceNumber = drivingLicenceNumber;
+            DriversLicenceNumber = driversLicenceNumber;
         }
 
         public User()

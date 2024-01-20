@@ -14,7 +14,6 @@ namespace CodeDrivers.Models.Car
         public TimeSpan DurationTime { get; private set; }
         public decimal TotalReservationPrice { get; set; }
         public Car Car { get; }
-
         public User Owner { get; }
 
         public Reservation(Car car, User user,  DateTime reservationFrom, DateTime reservationTo, decimal totalReservationPrice)

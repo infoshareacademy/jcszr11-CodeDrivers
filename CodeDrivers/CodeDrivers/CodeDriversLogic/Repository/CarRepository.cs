@@ -20,18 +20,11 @@ namespace CodeDrivers.Repository
     }
     internal class CarRepository : IRepository<Car>
     {
-
         public static List<Car> cars { get; set; } = new List<Car>();
         static int id = 0;
-
         public static int SetId()
         {
             return id++;
-        }
-        public void FillRepository()
-        {
-            cars.Add(new Car(CarBrand.Audi, "A1") { Id = SetId(), Segment = CarSegment.A, IsAvailable = true, PricePerDay = 60, GearTransmission = GearType.Manualna });
-            cars.Add(new Car(CarBrand.Toyota, "Aygo") { Id = SetId(), Segment = CarSegment.A, IsAvailable = true, PricePerDay = 135, GearTransmission = GearType.Manualna });
         }
         public void AddCar(CarBrand brand, string model, CarSegment segment, GearType transmission, decimal price)
         {
@@ -80,7 +73,7 @@ namespace CodeDrivers.Repository
             Console.WriteLine("=ID=|=Marka=|=Model=|=Segment=|=Skrzynia biegów=|=Stawka dzienna=|= Dostępność = ");
             foreach (var item in cars)
             {
-                Console.WriteLine($" {item.Id.ToString()}  | {item.Brand.ToString()} | {item.Model} | {item.Segment} | {item.GearTransmission} | {item.PricePerDay} | {item.DisplayAvailibility()} ");
+                Console.WriteLine($" {item.Id.ToString()}  | {item.Brand.ToString()} | {item.Model} | {item.Segment} | {item.GearTransmission} | {item.PricePerDay} |  ");
             }
         }
         public void RentCar(Car car) 
@@ -98,7 +91,4 @@ namespace CodeDrivers.Repository
 
     }
 }
-    //Lista dodanych samochodów będzie możliwa do wyświetlenia dla admina i usera.
-    //Marka, model, kategoria (male, rodzinne, dostawcze), rodzaj paliwa, cena wynajmu/dzien, KM , skrzynia biegow,elektryczne/spalinowe
-
 

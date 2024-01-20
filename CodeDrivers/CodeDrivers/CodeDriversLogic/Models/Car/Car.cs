@@ -20,15 +20,15 @@ namespace CodeDrivers.Models.Car
 		private static Dictionary<CarBrand, List<string>> BrandToModelsDict = new Dictionary<CarBrand, List<string>>();
 		static Car()
 		{
-			BrandToModelsDict.TryAdd(CarBrand.Audi, new List<string> { "A3", "A4", "A5" });
-			BrandToModelsDict.TryAdd(CarBrand.BMW, new List<string> { "1", "2", "3", "4", "5", "X1", "X2", "X3", "X5" });
+			BrandToModelsDict.TryAdd(CarBrand.Audi, new List<string> { "A3", "A4", "A5", "A6" });
+			BrandToModelsDict.TryAdd(CarBrand.BMW, new List<string> { "seria 1", "seria 2", "seria 3", "seria 5", "X1", "X2", "X3", "X5" });
 			BrandToModelsDict.TryAdd(CarBrand.Fiat, new List<string> { "500", "500X", "Panda" });
 			BrandToModelsDict.TryAdd(CarBrand.Ford, new List<string> { "Fiesta", "Focus", "Mondeo" });
 			BrandToModelsDict.TryAdd(CarBrand.Mercedes, new List<string> { "A-klasa", "C-klasa", "E-klasa" });
 			BrandToModelsDict.TryAdd(CarBrand.Opel, new List<string> { "Adam", "Corsa", "Astra", "Mokka", "Insignia" });
-			BrandToModelsDict.TryAdd(CarBrand.Seat, new List<string> { "Ibiza", "Arona", "Leon" });
+			BrandToModelsDict.TryAdd(CarBrand.Seat, new List<string> { "Ibiza", "Arona", "Leon", "Ateca"});
 			BrandToModelsDict.TryAdd(CarBrand.Toyota, new List<string> { "Aygo", "Yaris", "Corolla", "RAV4" });
-			BrandToModelsDict.TryAdd(CarBrand.VW, new List<string> { "up!", "Polo", "Golf", "Passat" });
+			BrandToModelsDict.TryAdd(CarBrand.VW, new List<string> { "up!", "Polo", "Golf", "Passat", "Arteon" });
 		}
 
         public Car(CarBrand brand, string model)
@@ -45,22 +45,9 @@ namespace CodeDrivers.Models.Car
                 }
             }
         }
-
         public Car()
         {
         }
-
-        public string DisplayAvailibility()
-		{
-			if (IsAvailable)
-			{
-				return "dostępny";
-			}
-			else
-			{
-				return "niedostępny";
-			}
-		}
 		public static Dictionary<CarBrand, List<string>> GetDisctionary()
 		{
 			var dictionary = BrandToModelsDict;
@@ -69,15 +56,3 @@ namespace CodeDrivers.Models.Car
 		
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-

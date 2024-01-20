@@ -67,12 +67,11 @@
                 <label asp-for="PhoneNumber" class="control-label">Numer telefonu</label>
                 <input asp-for="PhoneNumber" class="form-control" data-val="true" data-val-required="To pole jest wymagane." />
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-                <span class="text-danger">@Html.ValidationMessage("PhoneValidationError")</span>
-            </div>
+                <span class="text-danger">@Html.ValidationMessage("PhoneValidationError")</div>
             <div class="form-group">
-                <label asp-for="DrivingLicenceNumber" class="control-label">Numer prawa jazdy</label>
-                <input asp-for="DrivingLicenceNumber" class="form-control" data-val="true" data-val-required="To pole jest wymagane." />
-                <span asp-validation-for="DrivingLicenceNumber" class="text-danger"></span>
+                <label asp-for="DriversLicenceNumber" class="control-label">Numer prawa jazdy</label>
+                <input asp-for="DriversLicenceNumber" class="form-control" datDriversLicenceNumberl-required="To pole jest wymagane." />
+                <span asp-validation-for="DriversLicenceNumber" class="text-danger"></span>
             </div>
             <div class="text-danger">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })

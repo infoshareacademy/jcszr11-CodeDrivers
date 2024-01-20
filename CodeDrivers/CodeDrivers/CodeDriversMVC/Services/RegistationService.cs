@@ -1,6 +1,8 @@
 ﻿using CodeDrivers.Models;
 using CodeDrivers.Models.Car;
 using Newtonsoft.Json;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web.Mvc;
 
 namespace CodeDriversMVC.Services
@@ -12,6 +14,7 @@ namespace CodeDriversMVC.Services
         public void SaveUserInJson(User user, string path)
         {
             user.Id = Guid.NewGuid().ToString().Substring(0, 6);
+            user.Password = HashPassword(user.Password);
 
             string json = JsonConvert.SerializeObject(user);
 
@@ -86,6 +89,12 @@ namespace CodeDriversMVC.Services
             {
                 Console.WriteLine("Wystąpił błąd podczas dodawania pojazdu: " + ex.Message);
             }
+        }
+        string HashPassword(string password)
+        {
+            var inputBytes = Encoding.UTF8.GetBytes(password);
+            var inputHash = SHA256.HashData(inputBytes);
+            return Convert.ToHexString(inputHash);
         }
     }
 }

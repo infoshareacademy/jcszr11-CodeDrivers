@@ -47,7 +47,7 @@ namespace CodeDrivers
             Console.WriteLine("=============================================================================================");
             foreach (var user in users)
             {
-                Console.WriteLine($" # {user.Id}  |  {user.Name}  |  {user.LastName}  |  {user.DateOfBirth:dd-MM-yyyy}  |  {user.Email}  |  {user.PhoneNumber}  |  {user.DrivingLicenceNumber}  | ");
+                Console.WriteLine($" # {user.Id}  |  {user.Name}  |  {user.LastName}  |  {user.DateOfBirth:dd-MM-yyyy}  |  {user.Email}  |  {user.PhoneNumber}  |  {user.DriversLicenceNumber}  | ");
             }
         }
         public List<User> GetUser()
@@ -166,7 +166,7 @@ namespace CodeDrivers
                 Console.WriteLine("=============================================================================================");
                 foreach (var user in users)
                 {
-                    Console.WriteLine($" # {user.Id}  |  {user.Name}  |  {user.LastName}  |  {user.DateOfBirth:dd-MM-yyyy}  |  {user.Email}  |  {user.PhoneNumber}  |  {user.DrivingLicenceNumber}  | ");
+                    Console.WriteLine($" # {user.Id}  |  {user.Name}  |  {user.LastName}  |  {user.DateOfBirth:dd-MM-yyyy}  |  {user.Email}  |  {user.PhoneNumber}  |  {user.DriversLicenceNumber}  | ");
                 }
             }
         }
