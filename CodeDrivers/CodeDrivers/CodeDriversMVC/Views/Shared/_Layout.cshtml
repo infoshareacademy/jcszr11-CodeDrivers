@@ -20,18 +20,25 @@
                 <div>
                     <a asp-area="" asp-controller="Home" asp-action="Index">CodeDriversMVC</a>
                     <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    <a asp-area="" asp-controller="Home" asp-action="About">About</a>
-                    <a asp-area="" asp-controller="Car" asp-action="Index">Cars</a>
-                    <a asp-area="" asp-controller="Login" asp-action="Index">Login</a>
-                    <a asp-area="" asp-controller="Registration" asp-action="Index">Register</a>
-                    <a asp-area="" asp-controller="CarSearch" asp-action="Index">Car Search</a>
+                    <a asp-area="" asp-controller="Home" asp-action="About">O nas</a>
+                    <a asp-area="" asp-controller="Car" asp-action="Index">Baza pojazdów</a>
+                    <a asp-area="" asp-controller="Login" asp-action="Index">Logowanie</a>
+                    <a asp-area="" asp-controller="Registration" asp-action="Index">Rejestracja</a>
+                    <a asp-area="" asp-controller="CarSearch" asp-action="Index">Wyszukiwanie pojazdów</a>
                 </div>
             </div>
         </nav>
 
         <div class="container">
             <main role="main" class="pb-3">
-
+                @if (TempData.ContainsKey("Success"))
+                {
+                    <p class="alert alert-success">@TempData["Success"]</p>
+                }
+                @if (TempData.ContainsKey("Delete"))
+                {
+                    <p class="alert alert-danger">@TempData["Delete"]</p>
+                }
                 @RenderBody()
             </main>
         </div>
