@@ -18,13 +18,13 @@
         <nav class="navbar-style">
             <div class="container-fluid navbar-contener">
                 <div>
-                        <a asp-area="" asp-controller="Home" asp-action="Index">CodeDriversMVC</a>
-                        <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        <a asp-area="" asp-controller="Home" asp-action="About">About</a>
-                        <a asp-area="" asp-controller="Car" asp-action="Index">Cars</a>
-                        <a asp-area="" asp-controller="Login" asp-action="Index">Login</a>
-                        <a asp-area="" asp-controller="Registration" asp-action="Index">Register</a>
-                        <a asp-area="" asp-controller="CarSearch" asp-action="Index">Car Search</a>
+                    <a asp-area="" asp-controller="Home" asp-action="Index">CodeDriversMVC</a>
+                    <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    <a asp-area="" asp-controller="Home" asp-action="About">About</a>
+                    <a asp-area="" asp-controller="Car" asp-action="Index">Cars</a>
+                    <a asp-area="" asp-controller="Login" asp-action="Index">Login</a>
+                    <a asp-area="" asp-controller="Registration" asp-action="Index">Register</a>
+                    <a asp-area="" asp-controller="CarSearch" asp-action="Index">Car Search</a>
                 </div>
             </div>
         </nav>
@@ -36,22 +36,34 @@
             </main>
         </div>
         <div class="position-absolute top-50 start-50 translate-middle" style="z-index: 11">
-        <div id="toast1" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-                <strong class="me-auto">Sukces!</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            <div id="toast1" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <strong class="me-auto">Sukces!</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    Zostałeś poprawnie zarejestrowany!
+                </div>
             </div>
-            <div class="toast-body">
-                Zostałeś poprawnie zarejestrowany!
-            </div>
-        </div>
-        <div>
-        @{
-            Html.RenderPartial("~/Views/Shared/Footer.cshtml");
-        }
-            </div>
-    </header>
 
+            <div class="container">
+                <main role="main" class="pb-3">
+                    @if (TempData.ContainsKey("Success"))
+                    {
+                        <p class="alert alert-success">@TempData["Success"]</p>
+                    }
+                    @if (TempData.ContainsKey("Delete"))
+                    {
+                        <p class="alert alert-danger">@TempData["Delete"]</p>
+                    }
+                    @RenderBody()
+                </main>
+            </div>
+
+    </header>
+    @{
+        Html.RenderPartial("~/Views/Shared/Footer.cshtml");
+    }
 
     @section Scripts {
         <script>
@@ -65,25 +77,7 @@
             });
         </script>
     }
-    <div class="container">
-        <main role="main" class="pb-3">
-            @if (TempData.ContainsKey("Success"))
-            {
-                <p class="alert alert-success">@TempData["Success"]</p>
-            }
-            @if (TempData.ContainsKey("Delete"))
-            {
-                <p class="alert alert-danger">@TempData["Delete"]</p>
-            }
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - CodeDriversMVC - <a asp-area="" asp-controller="Home" asp-action="About">About</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
