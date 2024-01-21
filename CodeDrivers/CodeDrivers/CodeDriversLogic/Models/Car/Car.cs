@@ -21,7 +21,7 @@ namespace CodeDrivers.Models.Car
 		static Car()
 		{
 			BrandToModelsDict.TryAdd(CarBrand.Audi, new List<string> { "A3", "A4", "A5", "A6" });
-			BrandToModelsDict.TryAdd(CarBrand.BMW, new List<string> { "seria 1", "seria 2", "seria 3", "seria 5", "X1", "X2", "X3", "X5" });
+			BrandToModelsDict.TryAdd(CarBrand.BMW, new List<string> { "1", "2", "3", "5", "X1", "X2", "X3", "X5" });
 			BrandToModelsDict.TryAdd(CarBrand.Fiat, new List<string> { "500", "500X", "Panda" });
 			BrandToModelsDict.TryAdd(CarBrand.Ford, new List<string> { "Fiesta", "Focus", "Mondeo" });
 			BrandToModelsDict.TryAdd(CarBrand.Mercedes, new List<string> { "A-klasa", "C-klasa", "E-klasa" });
