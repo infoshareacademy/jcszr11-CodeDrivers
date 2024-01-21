@@ -12,6 +12,7 @@ namespace CodeDrivers.Models.Car
 		B,
 		C,
 		D,
+		E,
 		Crossover,
 		SUV
 	}

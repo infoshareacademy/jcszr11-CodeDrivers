@@ -25,7 +25,7 @@ namespace CodeDrivers
         public string Rang { get; set; }
         public Menu_tekstowe(string rang)
         {
-            carListRepository.FillRepository();
+            //carListRepository.FillRepository();
             Rang = rang;
 
             switch (rang)

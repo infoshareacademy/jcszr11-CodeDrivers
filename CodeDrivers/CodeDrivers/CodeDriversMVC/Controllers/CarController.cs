@@ -76,5 +76,18 @@ namespace CodeDriversMVC.Controllers
             TempData["Delete"] = "Auto zostało usunięte.";
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpPost]
+        public ActionResult GetModelsForBrand(string name)
+        {
+            var dic = Car.GetDisctionary();
+
+            var modelEnum = (CarBrand)Enum.Parse(typeof(CarBrand), name);
+            var models = dic[modelEnum];
+
+            return Json(models);
+
+
+        }
     }
 }
