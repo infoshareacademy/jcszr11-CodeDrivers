@@ -1,4 +1,6 @@
 using CodeDriversMVC.DataAccess;
+using CodeDriversMVC.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CodeDriversMVC
 {
@@ -10,6 +12,8 @@ namespace CodeDriversMVC
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddScoped<CodeDriversContext>();
+            builder.Services.AddScoped<RegistrationService>();
 
             var app = builder.Build();
 

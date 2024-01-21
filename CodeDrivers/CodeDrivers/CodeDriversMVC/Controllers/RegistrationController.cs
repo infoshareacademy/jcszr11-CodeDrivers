@@ -13,7 +13,14 @@ namespace CodeDriversMVC.Controllers
         private const string Path = @"fakeUsers.json";
 
         // GET: RegistrationController
-        RegistrationService _registrationService = new RegistrationService();
+        //RegistrationService _registrationService = new RegistrationService();
+
+        private readonly RegistrationService _registrationService;
+
+        public RegistrationController(RegistrationService registrationService)
+        {
+            _registrationService = registrationService;
+        }
 
         public ActionResult Index()
         {
@@ -49,7 +56,8 @@ namespace CodeDriversMVC.Controllers
             }
             else
             {
-                _registrationService.SaveInJson(user, Path);
+                //_registrationService.SaveInJson(user, Path);
+                _registrationService.AddUser(user);
                 TempData["ShowToast"] = "success";
                 return RedirectToAction("Index", "Home");
             }
