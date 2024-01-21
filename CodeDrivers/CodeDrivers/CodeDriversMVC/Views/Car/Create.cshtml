@@ -52,17 +52,18 @@
                 <label asp-for="PricePerDay" class="control-label">Stawka za dzień</label>
                 <input asp-for="PricePerDay" class="form-control" data-val="true" data-val-required="To pole jest wymagane." />
                 <span asp-validation-for="PricePerDay" class="text-danger"></span>
+                <span class="text-danger">@Html.ValidationMessage("PriceIsLessThan50Error")</span>
             </div>
             <br>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Dodaj pojazd" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index" class="custom-link">Back to List</a>
+    <a asp-action="Index" class="custom-link">Wróć do listy</a>
 </div>
 
 @section Scripts {

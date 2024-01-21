@@ -1,5 +1,6 @@
 ﻿using CodeDrivers.Models;
 using CodeDrivers.Models.Car;
+using CodeDriversMVC.Services.Interfaces;
 using Newtonsoft.Json;
 using System.Security.Cryptography;
 using System.Text;
@@ -7,11 +8,11 @@ using System.Web.Mvc;
 
 namespace CodeDriversMVC.Services
 {
-    public class RegistationService
+    public class RegistrationService : IJsonSerializer<User>
     {
         private static List<User> users = new List<User>();
 
-        public void SaveUserInJson(User user, string path)
+        public void SaveInJson(User user, string path)
         {
             user.Id = Guid.NewGuid().ToString().Substring(0, 6);
             user.Password = HashPassword(user.Password);
