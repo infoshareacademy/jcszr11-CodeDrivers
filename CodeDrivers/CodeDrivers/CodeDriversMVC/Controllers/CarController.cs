@@ -1,3 +1,4 @@
+using CodeDrivers.Models;
 using CodeDrivers.Models.Car;
 using CodeDriversMVC.Models;
 using CodeDriversMVC.Services;
@@ -8,7 +9,7 @@ namespace CodeDriversMVC.Controllers
 {
     public class CarController : Controller
     {
-        public readonly CarService carService;
+        private readonly CarService carService;
         public CarController()
         {
             carService = new CarService();
@@ -39,9 +40,17 @@ namespace CodeDriversMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Car allCars)
         {
-            carService.Create(allCars);
-            TempData["Success"] = "Auto zostało dodane";
-            return RedirectToAction(nameof(Index));
+            if(!carService.ValidatePrice(allCars.PricePerDay))
+            {
+                ModelState.AddModelError("PriceIsLessThan50Error", "Cena wynajmu nie może być niższa niż 50 zł.");
+                return View("Create", allCars);
+            }
+            else
+            {
+                carService.Create(allCars);
+                TempData["Success"] = "Auto zostało dodane";
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         // GET: CarController/Edit/5
@@ -54,25 +63,25 @@ namespace CodeDriversMVC.Controllers
         // POST: CarController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, Car allCars)
+        public ActionResult Edit(int id, Car carToBeEdited)
         {
-            carService.Update(allCars);
+            carService.Update(carToBeEdited);
             return RedirectToAction(nameof(Index));
         }
 
         // GET: CarController/Delete/5
         public ActionResult Delete(int id)
         {
-            var allCars = carService.GetById(id);
-            return View(allCars);
+            var carToBeDeleted = carService.GetById(id);
+            return View(carToBeDeleted);
         }
 
         // POST: CarController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, Car allCars)
+        public ActionResult Delete(int id, Car carToBeDeleted)
         {
-            carService.RemoveCar(id);
+            carService.Remove(id);
             TempData["Delete"] = "Auto zostało usunięte.";
             return RedirectToAction(nameof(Index));
         }
@@ -86,8 +95,6 @@ namespace CodeDriversMVC.Controllers
             var models = dic[modelEnum];
 
             return Json(models);
-
-
         }
     }
 }

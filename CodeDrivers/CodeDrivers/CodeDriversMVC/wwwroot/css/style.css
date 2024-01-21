@@ -2,9 +2,9 @@
 .navbar-contener {
     align-content: end;
     background-color: black;
-    height:3rem;
+    height:6rem;
     margin-right:auto;
-    padding-top:1rem;
+    padding-top:0.1rem;
 }
 
 .navbar-style{
@@ -28,16 +28,15 @@
         color: white;
     }
 .navbar-contener {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 5px 0px 5px 0px;
+    justify-content: right;
 }
 
     .navbar-contener a {
         display: inline-block;
-        width: 10rem;
-        height: 2.5rem;
+        width: 12rem;
+        height: 2rem;
         background-color: black;
         color: white;
         text-decoration: none;
@@ -45,14 +44,25 @@
         font-size: 1.4rem;
         border: none;
         text-align: center;
-        line-height: 2.5rem;
-        margin-right: 2.5rem;
+        line-height: 2rem;
+        margin-right: 1.3rem;
     }
 
         .navbar-contener a:first-child {
-            font-size: 18px;
+            font-size: 16px;
             display: inline-block;
-            margin-right: 28rem;
+            justify-content: left;
+            width: 11rem;
+            height: 2rem;
+            margin-right: auto;
+        }
+        .navbar-contener a:nth-child(2){
+            margin-left: 21rem;
+        }
+        .navbar-contener a:last-child{
+            font-size: 1rem;
+            display: inline-block;
+            justify-content: center;
         }
         .navbar-contener a:hover{
             background-color: white;
