@@ -1,12 +1,17 @@
-﻿using CodeDrivers.Models;
+﻿using CodeDrivers;
+using CodeDrivers.Models;
 using CodeDriversMVC.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Configuration;
+using System.Reflection;
 
 namespace CodeDriversMVC.Controllers
 {
     public class RegistrationController : Controller
     {
+        private const string Path = @"fakeUsers.json";
+
         // GET: RegistrationController
         RegistationService _registrationService = new RegistationService();
 
@@ -20,13 +25,35 @@ namespace CodeDriversMVC.Controllers
         [HttpPost]
         public ActionResult Register(User user)
         {
-            _registrationService.AddNewUser(user);
-            ViewData["ShowToast"] = true;
+            var validator = new CodeDrivers.CredentialsValidator();
 
-            return RedirectToAction("Index", "Home");
-
+            if (!validator.ValidatePassword(user.Password))
+            {
+                ModelState.AddModelError("PasswordValidationError", "Hasło musi składać się z co najmniej 8 znaków w tym co najmniej jednej cyfry.");
+                return View("Index", user);
+            }
+            else if (!validator.ConfirmPassword(user.Password, Request.Form["PasswordConfirmation"]))
+            {
+                ModelState.AddModelError("PasswordValidationError", "Hasła nie są zgodne!");
+                return View("Index", user);
+            }
+            else if (!validator.ValidatePhoneNumber(user.PhoneNumber))
+            {
+                ModelState.AddModelError("PhoneValidationError", "Numer telefonu powinien składać się z 9 cyfr nieodzielonych odstępami.");
+                return View("Index", user);
+            }
+            else if (!validator.AgeValidator(user.DateOfBirth))
+            {
+                ModelState.AddModelError("DateOfBirthValidationError", "Aby zarezerwować samochód, musisz mieć ukończone 18 lat.");
+                return View("Index", user);
+            }
+            else
+            {
+                _registrationService.SaveUserInJson(user, Path);
+                TempData["ShowToast"] = "success";
+                return RedirectToAction("Index", "Home");
+            }
         }
-
 
         // GET: RegistrationController/Details/5
         public ActionResult Details(int id)

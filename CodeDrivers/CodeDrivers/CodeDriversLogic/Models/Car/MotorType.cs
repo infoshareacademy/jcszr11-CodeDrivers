@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace CodeDrivers.Models.Car
 {
-    internal enum MotorType
+    public enum MotorType
     {
-        Electric,
-        Combustion,
-        Hybrid
+        Benzynowy,
+        Diesel,
+        Elektryczny,
+        Hybrydowy,
+      
     }
 }

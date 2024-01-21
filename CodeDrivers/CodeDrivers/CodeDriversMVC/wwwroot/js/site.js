@@ -5,9 +5,13 @@
 
 document.getElementById("passwordShowCheckbox").addEventListener('change', function () {
     var passwordField = document.getElementById("passwordTextField");
+    var passwordConfirmationField = document.getElementById("passwordConfirmationTextField");
+
     if (this.checked) {
         passwordField.type = "text";
+        passwordConfirmationField.type = "text";
     } else {
         passwordField.type = "password";
+        passwordConfirmationField.type = "password";
     }
-})
+});

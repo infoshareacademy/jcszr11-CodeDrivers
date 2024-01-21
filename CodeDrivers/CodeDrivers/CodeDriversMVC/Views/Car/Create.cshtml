@@ -14,39 +14,40 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
-                <label asp-for="Brand" class="control-label">Marka</label>
-                <input asp-for="Brand" class="form-control" data-val="true" data-val-required="To pole jest wymagane." />
-                <span asp-validation-for="Brand" class="text-danger"></span>
+                <label asp-for="Brand" class="control-label">Marka pojazdu</label>
+                <select asp-for="Brand" class="form-control" id="brandDropdown" id="Brand" asp-items="Html.GetEnumSelectList<CodeDrivers.Models.Car.CarBrand>()">
+                </select>
             </div>
             <div class="form-group">
-                <label asp-for="Model" class="control-label">Model</label>
-                <input asp-for="Model" class="form-control" data-val="true" data-val-required="To pole jest wymagane." />
+                <label asp-for="Model" class="control-label">Model pojazdu</label>
                 <span asp-validation-for="Model" class="text-danger"></span>
+                <span id="selectModelId">
+
+                    <select asp-for="Model" class="form-control" id="modelDropdown" name="Model">
+                        @foreach (var car in Model.Models)
+                        {
+                            <option value="@car">@car</option>
+                        }
+                    </select>
+                </span>
             </div>
-       @*      <form>
-                <label for="carDropdown">Select a car:</label>
-                <select id="carDropdown" name="carDropdown">
-                    @foreach (var car in Model.Brand)
-                    {
-                        <option value="@car.Id">@car.Brand - @car.Model</option>
-                    }
-                </select>
-            </form> *@
+         
             <div class="form-group">
                 <label asp-for="Segment" class="control-label">Segment</label>
-                <input asp-for="Segment" class="form-control" data-val="true" data-val-required="To pole jest wymagane." />
                 <span asp-validation-for="Segment" class="text-danger"></span>
+                <select asp-for="Segment" class="form-control" asp-items="Html.GetEnumSelectList<CodeDrivers.Models.Car.CarSegment>()">
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Motor" class="control-label">Rodzaj napędu</label>
+                <select asp-for="Motor" class="form-control" asp-items="Html.GetEnumSelectList<CodeDrivers.Models.Car.MotorType>()">
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="GearTransmission" class="control-label">Skrzynia biegów</label>
-                <input asp-for="GearTransmission" class="form-control" data-val="true" data-val-required="To pole jest wymagane." />
-                <span asp-validation-for="GearTransmission" class="text-danger"></span>
+                <select asp-for="GearTransmission" class="form-control" asp-items="Html.GetEnumSelectList<CodeDrivers.Models.Car.GearType>()">
+                </select>
             </div>
-@*             <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsAvailable" /> @Html.DisplayNameFor(model => model.IsAvailable)
-                </label>
-            </div> *@
             <div class="form-group">
                 <label asp-for="PricePerDay" class="control-label">Stawka za dzień</label>
                 <input asp-for="PricePerDay" class="form-control" data-val="true" data-val-required="To pole jest wymagane." />
@@ -66,4 +67,28 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#brandDropdown').change(function () {
+                $.ajax({
+                    type: "post",
+                    url: "/Car/GetModelsForBrand",
+                    data: { name: $('#brandDropdown').val() },
+                    datatype: "json",
+                    traditional: true,
+                    success: function (data) {
+                        var district = '<select asp-for="Model" class="form-control" id="modelDropdown" name="Model">';
+
+                        for (var i = 0; i < data.length; i++) {
+                            district = district + '<option value=' + data[i] + '>' + data[i] + '</option>';
+                        }
+                        district = district + '</select>';
+                        $('#selectModelId').html(district);
+                    }
+                });
+            });
+        });
+    </script>
 }
+

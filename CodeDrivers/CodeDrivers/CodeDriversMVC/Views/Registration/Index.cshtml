@@ -1,15 +1,15 @@
-﻿@model CodeDrivers.Models.User
+@model CodeDrivers.Models.User
 
 @{
     ViewData["Title"] = "Index";
 }
 
+<h1>Formularz rejestracji</h1>
 
-<div class="login-panel">
+<p>Aby dokonać rezerwacji pojazdu, uzupełnij poniższe pola</p>
+<hr />
+<div class="row">
     <div class="col-md-4">
-        <h1>Formularz rejestracji</h1>
-
-        <p>Aby dokonać rezerwacji pojazdu, uzupełnij poniższe pola</p>
         <form asp-action="Register">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             
@@ -27,7 +27,7 @@
                 <label asp-for="DateOfBirth" class="control-label">Data urodzenia</label>
                 <input asp-for="DateOfBirth" type="date" class="form-control" data-val="true" data-val-required="To pole jest wymagane." />
                 <span asp-validation-for="DateOfBirth" class="text-danger"></span>
-
+                <span class="text-danger">@Html.ValidationMessage("DateOfBirthValidationError")</span>
             </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label">Adres e-mail</label>
@@ -35,36 +35,50 @@
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Password" class="control-label">Hasło</label>
+                <label class="control-label">Hasło</label>
                 <div class="input-group">
                     <input asp-for="Password" class="form-control" type="password" data-val="true" data-val-required="To pole jest wymagane." id="passwordTextField" />
                 </div>
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label class="control-label">Potwierdź hasło</label>
+                <div class="input-group">
+                    <input name="PasswordConfirmation" class="form-control" type="password" data-val="true" data-val-required="To pole jest wymagane." id="passwordConfirmationTextField" />
+                </div>
+                <span class="text-danger">@Html.ValidationMessage("PasswordValidationError")</span>
+            </div>
 
-            <div>
-                <div style="display: flex;text-align:center; justify-content: center;">
-                    <div class="input-group-text">
-                        <input class="form-check-input" type="checkbox" id="passwordShowCheckbox">
-                        <label class="form-check-label" for="passwordShowCheckbox">
-                            Pokaż hasło
-                        </label>
-                    </div>
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="text-danger">
+                    @TempData["ErrorMessage"]
+                </div>
+            }
+            <div class="form-group">
+                <div class="input-group">
+                    <input class="form-check-input" type="checkbox" id="passwordShowCheckbox">
+                    <label class="form-check-label" for="passwordShowCheckbox">
+                        Pokaż hasło
+                    </label>
                 </div>
             </div>
             <div class="form-group">
                 <label asp-for="PhoneNumber" class="control-label">Numer telefonu</label>
                 <input asp-for="PhoneNumber" class="form-control" data-val="true" data-val-required="To pole jest wymagane." />
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-            </div>
+                <span class="text-danger">@Html.ValidationMessage("PhoneValidationError")</div>
             <div class="form-group">
-                <label asp-for="DrivingLicenceNumber" class="control-label">Numer prawa jazdy</label>
-                <input asp-for="DrivingLicenceNumber" class="form-control" data-val="true" data-val-required="To pole jest wymagane." />
-                <span asp-validation-for="DrivingLicenceNumber" class="text-danger"></span>
+                <label asp-for="DriversLicenceNumber" class="control-label">Numer prawa jazdy</label>
+                <input asp-for="DriversLicenceNumber" class="form-control" datDriversLicenceNumberl-required="To pole jest wymagane." />
+                <span asp-validation-for="DriversLicenceNumber" class="text-danger"></span>
+            </div>
+            <div class="text-danger">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             </div>
             <br />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Zapisz" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -72,7 +86,6 @@
 
 <div style="display: flex; justify-content: center;">
     <a asp-action="Index">Back to List</a></div>
-
 
 
 @section Scripts {

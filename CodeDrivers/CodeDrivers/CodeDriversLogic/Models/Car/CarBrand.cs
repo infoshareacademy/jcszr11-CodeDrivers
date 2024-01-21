@@ -15,7 +15,6 @@ namespace CodeDrivers.Models.Car
         Mercedes,
         Opel,
         Seat,
-        Skoda,
         Toyota,
         VW
     }

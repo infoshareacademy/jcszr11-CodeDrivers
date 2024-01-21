@@ -8,7 +8,7 @@ namespace CodeDrivers.Models.Car
 {
     public enum GearType
     {
-        Automatic,
-        Manual
+        Automatyczna,
+        Manualna
     }
 }

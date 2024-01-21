@@ -1,4 +1,4 @@
-﻿using CodeDrivers.Models.Car;
+using CodeDrivers.Models.Car;
 using CodeDriversMVC.Models;
 using CodeDriversMVC.Services;
 using Microsoft.AspNetCore.Http;
@@ -21,8 +21,7 @@ namespace CodeDriversMVC.Controllers
             return View(allCars);
         }
 
-        // GET: CarController/Details
-
+        // GET: CarController/Details/5
         public ActionResult Details(int id)
         {
             var allCars = carService.GetById(id);
@@ -32,7 +31,7 @@ namespace CodeDriversMVC.Controllers
         // GET: CarController/Create
         public ActionResult Create()
         {
-            return View();
+            return View(new Car());
         }
 
         // POST: CarController/Create
@@ -48,7 +47,7 @@ namespace CodeDriversMVC.Controllers
         // GET: CarController/Edit/5
         public ActionResult Edit(int id)
         {
-            var allCars= carService.GetById(id);
+            var allCars = carService.GetById(id);
             return View(allCars);
         }
 
@@ -64,7 +63,7 @@ namespace CodeDriversMVC.Controllers
         // GET: CarController/Delete/5
         public ActionResult Delete(int id)
         {
-            var allCars=carService.GetById(id);
+            var allCars = carService.GetById(id);
             return View(allCars);
         }
 
@@ -76,6 +75,19 @@ namespace CodeDriversMVC.Controllers
             carService.RemoveCar(id);
             TempData["Delete"] = "Auto zostało usunięte.";
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public ActionResult GetModelsForBrand(string name)
+        {
+            var dic = Car.GetDisctionary();
+
+            var modelEnum = (CarBrand)Enum.Parse(typeof(CarBrand), name);
+            var models = dic[modelEnum];
+
+            return Json(models);
+
+
         }
     }
 }

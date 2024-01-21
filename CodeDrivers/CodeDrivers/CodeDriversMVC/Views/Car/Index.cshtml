@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CodeDrivers.Models.Car.Car>
+@model IEnumerable<CodeDrivers.Models.Car.Car>
 
 @{
     ViewData["Title"] = "Cars";
@@ -6,8 +6,8 @@
 
 <h1>Baza pojazdów</h1>
 
-<p class="table">
-    <a asp-action="Create" class="custom-link">Dodaj nowy pojazd</a>
+<p>
+    <a asp-action="Create">Dodaj nowy pojazd</a>
 </p>
 <table class="table">
     <thead>
@@ -25,6 +25,9 @@
                 Segment
             </th>
             <th>
+                Rodzaj napędu
+            </th>
+            <th>
                 Skrzynia biegów
             </th>
             <th>
@@ -37,35 +40,39 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Brand)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Model)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Segment)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GearTransmission)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsAvailable)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PricePerDay)
-            </td>
-            <td>
-                    @Html.ActionLink("Edit", "Edit",new {id=item.Id }, new {@class = "custom-link"}) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "custom-link" }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "custom-link" })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Brand)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Model)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Segment)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Motor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GearTransmission)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsAvailable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PricePerDay)
+                </td>
+                <td>
+                    @Html.ActionLink("Edytuj", "Edit", new { id=item.Id }) |
+                    @Html.ActionLink("Szczegóły", "Details", new { id=item.Id }) |
+                    @Html.ActionLink("Usuń", "Delete", new { id=item.Id })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
