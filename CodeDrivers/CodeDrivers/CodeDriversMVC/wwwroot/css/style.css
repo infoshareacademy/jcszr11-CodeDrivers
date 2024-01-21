@@ -106,3 +106,9 @@ body a:hover{
         background-color: black;
         color: white;
     }
+.login-panel{
+    display: flex;
+    margin-top: 7rem;
+    text-align: center;
+    justify-content: center;
+}

@@ -15,7 +15,7 @@ namespace CodeDrivers.Models.Car
 		public GearType GearTransmission { get; set; }
 		public bool IsAvailable { get; set; }
 		public decimal PricePerDay { get; set; }
-		private static Dictionary<CarBrand, List<string>> BrandToModelsDict = new Dictionary<CarBrand, List<string>>();
+		public static Dictionary<CarBrand, List<string>> BrandToModelsDict = new Dictionary<CarBrand, List<string>>();
 		static Car()
 		{
 			BrandToModelsDict.TryAdd(CarBrand.Audi, new List<string> { "A3", "A4", "Arona" });

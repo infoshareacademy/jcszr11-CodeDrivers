@@ -1,0 +1,50 @@
+﻿@using CodeDrivers.Models.Car
+@model IEnumerable<CodeDrivers.Models.Car.Car>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<h1>Wyszukaj pojazd</h1>
+<div class="carSearch-mainPanel">
+    @using (Html.BeginForm("Search", "CarSearch", FormMethod.Post, new { id = "searchForm" }))
+    {
+        <label for="cars">Wybierz samochód:</label>
+        <select id="cars" name="searchText" onchange="onCarBrandChange()">
+            <option value="Wszystkie">Wszystkie</option>
+            @foreach (var carBrand in ViewBag.CarBrand)
+            {
+                <option>@carBrand</option>
+            }
+        </select>
+        @if (ViewBag.SelectedBrand != null && ViewBag.ModelsForBrand != null)
+        {
+            <select id="models" name="searchText">
+                <option value="Wszystkie">Wszystkie</option>
+                @foreach (var item in ViewBag.ModelsForBrand)
+                {
+                    <option>@item</option>
+                }
+            </select>
+        }
+        <button type="submit">Wyszukaj</button>
+    }
+</div>
+
+<div class="carSearch-container">
+    @foreach (var item in Model)
+    {
+        <div class="car-box-search">
+            <p>@Html.DisplayFor(modelItem => item.Brand) @Html.DisplayFor(modelItem => item.Segment)</p>
+            @if (item.IsAvailable)
+            {
+                <p>Dostępny</p>
+            }
+            else
+            {
+                <p>Niedostępny</p>
+            }
+            <p>@Html.DisplayFor(modelItem => item.PricePerDay) zł</p>
+        </div>
+    }
+</div>
+
+

@@ -1,0 +1,20 @@
+﻿body {
+}
+.carSearch-mainPanel{
+    display: flex;
+    justify-content: center;
+}
+.carSearch-container {
+    display: grid;
+    grid-gap: 10rem;
+    justify-content: center;
+    grid-template-columns: repeat(5, 30px);
+    margin-top: 2rem;
+}
+.car-box-search{
+    height: 6.5rem;
+    width: 6.5rem;
+    text-align: center;
+    font-weight: bold;
+    background-color: grey;
+}

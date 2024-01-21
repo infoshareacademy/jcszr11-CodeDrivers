@@ -38,6 +38,10 @@ namespace CodeDriversMVC.Services
         {
             return cars.FirstOrDefault(m => m.Id == id);
         }
+        public List<Car> GetByBrand(CarBrand brand)
+        {
+            return cars.Where(m => m.Brand == brand).ToList();
+        }
         public void Create(Car nextCar)
         {
             nextCar.Id = SetId();
