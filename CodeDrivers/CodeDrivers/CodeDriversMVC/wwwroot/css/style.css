@@ -140,3 +140,8 @@ body a:hover{
     height: 50px;
     width: auto;
 }
+
+
+.link {
+    margin-right: 20px; 
+}
