@@ -54,6 +54,11 @@ namespace CodeDriversMVC.Controllers
                 ModelState.AddModelError("DateOfBirthValidationError", "Aby zarezerwować samochód, musisz mieć ukończone 18 lat.");
                 return View("Index", user);
             }
+            else if(_registrationService.CheckIfEmailExits(user.Email))
+            {
+                ModelState.AddModelError("UserAlreadyExists", "Użytkownik o tym adresie e-mail już istnieje.");
+                return View("Index", user);
+            }
             else
             {
                 //_registrationService.SaveInJson(user, Path);

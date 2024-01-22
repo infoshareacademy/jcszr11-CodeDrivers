@@ -122,3 +122,21 @@ body a:hover{
     text-align: center;
     justify-content: center;
 }
+
+
+.center-form {
+    display: flex;
+    margin-top: 7rem;
+    text-align: center;
+    justify-content: center;
+}
+
+.logo-link {
+    display: inline-block;
+    margin-right: 1.3rem;
+}
+
+.logo-img {
+    height: 50px;
+    width: auto;
+}

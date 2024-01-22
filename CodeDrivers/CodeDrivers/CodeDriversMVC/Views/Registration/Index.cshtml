@@ -8,8 +8,8 @@
 <div class="login-panel">
     <div class="col-md-4">
         <h1>Formularz rejestracji</h1>
-
         <p>Aby dokonać rezerwacji pojazdu, uzupełnij poniższe pola</p>
+        <hr />
         <form asp-action="Register">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             
@@ -33,6 +33,7 @@
                 <label asp-for="Email" class="control-label">Adres e-mail</label>
                 <input asp-for="Email" class="form-control" data-val="true" data-val-required="To pole jest wymagane." />
                 <span asp-validation-for="Email" class="text-danger"></span>
+                <span class="text-danger">@Html.ValidationMessage("UserAlreadyExists")</span>
             </div>
             <div class="form-group">
                 <label class="control-label">Hasło</label>

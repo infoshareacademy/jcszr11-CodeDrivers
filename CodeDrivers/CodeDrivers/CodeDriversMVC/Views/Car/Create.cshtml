@@ -4,12 +4,13 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Dodawanie pojazdów</h1>
 
-<h4>Aby dodać pojazd, uzupełnij poniższe pola</h4>
-<hr />
-<div class="row">
+<div class="row center-form">
     <div class="col-md-4">
+        <h1>Dodawanie pojazdów</h1>
+
+        <p>Aby dodać pojazd, uzupełnij poniższe pola</p>
+        <hr />
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -62,6 +63,7 @@
     </div>
 </div>
 
+<div style="display: flex; justify-content: center;">
 <div>
     <a asp-action="Index" class="custom-link">Wróć do listy</a>
 </div>
