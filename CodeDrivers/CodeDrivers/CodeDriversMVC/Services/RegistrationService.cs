@@ -77,22 +77,7 @@ namespace CodeDriversMVC.Services
         //    }
         //}
 
-        //public void AddNewCar(int id, CarBrand brand, string model, CarSegment segment, GearType transmission, decimal price, bool availability, string path)
-        //{
-        //    try
-        //    {
-        //        using (StreamWriter sw = File.AppendText(path))
-        //        {
-        //            sw.WriteLine($"{id},{brand},{model},{segment},{transmission},{price},{availability}");
-        //        }
 
-        //        Console.WriteLine($"Samochód {brand} {model} został dodany do pliku.");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine("Wystąpił błąd podczas dodawania pojazdu: " + ex.Message);
-        //    }
-        //}
         string HashPassword(string password)
         {
             var inputBytes = Encoding.UTF8.GetBytes(password);
@@ -114,6 +99,25 @@ namespace CodeDriversMVC.Services
             user.Password = HashPassword(user.Password);
             _context.Set<User>().Add(user);
             _context.SaveChanges();
+        }
+
+        public User GetByEmail(string email)
+        {
+            return _context.Set<User>().FirstOrDefault(u => u.Email == email);
+        }
+        public bool CheckIfEmailExits(string email)
+        {
+            return _context.Set<User>().FirstOrDefault(u => u.Email == email) != null;
+        }
+
+        public void Remove(string email)
+        {
+            User userToBeRemoved = GetByEmail(email);
+            if (userToBeRemoved != null)
+            {
+                _context.Set<User>().Remove(userToBeRemoved);
+                _context.SaveChanges();
+            }
         }
     }
 }

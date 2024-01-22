@@ -1,4 +1,4 @@
-﻿@model LoginCredentials
+﻿@model CodeDrivers.Models.User
 
 @{
     ViewData["Title"] = "Index";
@@ -9,28 +9,29 @@
 
 <div class="login-panel">
     <div class="col-md-4">
-        <h1>Login:</h1>
-        <form asp-action="Login">
+        <h1>Logowanie</h1>
+        <form asp-action="SignIn">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label>Nazwa użytkownika: </label>
-                <input asp-for="Username" class="form-control" />
-                <span asp-validation-for="Username" class="text-danger"></span>
+                <label>Adres e-mail</label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+                <span class="text-danger">@Html.ValidationMessage("CredentialsValidationError")</span>
             </div>
             <br />
             <div class="form-group">
-                <label>Hasło: </label>
+                <label>Hasło</label>
                 <input id="passwordTextField" type="password" asp-for="Password" class="form-control" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div>
-                <div style="display: flex;text-align:center; justify-content: center;">
-                    <div class="input-group-text">
+                <div style="display: flex;text-align:left; justify-content: left;">
+                    
                         <input class="form-check-input" type="checkbox" id="passwordShowCheckbox">
                         <label class="form-check-label" for="passwordShowCheckbox">
                             Pokaż hasło
                         </label>
-                    </div>
+                   
                 </div>
             </div>
 

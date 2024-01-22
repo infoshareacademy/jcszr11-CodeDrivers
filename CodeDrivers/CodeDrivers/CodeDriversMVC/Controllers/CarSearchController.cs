@@ -8,10 +8,9 @@ namespace CodeDriversMVC.Controllers
     public class CarSearchController : Controller
     {
         public readonly CarService _carService;
-
-        public CarSearchController()
+        public CarSearchController(CarService carService)
         {
-            _carService = new CarService();
+            _carService = carService;
         }
         // GET: CarSearchController
         [HttpGet]
@@ -44,5 +43,7 @@ namespace CodeDriversMVC.Controllers
             return RedirectToAction("Index");
         }
     }
-
 }
+        
+
+

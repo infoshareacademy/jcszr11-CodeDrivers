@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\Images\codedrivers.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="jQuery.UI.Widgets.Datepicker" Version="1.8.9" />
     <PackageReference Include="libphonenumber-csharp" Version="8.13.27" />
     <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.3.0" />
