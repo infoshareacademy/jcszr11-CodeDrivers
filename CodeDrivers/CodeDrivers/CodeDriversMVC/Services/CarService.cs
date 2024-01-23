@@ -56,6 +56,27 @@ namespace CodeDriversMVC.Services
             }
         }
 
+        public string UploadImage(IFormFile imageFile)
+        {
+            
+            string uniqueFileName = Guid.NewGuid().ToString().Substring(0,4) + "_" + imageFile.FileName;
+
+            string uploadsFolder = "/Images/";
+
+            if (!Directory.Exists(uploadsFolder))
+            {
+                Directory.CreateDirectory(uploadsFolder);
+            }
+            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                imageFile.CopyTo(fileStream);
+            }
+
+            return uniqueFileName;
+        }
+
         //static int id = 7;
         //public static List<Car> cars { get; set; } = new List<Car>
         //    {
