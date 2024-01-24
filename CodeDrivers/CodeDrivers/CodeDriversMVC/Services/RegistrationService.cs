@@ -1,12 +1,10 @@
 ﻿using CodeDrivers.Models;
 using CodeDrivers.Models.Car;
 using CodeDriversMVC.DataAccess;
+using CodeDriversMVC.Helpers;
 using CodeDriversMVC.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
-using System.Security.Cryptography;
 using System.Text;
-using System.Web.Mvc;
 
 namespace CodeDriversMVC.Services
 {
@@ -51,7 +49,7 @@ namespace CodeDriversMVC.Services
         public void Create(User user)
         {
             user.Id = Guid.NewGuid().ToString().Substring(0, 6);
-            user.Password = HashPassword(user.Password);
+            user.Password = HashPasswordHelper.HashPassword(user.Password);
             _context.Set<User>().Add(user);
             _context.SaveChanges();
         }

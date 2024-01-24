@@ -32,24 +32,29 @@ namespace CodeDriversMVC.Controllers
         [HttpPost]
         public ActionResult Register(User user)
         {
-            var validator = new CodeDrivers.CredentialsValidator();
+            var validator = new UserValidationHelper();
 
-            if (!validator.ValidatePassword(user.Password))
+            if (!validator.IsValidPassword(user.Password))
             {
                 ModelState.AddModelError("PasswordValidationError", "Hasło musi składać się z co najmniej 8 znaków w tym co najmniej jednej cyfry.");
                 return View("Index", user);
             }
-            else if (!validator.ConfirmPassword(user.Password, Request.Form["PasswordConfirmation"]))
+            else if (!validator.IsConfirmedPassword(user.Password, Request.Form["PasswordConfirmation"]))
             {
                 ModelState.AddModelError("PasswordValidationError", "Hasła nie są zgodne!");
                 return View("Index", user);
             }
-            else if (!validator.ValidatePhoneNumber(user.PhoneNumber))
+            else if (!validator.IsValidEmail(user.Email))
+            {
+                ModelState.AddModelError("EmailValidationError", "Wprowadzono niepoprawny e-mail");
+                return View("Index", user);
+            }
+            else if (!validator.IsValidPhoneNumber(user.PhoneNumber))
             {
                 ModelState.AddModelError("PhoneValidationError", "Numer telefonu powinien składać się z 9 cyfr nieodzielonych odstępami.");
                 return View("Index", user);
             }
-            else if (!validator.AgeValidator(user.DateOfBirth))
+            else if (!validator.IsMoreThan18(user.DateOfBirth))
             {
                 ModelState.AddModelError("DateOfBirthValidationError", "Aby zarezerwować samochód, musisz mieć ukończone 18 lat.");
                 return View("Index", user);
@@ -61,8 +66,7 @@ namespace CodeDriversMVC.Controllers
             }
             else
             {
-                //_registrationService.SaveInJson(user, Path);
-                _registrationService.AddUser(user);
+                _registrationService.Create(user);
                 TempData["ShowToast"] = "success";
                 return RedirectToAction("Index", "Home");
             }

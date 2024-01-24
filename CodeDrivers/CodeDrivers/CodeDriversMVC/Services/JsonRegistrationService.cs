@@ -9,11 +9,11 @@ namespace CodeDriversMVC.Services
     public class JsonRegistrationService : IRegistrationService
     {
         private static List<User> users = new List<User>();
-        private readonly string path;
+        private readonly string _path;
 
         public JsonRegistrationService(string path)
         {
-            this.path = path;
+            _path = path;
         }
 
         public bool AuthorizeUser(string login, string password, List<string> credentials)
@@ -77,11 +77,11 @@ namespace CodeDriversMVC.Services
         public void Create(User user)
         {
             user.Id = Guid.NewGuid().ToString().Substring(0, 6);
-            user.Password = Helpers.Helpers.HashPassword(user.Password);
+            user.Password = HashPasswordHelper.HashPassword(user.Password);
 
             string json = JsonConvert.SerializeObject(user);
 
-            using (StreamWriter sw = File.AppendText(path))
+            using (StreamWriter sw = File.AppendText(_path))
             {
                 sw.WriteLine(json);
             }

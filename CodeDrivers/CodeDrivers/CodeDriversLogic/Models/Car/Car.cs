@@ -30,29 +30,10 @@ namespace CodeDrivers.Models.Car
 			BrandToModelsDict.TryAdd(CarBrand.Toyota, new List<string> { "Aygo", "Yaris", "Corolla", "RAV4" });
 			BrandToModelsDict.TryAdd(CarBrand.VW, new List<string> { "up!", "Polo", "Golf", "Passat", "Arteon" });
 		}
-
-        public Car(CarBrand brand, string model)
-        {
-            Brand = brand;
-            if (BrandToModelsDict.TryGetValue(brand, out List<string> models))
-            {
-                if (models.Contains(model))
-                {
-                    Model = model;
-                }
-                else
-                {
-                }
-            }
-        }
-        public Car()
-        {
-        }
 		public static Dictionary<CarBrand, List<string>> GetDisctionary()
 		{
 			var dictionary = BrandToModelsDict;
 			return dictionary;
 		}
-		
 	}
 }
