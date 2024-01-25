@@ -5,6 +5,8 @@ using CodeDrivers.Repository;
 using CodeDriversMVC.Services.Interfaces;
 using CodeDriversMVC.DataAccess;
 using static System.Net.Mime.MediaTypeNames;
+using Elfie.Serialization;
+using System.Drawing;
 
 namespace CodeDriversMVC.Services
 {
@@ -55,5 +57,29 @@ namespace CodeDriversMVC.Services
                 _context.SaveChanges();
             }
         }
+
+        public string UploadImage(IFormFile imageFile)
+        {
+            
+            string uniqueFileName = Guid.NewGuid().ToString().Substring(0,4) + "_" + imageFile.FileName;
+
+            string uploadsFolder = @"wwwroot\Images";
+
+            if (!Directory.Exists(uploadsFolder))
+            {
+                Directory.CreateDirectory(uploadsFolder);
+            }
+            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                imageFile.CopyTo(fileStream);
+            }
+
+            return uniqueFileName;
+        }
+
+      }
+
     }
 }

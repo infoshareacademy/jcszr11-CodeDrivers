@@ -14,7 +14,6 @@ namespace CodeDriversMVC.Controllers
         private readonly CarService _carService;
         public CarController(CarService carService)
         {
-            //carService = new CarService();
             _carService = carService;
         }
 
@@ -50,6 +49,7 @@ namespace CodeDriversMVC.Controllers
             }
             else
             {
+                car.ImageFileName = _carService.UploadImage(car.ImageFile);
                 _carService.Create(car);
                 TempData["Success"] = "Auto zostało dodane";
                 return RedirectToAction(nameof(Index));
