@@ -16,7 +16,7 @@
 
             <div class="form-group">
                 <label asp-for="Brand" class="control-label">Marka pojazdu</label>
-                <select asp-for="Brand" class="form-control" id="brandDropdown" id="Brand" asp-items="Html.GetEnumSelectList<CodeDrivers.Models.Car.CarBrand>()">
+                <select asp-for="Brand" class="form-control" id="brandDropdown" asp-items="Html.GetEnumSelectList<CodeDrivers.Models.Car.CarBrand>()">
                 </select>
             </div>
             <div class="form-group">

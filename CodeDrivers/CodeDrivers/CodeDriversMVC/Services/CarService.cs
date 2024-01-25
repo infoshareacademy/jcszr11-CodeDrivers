@@ -5,6 +5,8 @@ using CodeDrivers.Repository;
 using CodeDriversMVC.Services.Interfaces;
 using CodeDriversMVC.DataAccess;
 using static System.Net.Mime.MediaTypeNames;
+using Elfie.Serialization;
+using System.Drawing;
 
 namespace CodeDriversMVC.Services
 {
@@ -61,7 +63,7 @@ namespace CodeDriversMVC.Services
             
             string uniqueFileName = Guid.NewGuid().ToString().Substring(0,4) + "_" + imageFile.FileName;
 
-            string uploadsFolder = "/Images/";
+            string uploadsFolder = @"wwwroot\Images";
 
             if (!Directory.Exists(uploadsFolder))
             {
