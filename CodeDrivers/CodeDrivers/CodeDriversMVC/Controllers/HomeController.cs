@@ -12,13 +12,12 @@ namespace CodeDriversMVC.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        public readonly CarService _carService;
-        private readonly CodeDriversContext _context;
+        private readonly CarService _carService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, CarService carService)
         {
             _logger = logger;
-            _carService = new CarService(_context);
+            _carService = carService;
         }
 
         public IActionResult Index()
