@@ -4,7 +4,8 @@
     ViewData["Title"] = "Home Page";
 }
 @{
-    Html.RenderPartial("~/Views/CarSearch/Search.cshtml");
+    var firstCar = Model.FirstOrDefault();
+    Html.RenderPartial("~/Views/CarSearch/Search.cshtml", firstCar);
 }
 @using (Html.BeginForm("Reservation", "CarSearch", FormMethod.Post))
 {
