@@ -4,18 +4,19 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Dodawanie pojazdów</h1>
 
-<h4>Aby dodać pojazd, uzupełnij poniższe pola</h4>
-<hr />
-<div class="row">
+<div class="row center-form">
     <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <h1>Dodawanie pojazdów</h1>
+
+        <p>Aby dodać pojazd, uzupełnij poniższe pola</p>
+        <hr />
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger" ></div>
 
             <div class="form-group">
                 <label asp-for="Brand" class="control-label">Marka pojazdu</label>
-                <select asp-for="Brand" class="form-control" id="brandDropdown" id="Brand" asp-items="Html.GetEnumSelectList<CodeDrivers.Models.Car.CarBrand>()">
+                <select asp-for="Brand" class="form-control" id="brandDropdown" asp-items="Html.GetEnumSelectList<CodeDrivers.Models.Car.CarBrand>()">
                 </select>
             </div>
             <div class="form-group">
@@ -52,17 +53,23 @@
                 <label asp-for="PricePerDay" class="control-label">Stawka za dzień</label>
                 <input asp-for="PricePerDay" class="form-control" data-val="true" data-val-required="To pole jest wymagane." />
                 <span asp-validation-for="PricePerDay" class="text-danger"></span>
+                <span class="text-danger">@Html.ValidationMessage("PriceIsLessThan50Error")</span>
             </div>
+                <div class="form-group">
+                    <label asp-for="ImageFile">Zdjęcie</label>
+                    <input asp-for="ImageFile" type="file" class="form-control" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+                </div>
             <br>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Dodaj pojazd" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index" class="custom-link">Back to List</a>
+<div style="display: flex; justify-content: center;">
+    <a asp-action="Index" class="custom-link">Wróć do listy</a>
 </div>
 
 @section Scripts {

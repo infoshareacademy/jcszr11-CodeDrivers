@@ -19,7 +19,6 @@ namespace CodeDrivers.Models.Car
         {
             
         }
-
         public Reservation(Car car, User user,  DateTime reservationFrom, DateTime reservationTo, decimal totalReservationPrice)
         {
             Car = car;

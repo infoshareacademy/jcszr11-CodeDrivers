@@ -1,4 +1,8 @@
 using CodeDriversMVC.DataAccess;
+using CodeDriversMVC.Services;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using System.Threading.RateLimiting;
 
 namespace CodeDriversMVC
 {
@@ -10,6 +14,10 @@ namespace CodeDriversMVC
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddScoped<CodeDriversContext>();
+            builder.Services.AddScoped<RegistrationService>();
+            builder.Services.AddScoped<CarService>();
+            builder.Services.AddScoped<LoginService>();
 
             var app = builder.Build();
 
@@ -20,6 +28,7 @@ namespace CodeDriversMVC
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

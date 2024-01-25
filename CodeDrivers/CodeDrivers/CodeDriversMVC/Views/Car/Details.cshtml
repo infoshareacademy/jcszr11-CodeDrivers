@@ -4,50 +4,50 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Szczegóły</h1>
 
 <div>
     <h4>Car</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
+            Id
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Id)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Brand)
+            Marka
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Brand)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Model)
+            Model
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Model)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Segment)
+            Segment
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Segment)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.GearTransmission)
+            Skrzynia biegów
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.GearTransmission)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsAvailable)
+            Dostępność
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.IsAvailable)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PricePerDay)
+            Stawka za dzień
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.PricePerDay)
@@ -55,6 +55,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id" class="custom-link">Edit</a>
-    <a asp-action="Index" class="custom-link">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="custom-link">Edytuj</a>
+    <a asp-action="Index" class="custom-link">Wróć do listy</a>
 </div>

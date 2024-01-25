@@ -11,8 +11,6 @@ namespace CodeDrivers.Models
 {
     public class User
     {
-        private string dateOfBirth;
-
         [BindProperty]
         public string Id { get; set; }
         public string Name { get; set; }
@@ -23,22 +21,6 @@ namespace CodeDrivers.Models
         public string PhoneNumber { get; set; }
         public string DriversLicenceNumber { get; set; }
         List<User> Users { get; set; } = new List<User>();
-        public User(string name, string lastName, DateTime dateOfBirth, string email, string password, string phoneNumber, string driversLicenceNumber)
-        {
-            Id = Guid.NewGuid().ToString();
-            Name = name;
-            LastName = lastName;
-            DateOfBirth = dateOfBirth;
-            Email = email;
-            Password = password;
-            PhoneNumber = phoneNumber;
-            DriversLicenceNumber = driversLicenceNumber;
-        }
-
-        public User()
-        {
-            
-        }
     }
 }
 

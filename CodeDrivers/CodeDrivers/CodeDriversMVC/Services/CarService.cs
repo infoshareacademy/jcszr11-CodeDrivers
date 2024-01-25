@@ -1,74 +1,78 @@
-﻿using CodeDrivers.Models;
+using CodeDrivers.Models;
 using CodeDrivers.Models.Car;
 using CodeDriversMVC.Models;
 using CodeDrivers.Repository;
+using CodeDriversMVC.Services.Interfaces;
+using CodeDriversMVC.DataAccess;
 
 namespace CodeDriversMVC.Services
 {
-    public class CarService
+    public class CarService : IRepository<Car>
     {
-        static int id = 7;
-        public static List<Car> cars { get; set; } =
-            new List<Car>
-            {
-                new() {Id=1, Brand = CarBrand.Audi, Model = "A4", Motor = MotorType.Diesel, GearTransmission = GearType.Automatyczna, Segment = CarSegment.D, PricePerDay = 300},
-                new() {Id=2, Brand = CarBrand.Toyota, Model = "Yaris", Motor = MotorType.Hybrydowy, GearTransmission = GearType.Automatyczna, Segment = CarSegment.B, PricePerDay = 150},
-                new() {Id=3, Brand = CarBrand.Fiat, Model = "500", Motor = MotorType.Benzynowy, GearTransmission = GearType.Manualna, Segment = CarSegment.A, PricePerDay = 130},
-                new() {Id=4, Brand = CarBrand.Seat, Model = "Arona", Motor = MotorType.Benzynowy, GearTransmission = GearType.Manualna, Segment = CarSegment.Crossover, PricePerDay = 190},
-                new() {Id=5, Brand = CarBrand.BMW, Model = "seria 1", Motor = MotorType.Benzynowy, GearTransmission = GearType.Automatyczna, Segment = CarSegment.C, PricePerDay = 220},
-                new() {Id=6, Brand = CarBrand.Mercedes, Model = "E-klasa", Motor = MotorType.Diesel, GearTransmission = GearType.Automatyczna, Segment = CarSegment.E, PricePerDay = 450},
-
-               
-            };
-        public List<Car> GetAll()
+        private readonly CodeDriversContext _context;
+        public CarService(CodeDriversContext context)
         {
-            return cars;
+            _context = context;
         }
-        public static int SetId()
+        public void Create(Car car)
         {
-            return id++;
-        }
-        public void Update(Car car)
-        {
-            Car allCars =GetById(car.Id);
-            allCars.Brand=car.Brand;
-            allCars.Model=car.Model;
-            allCars.Segment=car.Segment;
-            allCars.GearTransmission=car.GearTransmission;
-            allCars.PricePerDay=car.PricePerDay;
-            allCars.IsAvailable=true;
-
+            _context.Set<Car>().Add(car);
+            _context.SaveChanges();
         }
         public Car GetById(int id)
         {
-            return cars.FirstOrDefault(m => m.Id == id);
+            return _context.Set<Car>().FirstOrDefault(car => car.Id == id);
         }
         public List<Car> GetByBrand(CarBrand brand)
         {
-            return cars.Where(m => m.Brand == brand).ToList();
+            return _context.Set<Car>().Where(car => car.Brand == brand).ToList();
         }
-        public List<Car> GetByAllFilters(CarBrand brand, CarSegment segment, GearType gearType, MotorType motorType)
+        public List<Car> GetAll()
         {
-            return cars.Where(x => x.Brand == brand && x.Segment == segment && x.GearTransmission == gearType && x.Motor == motorType).ToList();
+            return _context.Set<Car>().ToList();
         }
-        public void Create(Car nextCar)
+
+        public void Update(Car updatedCar)
         {
-            nextCar.Id = SetId();
-            cars.Add(nextCar);
+            Car carToBeUpdated = GetById(updatedCar.Id);
+            carToBeUpdated.Brand = updatedCar.Brand;
+            carToBeUpdated.Model = updatedCar.Model;
+            carToBeUpdated.Segment = updatedCar.Segment;
+            carToBeUpdated.GearTransmission = updatedCar.GearTransmission;
+            carToBeUpdated.PricePerDay = updatedCar.PricePerDay;
+            carToBeUpdated.IsAvailable = updatedCar.IsAvailable;
+
+            _context.Set<Car>().Update(carToBeUpdated);
+            _context.SaveChanges();
         }
-        public void Delete(Car nextCar)
+        public void Remove(int id)
         {
-            cars.Remove(nextCar);
-        }
-        public void RemoveCar(int id)
-        {
-            for (int i = 0; i < GetAll().Count; i++)
+            Car carToBeRemoved = GetById(id);
+            if (carToBeRemoved != null)
             {
-                if (id == GetAll()[i].Id)
-                {
-                    GetAll().Remove(GetAll()[i]);
-                }
+                _context.Set<Car>().Remove(carToBeRemoved);
+                _context.SaveChanges();
             }
         }
-    };
+
+        public string UploadImage(IFormFile imageFile)
+        {
+
+            string uniqueFileName = Guid.NewGuid().ToString().Substring(0, 4) + "_" + imageFile.FileName;
+
+            string uploadsFolder = @"wwwroot\Images";
+
+            if (!Directory.Exists(uploadsFolder))
+            {
+                Directory.CreateDirectory(uploadsFolder);
+            }
+            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                imageFile.CopyTo(fileStream);
+            }
+            return uniqueFileName;
+        }
+    }
 }
