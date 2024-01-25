@@ -135,12 +135,12 @@ body a:hover{
 }
 
 .logo-link {
-    display: inline-block;
+    display: inline-table;
     margin-right: 1.3rem;
 }
 
 .logo-img {
-    height: 50px;
+    height: 80px;
     width: auto;
 }
 
