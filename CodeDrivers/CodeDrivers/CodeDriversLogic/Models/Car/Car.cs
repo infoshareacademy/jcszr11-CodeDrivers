@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +20,9 @@ namespace CodeDrivers.Models.Car
 		public GearType GearTransmission { get; set; }
 		public bool IsAvailable { get; set; }
 		public decimal PricePerDay { get; set; }
+        public string ImageFileName { get; set; }
+		[NotMapped]
+		public IFormFile ImageFile { get; set; }
 		public static Dictionary<CarBrand, List<string>> BrandToModelsDict = new Dictionary<CarBrand, List<string>>();
 		static Car()
 		{
@@ -30,29 +36,10 @@ namespace CodeDrivers.Models.Car
 			BrandToModelsDict.TryAdd(CarBrand.Toyota, new List<string> { "Aygo", "Yaris", "Corolla", "RAV4" });
 			BrandToModelsDict.TryAdd(CarBrand.VW, new List<string> { "up!", "Polo", "Golf", "Passat", "Arteon" });
 		}
-
-        public Car(CarBrand brand, string model)
-        {
-            Brand = brand;
-            if (BrandToModelsDict.TryGetValue(brand, out List<string> models))
-            {
-                if (models.Contains(model))
-                {
-                    Model = model;
-                }
-                else
-                {
-                }
-            }
-        }
-        public Car()
-        {
-        }
 		public static Dictionary<CarBrand, List<string>> GetDisctionary()
 		{
 			var dictionary = BrandToModelsDict;
 			return dictionary;
 		}
-		
 	}
 }

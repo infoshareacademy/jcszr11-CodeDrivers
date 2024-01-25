@@ -1,5 +1,7 @@
 using CodeDrivers.Models;
 using CodeDrivers.Models.Car;
+using CodeDriversMVC.Constants;
+using CodeDriversMVC.Helpers;
 using CodeDriversMVC.Models;
 using CodeDriversMVC.Services;
 using Microsoft.AspNetCore.Http;
@@ -12,7 +14,6 @@ namespace CodeDriversMVC.Controllers
         private readonly CarService _carService;
         public CarController(CarService carService)
         {
-            //carService = new CarService();
             _carService = carService;
         }
 
@@ -39,16 +40,17 @@ namespace CodeDriversMVC.Controllers
         // POST: CarController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Car allCars)
+        public ActionResult Create(Car car)
         {
-            if (!_carService.ValidatePrice(allCars.PricePerDay))
+            if (CarValidationHelper.IsPriceBelowMinimum(Constants.Constants.MinimalPricePerDay, car.PricePerDay))
             {
                 ModelState.AddModelError("PriceIsLessThan50Error", "Cena wynajmu nie może być niższa niż 50 zł.");
-                return View("Create", allCars);
+                return View("Create", car);
             }
             else
             {
-                _carService.Create(allCars);
+                car.ImageFileName = _carService.UploadImage(car.ImageFile);
+                _carService.Create(car);
                 TempData["Success"] = "Auto zostało dodane";
                 return RedirectToAction(nameof(Index));
             }

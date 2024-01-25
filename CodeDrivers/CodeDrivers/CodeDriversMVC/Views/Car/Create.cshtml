@@ -11,12 +11,12 @@
 
         <p>Aby dodać pojazd, uzupełnij poniższe pola</p>
         <hr />
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger" ></div>
 
             <div class="form-group">
                 <label asp-for="Brand" class="control-label">Marka pojazdu</label>
-                <select asp-for="Brand" class="form-control" id="brandDropdown" id="Brand" asp-items="Html.GetEnumSelectList<CodeDrivers.Models.Car.CarBrand>()">
+                <select asp-for="Brand" class="form-control" id="brandDropdown" asp-items="Html.GetEnumSelectList<CodeDrivers.Models.Car.CarBrand>()">
                 </select>
             </div>
             <div class="form-group">
@@ -55,6 +55,11 @@
                 <span asp-validation-for="PricePerDay" class="text-danger"></span>
                 <span class="text-danger">@Html.ValidationMessage("PriceIsLessThan50Error")</span>
             </div>
+                <div class="form-group">
+                    <label asp-for="ImageFile">Zdjęcie</label>
+                    <input asp-for="ImageFile" type="file" class="form-control" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+                </div>
             <br>
             <div class="form-group">
                 <input type="submit" value="Dodaj pojazd" class="btn btn-primary" />
@@ -64,7 +69,6 @@
 </div>
 
 <div style="display: flex; justify-content: center;">
-<div>
     <a asp-action="Index" class="custom-link">Wróć do listy</a>
 </div>
 
