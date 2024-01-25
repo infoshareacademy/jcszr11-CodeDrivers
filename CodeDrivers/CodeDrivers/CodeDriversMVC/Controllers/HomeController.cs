@@ -5,6 +5,7 @@ using CodeDrivers.Models.Car;
 using CodeDrivers;
 using CodeDriversMVC.Services;
 using CodeDrivers.Repository;
+using CodeDriversMVC.DataAccess;
 
 namespace CodeDriversMVC.Controllers
 {
@@ -12,11 +13,12 @@ namespace CodeDriversMVC.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         public readonly CarService _carService;
+        private readonly CodeDriversContext _context;
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _carService = new CarService();
+            _carService = new CarService(_context);
         }
 
         public IActionResult Index()
@@ -34,8 +36,8 @@ namespace CodeDriversMVC.Controllers
                 && Enum.TryParse(motorTypeDropdownText, out MotorType motorType))
             {
                 var carFromBrand = _carService.GetByBrand(brand);
-                var carFromSegment = _carService.GetByAllFilters(brand,segment,gearType,motorType);
-                return View(carFromSegment);
+                //var carFromSegment = _carService.GetByAllFilters(brand,segment,gearType,motorType);
+                return View(carFromBrand);
             }
             if (searchTextBrand == "Wszystko")
             {
