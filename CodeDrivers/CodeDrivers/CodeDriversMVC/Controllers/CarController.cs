@@ -1,4 +1,3 @@
-using CodeDrivers.Models;
 using CodeDrivers.Models.Car;
 using CodeDriversMVC.Constants;
 using CodeDriversMVC.Helpers;
@@ -98,6 +97,20 @@ namespace CodeDriversMVC.Controllers
             var models = dic[modelEnum];
 
             return Json(models);
+
+        }
+        [HttpPost]
+        public ActionResult GetCarSearchFilter(string name)
+        {
+            var dic = Car.GetDisctionary();
+
+            if (name == "Wszystko")
+            {
+                var allModels = dic.Values.SelectMany(models => models).Distinct().ToList();
+                return Json(allModels);
+            }
+
+            return View();
         }
     }
 }

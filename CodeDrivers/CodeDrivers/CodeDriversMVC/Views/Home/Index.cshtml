@@ -1,10 +1,43 @@
+@using CodeDriversMVC.Services
+@model IEnumerable<CodeDrivers.Models.Car.Car>
 @{
     ViewData["Title"] = "Home Page";
 }
+@{
+    var firstCar = Model.FirstOrDefault();
+    Html.RenderPartial("~/Views/CarSearch/Search.cshtml", firstCar);
+}
+@using (Html.BeginForm("Reservation", "CarSearch", FormMethod.Post))
+{
+    <div class="text-center carlist-filter">
+        <div class="carSearch-container">
+            @foreach (var item in Model)
+            {
+                <div class="car-box-search">
+                    <p>@Html.DisplayFor(modelItem => item.Brand)</p>
+                    <p>@Html.DisplayFor(modelItem => item.Model)</p>
+                    <p>@Html.DisplayFor(modelItem => item.Segment)</p>
+                    <p>@Html.DisplayFor(modelItem => item.GearTransmission)</p>
+                    <p>@Html.DisplayFor(modelItem => item.Motor)</p>
 
-<div class="text-center carlist-filter">
-    <h1 class="display-4">Witaj, tutaj bedzie wybór dat od kiedy do kiedy i pokaże samochodzy</h1>
-</div>
+                    @if (item.IsAvailable)
+                    {
+                        <p style="color: black;">Dostępny</p>
+                    }
+                    else
+                    {
+                        <p style="color: rgb(70, 82, 78);">Niedostępny</p>
+                    }
+                    <p style="color: #ff0a21;">@Html.DisplayFor(modelItem => item.PricePerDay) zł</p>
+                    
+                    <!-- Zamiast Html.HiddenFor -->
+                    <button type="submit" formaction="@Url.Action("Reservation", "CarSearch", new { id = item.Id })">Zarezerwuj
+                    </button>
+                </div>
+            }
+        </div>
+    </div>
+}
 
 <div class="position-absolute top-50 start-50 translate-middle" style="z-index: 11">
     <div id="toast1" class="toast" role="alert" aria-live="assertive" aria-atomic="true">

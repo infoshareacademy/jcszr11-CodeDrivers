@@ -1,5 +1,7 @@
 ﻿using CodeDrivers.Models.Car;
+using CodeDriversMVC.Models;
 using CodeDriversMVC.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -13,34 +15,21 @@ namespace CodeDriversMVC.Controllers
             _carService = carService;
         }
         // GET: CarSearchController
-        [HttpGet]
-        public IActionResult Index()
-        {
-            ViewBag.CarBrand = Enum.GetValues(typeof(CarBrand)).Cast<CarBrand>();
-            var allCars = _carService.GetAll();
-            return View(allCars);
-        }
+
+        // POST: CarSearchController
         [HttpPost]
-        public IActionResult Search(string searchText)
+        public IActionResult Search()
         {
-            ViewBag.CarBrand = Enum.GetValues(typeof(CarBrand)).Cast<CarBrand>();
-            if (searchText == "Wszystkie")
-            {
-                var allCars = _carService.GetAll();
-                return View(allCars);
-            }
+            return View(new Car());
+        }
 
-            if (Enum.TryParse<CarBrand>(searchText, out var selectedBrand) && Car.BrandToModelsDict.ContainsKey(selectedBrand))
-            {
-                var allBrandCar = _carService.GetByBrand(selectedBrand);
-                var modelsForBrand = Car.BrandToModelsDict[selectedBrand];
 
-                ViewBag.SelectedBrand = selectedBrand;
-                ViewBag.ModelsForBrand = modelsForBrand;
-
-                return View(allBrandCar);
-            }
-            return RedirectToAction("Index");
+        // POST: CarSearchController/Reservation
+        [HttpPost]
+        public ActionResult Reservation(int Id)
+        {
+            var carById = _carService.GetById(Id);
+            return View(carById);
         }
     }
 }

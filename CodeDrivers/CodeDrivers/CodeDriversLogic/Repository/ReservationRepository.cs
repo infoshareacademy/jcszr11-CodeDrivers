@@ -6,7 +6,7 @@ using CodeDrivers.Repository;
 
 namespace CodeDrivers.Repository
 {
-	internal class ReservationRepository : IReservationRepository
+	public class ReservationRepository : IReservationRepository
 	{
         public List<Reservation> Reservations { get; set; } = new List<Reservation>();
         Car Car { get; set; }
