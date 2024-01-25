@@ -1,50 +1,53 @@
 ﻿@using CodeDrivers.Models.Car
-@model IEnumerable<CodeDrivers.Models.Car.Car>
+@using CodeDrivers.Models
+@model CodeDrivers.Models.Car.Car
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-<h1>Wyszukaj pojazd</h1>
 <div class="carSearch-mainPanel">
-    @using (Html.BeginForm("Search", "CarSearch", FormMethod.Post))
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
     {
-        <label for="cars">Wybierz samochód:</label>
-        <select id="cars" name="searchText" onchange="onCarBrandChange()">
-            <option value="Wszystkie">Wszystkie</option>
-            @foreach (var carBrand in ViewBag.CarBrand)
+        <h1>Wyszukaj pojazd</h1>
+        <label for="cars">Filtry:</label>
+        <select id="brandDropdown" name="searchTextBrand">
+            @foreach (var carBrand in Enum.GetValues(typeof(CarBrand)))
             {
                 <option>@carBrand</option>
             }
+            <option value="Wszystko">Wszystko</option>
         </select>
-
-        @if (ViewBag.SelectedBrand != null && ViewBag.ModelsForBrand != null)
-        {
-            <select id="models" name="searchText">
-                <option value="Wszystkie">Wszystkie</option>
-                @foreach (var item in ViewBag.ModelsForBrand)
+        <span id="selectModelId">
+            <select id="segmentDropdown" name="segmentDropdownText">
+                @foreach (var carSegment in Enum.GetValues(typeof(CarSegment)))
                 {
-                    <option>@item</option>
+                    <option>@carSegment</option>
                 }
             </select>
-        }
-
+            <select id="gearTypeDropdown" name="gearTypeDropdownText">
+                @foreach (var gearType in Enum.GetValues(typeof(GearType)))
+                {
+                    <option>@gearType</option>
+                }
+            </select>
+            <select id="motorTypeDropdown" name="motorTypeDropdownText">
+                @foreach (var motorType in Enum.GetValues(typeof(MotorType)))
+                {
+                    <option>@motorType</option>
+                }
+            </select>
+        </span>
+        <p></p>
+        <span id="selectDateTime">
+            <label>Początek:</label>
+            <input type="date" class="form-control" data-val="true" data-val-required="To pole jest wymagane." name="dateStart"/>
+            <label>Koniec:</label>
+            <input type="date" class="form-control" data-val="true" data-val-required="To pole jest wymagane."  name="dateEnd"/>
+        </span>
         <button type="submit">Wyszukaj</button>
     }
 </div>
-
-<div class="carSearch-container">
-    @foreach (var item in Model)
-    {
-        <div class="car-box-search">
-            <p>@Html.DisplayFor(modelItem => item.Brand) @Html.DisplayFor(modelItem => item.Segment)</p>
-            @if (item.IsAvailable)
-            {
-                <p>Dostępny</p>
-            }
-            else
-            {
-                <p>Niedostępny</p>
-            }
-            <p>@Html.DisplayFor(modelItem => item.PricePerDay) zł</p>
-        </div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-</div>
+}

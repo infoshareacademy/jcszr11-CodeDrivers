@@ -22,4 +22,8 @@
     <ProjectReference Include="..\CodeDriversLogic\CodeDriversLogic.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Nowy folder\" />
+  </ItemGroup>
+
 </Project>

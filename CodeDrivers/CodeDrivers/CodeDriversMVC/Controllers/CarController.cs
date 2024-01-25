@@ -3,6 +3,7 @@ using CodeDriversMVC.Models;
 using CodeDriversMVC.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace CodeDriversMVC.Controllers
 {
@@ -87,7 +88,19 @@ namespace CodeDriversMVC.Controllers
 
             return Json(models);
 
+        }
+        [HttpPost]
+        public ActionResult GetCarSearchFilter(string name)
+        {
+            var dic = Car.GetDisctionary();
 
+            if (name == "Wszystko")
+            {
+                var allModels = dic.Values.SelectMany(models => models).Distinct().ToList();
+                return Json(allModels);
+            }
+
+            return View();
         }
     }
 }

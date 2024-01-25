@@ -1,20 +1,52 @@
 ﻿body {
+
 }
-.carSearch-mainPanel{
+.carSearch-mainPanel {
     display: flex;
     justify-content: center;
+    text-align: center;
+    padding-top:1rem;
 }
 .carSearch-container {
     display: grid;
-    grid-gap: 10rem;
+    grid-gap: 8rem;
     justify-content: center;
-    grid-template-columns: repeat(5, 30px);
-    margin-top: 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(6rem, 10rem));
+    margin-top: 1.5rem;
 }
-.car-box-search{
-    height: 6.5rem;
-    width: 6.5rem;
+.car-box-search {
+    margin-top: 1.5rem;
+    height: 15rem;
+    width: 11rem;
     text-align: center;
     font-weight: bold;
-    background-color: grey;
+    border: none;
+    outline-color: white;
+    background-color: white;
+    border-radius: .2rem;
+    box-shadow: 0 0 5px rgb(128, 128, 128);
 }
+    .car-box-search p {
+        margin: auto;
+        padding: 0;
+        margin-bottom: 0.3rem;
+        color:rgb(70, 72, 74);
+        font-weight: bold;
+    }
+    .car-box-search button {
+        border-radius: .2rem;
+        text-decoration: none;
+        border: none;
+        outline-color: red;
+        background-color: red;
+        text-align: center;
+        color: white;
+        font-weight: bold;
+    }
+.car-box-search button:hover{
+    color:black;
+    background-color: white;
+    outline: .1rem solid red;
+
+}
+
