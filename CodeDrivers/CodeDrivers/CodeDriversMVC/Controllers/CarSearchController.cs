@@ -29,7 +29,7 @@ namespace CodeDriversMVC.Controllers
         public ActionResult Reservation(int Id)
         {
             var carById = _carService.GetById(Id);
-            return View(carById);
+            return RedirectToAction("Create", "Reservation", new { carId = Id });
         }
     }
 }

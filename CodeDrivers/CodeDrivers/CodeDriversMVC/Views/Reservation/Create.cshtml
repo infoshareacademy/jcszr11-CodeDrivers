@@ -1,0 +1,98 @@
+﻿@model CodeDriversMVC.Models.ReservationViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="login-panel">
+    <div class="col-md-4">
+        <input type="hidden" asp-for="Car.Id" />
+        <h1>Rezerwacja pojazdu @Model.Car.Brand @Model.Car.Model</h1>
+
+        <p>Wybierz zakres dat dla Twojej rezerwacji</p>
+        <hr />
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="User.Email" class="control-label">Twój adres e-mail</label>
+                <input asp-for="User.Email" class="form-control" />
+                <span asp-validation-for="User.Email" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="Reservation.ReservationFrom" class="control-label">Początek rezerwacji</label>
+                <input asp-for="Reservation.ReservationFrom" id="ReservationFrom" class="form-control" type="date" value="@DateTime.Today.ToString("yyyy-MM-dd")" />
+                <span asp-validation-for="Reservation.ReservationFrom" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reservation.ReservationTo" class="control-label">Koniec rezerwacji</label>
+                <input asp-for="Reservation.ReservationTo" id="ReservationTo" class="form-control" type="date" value="@DateTime.Today.ToString("yyyy-MM-dd")" />
+                <span asp-validation-for="Reservation.ReservationTo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Car.PricePerDay" class="control-label">Cena za dzień wynajmu</label>
+                <div class="input-group">
+                    <input asp-for="Car.PricePerDay" id="PricePerDay" class="form-control" />
+                    <div class="input-group-append">
+                        <span class="input-group-text">zł</span>
+                    </div>
+                </div>
+                <span asp-validation-for="Car.PricePerDay" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reservation.DurationTime" class="control-label">Łączny czas wynajmu</label>
+                <div class="form-control" id="DurationTime">0.00</div>
+                <span asp-validation-for="Reservation.DurationTime" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Reservation.TotalReservationPrice" class="control-label">Cena całkowita</label>
+                <div class="form-control" id="TotalPrice">0.00 zł</div>
+
+                <span asp-validation-for="Reservation.TotalReservationPrice" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Car.Id" />
+
+
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Zarezerwuj" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div style="display: flex; justify-content: center;">
+    <a asp-action="Index">Wróć do wyboru aut</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+
+        var reservationFromElement = document.getElementById('ReservationFrom');
+        var reservationToElement = document.getElementById('ReservationTo');
+        var durationTimeElement = document.getElementById('DurationTime');
+        var pricePerDayElement = document.getElementById('PricePerDay');
+
+
+        reservationFromElement.addEventListener('change', calculateTotalPrice);
+        reservationToElement.addEventListener('change', calculateTotalPrice);
+
+        function calculateTotalPrice() {
+            var reservationFrom = new Date(reservationFromElement.value);
+            var reservationTo = new Date(reservationToElement.value);
+            var pricePerDay = parseFloat(pricePerDayElement.value);
+
+            var durationTime = (reservationTo - reservationFrom) / (1000 * 60 * 60 * 24);
+
+            var totalPrice = durationTime * pricePerDay;
+
+            var totalPriceElement = document.getElementById('TotalPrice');
+            totalPriceElement.textContent = totalPrice.toFixed(2); // Zaokrągl do dwóch miejsc po przecinku
+            durationTimeElement.textContent = durationTime;
+        }
+    </script>
+}

@@ -18,6 +18,7 @@ namespace CodeDriversMVC
             builder.Services.AddScoped<RegistrationService>();
             builder.Services.AddScoped<CarService>();
             builder.Services.AddScoped<LoginService>();
+            builder.Services.AddScoped<ReservationService>();
 
             var app = builder.Build();
 
