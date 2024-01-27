@@ -18,8 +18,9 @@ namespace CodeDriversMVC.Services
         {
             var carToReserve = _context.Set<Car>().FirstOrDefault(car => car.Id == carId);
             carToReserve.IsAvailable = false;
+           
 
-            var owner = _context.Set<User>().FirstOrDefault(user => user.Id == userEmail);
+            var owner = _context.Set<User>().FirstOrDefault(user => user.Email == userEmail);
             var totalPrice = PriceCalculationHelper.CalculateTotalPrice(reservationFrom, reservationTo, pricePerDay);
 
             var reservation = new Reservation

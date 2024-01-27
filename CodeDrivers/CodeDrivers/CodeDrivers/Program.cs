@@ -7,7 +7,7 @@ namespace CodeDrivers
     {
         static void Main(string[] args)
         {
-            Menu_tekstowe menu = new Menu_tekstowe("user"); //Na start wyswietla panel menu
+            //Menu_tekstowe menu = new Menu_tekstowe("user"); //Na start wyswietla panel menu
         }
     }
 }
