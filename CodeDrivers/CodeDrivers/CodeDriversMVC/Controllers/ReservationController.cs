@@ -52,7 +52,7 @@ namespace CodeDriversMVC.Controllers
             }
             catch
             {
-                return View();
+                return View(model);
             }
         }
 
