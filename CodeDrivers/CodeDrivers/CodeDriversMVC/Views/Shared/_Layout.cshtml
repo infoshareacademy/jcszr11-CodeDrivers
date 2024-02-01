@@ -13,45 +13,53 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid navbar-contener">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">CodeDriversMVC</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-contener">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">About</a>
-                        </li>
-                        <li>
-                            <button>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Index">Login</a>
-                            </button>
-                            <button>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Registration" asp-action="Index">Register</a>
-                            </button>
-                        </li>
-                    </ul>
+                <div>
+
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="logo-link">
+                        <img src="~/Images/logo.png" alt="logo" class="logo-img">
+                    </a>
+                    <a asp-area="" asp-controller="Home" asp-action="About">O nas</a>
+                    <a asp-area="" asp-controller="Car" asp-action="Index">Baza pojazdów</a>
+                    <a asp-area="" asp-controller="Login" asp-action="Index">Logowanie</a>
+                    <a asp-area="" asp-controller="Registration" asp-action="Index">Rejestracja</a>
+                    <a asp-area="" asp-controller="PanelAdmin" asp-action="Index">PanelAdmin</a>
+                    <a asp-area="" asp-controller="PanelUser" asp-action="Index">PanelUser</a>
                 </div>
             </div>
         </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @if (TempData.ContainsKey("Success"))
-            {
-                <p class="alert alert-success">@TempData["Success"]</p>
-            }
-            @if (TempData.ContainsKey("Delete"))
-            {
-                <p class="alert alert-danger">@TempData["Delete"]</p>
-            }
-            @RenderBody()
-        </main>
-    </div>
+
+        <div class="container">
+            <main role="main" class="pb-3">
+                @if (TempData.ContainsKey("Success"))
+                {
+                    <p class="alert alert-success">@TempData["Success"]</p>
+                }
+                @if (TempData.ContainsKey("Delete"))
+                {
+                    <p class="alert alert-danger">@TempData["Delete"]</p>
+                }
+                @if (TempData.ContainsKey("SuccessUser"))
+                {
+                    <p class="alert alert-success">@TempData["SuccessUser"]</p>
+                }
+                @if (TempData.ContainsKey("DeleteUser"))
+                {
+                    <p class="alert alert-danger">@TempData["DeleteUser"]</p>
+                }
+                
+                @RenderBody()
+            </main>
+        </div>
+        <div class="position-absolute top-50 start-50 translate-middle" style="z-index: 11">
+            <div id="toast1" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <strong class="me-auto">Sukces!</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    Zostałeś poprawnie zarejestrowany!
+                </div>
+            </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">

@@ -8,6 +8,12 @@ namespace CodeDriversMVC
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddScoped<CodeDriversContext>();
+            builder.Services.AddScoped<RegistrationService>();
+            builder.Services.AddScoped<CarService>();
+            builder.Services.AddScoped<LoginService>();
+            builder.Services.AddScoped<ReservationService>();
+            //builder.Services.AddScoped<UserService>();
 
             var app = builder.Build();
 

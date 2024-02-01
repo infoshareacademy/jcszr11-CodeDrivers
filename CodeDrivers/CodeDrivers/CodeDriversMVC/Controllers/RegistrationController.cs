@@ -12,13 +12,11 @@ namespace CodeDriversMVC.Controllers
         
         public ActionResult Index()
         {
-            if (TempData["ShowToast"] != null)
-            {
-                ViewBag.ShowToast = true;
-                TempData.Remove("ShowToast");
+            //ViewData["ShowToast"] = true;
 
-            }
-            return View();
+            //return View();
+            var allUsers = _registrationService.GetAll();
+            return View(allUsers);
         }
         
         [HttpPost]
@@ -35,70 +33,61 @@ namespace CodeDriversMVC.Controllers
         // GET: RegistrationController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var allUsers = _registrationService.GetById(id);
+            return View(allUsers);
         }
 
         // GET: RegistrationController/Create
         public ActionResult Create()
         {
-            return View();
+            return View(new User());
         }
 
         // POST: RegistrationController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(User user)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            _registrationService.Create(user);
+            TempData["SuccessUser"] = "Użytkownik został dodany do listy.";
+            return RedirectToAction(nameof(Index));
+          
         }
 
         // GET: RegistrationController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var allUsers = _registrationService.GetById(id);
+            return View(allUsers);
+            
         }
 
         // POST: RegistrationController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, User userToEdit)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            _registrationService.Update(userToEdit);
+            return RedirectToAction(nameof(Index));
+          
         }
 
         // GET: RegistrationController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var userToBeRemoved = _registrationService.GetById(id);
+            return View(userToBeRemoved);
+           
         }
 
         // POST: RegistrationController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, User userToBeRemoved)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            _registrationService.Remove(id);
+            TempData["DeleteUser"] = "Użytkownik został usunięty z listy.";
+            return RedirectToAction(nameof(Index));
         }
     }
 }

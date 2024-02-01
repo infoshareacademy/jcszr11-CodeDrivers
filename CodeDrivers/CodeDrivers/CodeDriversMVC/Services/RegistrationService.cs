@@ -120,20 +120,46 @@ namespace CodeDriversMVC.Services
                 _context.SaveChanges();
             }
         }
-        //public List<User> GetAllUsers()
-        //{
-        //    return _context.Set<User>().ToList();
-        //}
-        //public void Create(User newUser)
-        //{
-        //    newUser.Id = GetNextId();
-        //    users.Add(newUser);
-        //}
-        //public int GetNextId()
-        //{
-        //    id++;
-        //    return id;
-        //}
-    }
 
+        public User GetById(int id)  
+        {
+            
+            return _context.Set<User>().FirstOrDefault(user => user.Id == id);
+        }
+
+        public List<User> GetAll()
+        {
+            return _context.Set<User>().ToList();
+            
+        }
+          
+        public void Create(User user)
+        {
+            user.Id = Guid.NewGuid().ToString().Substring(0, 6);
+            user.Password = HashPasswordHelper.HashPassword(user.Password);
+            _context.Set<User>().Add(user);
+            _context.SaveChanges();
+        }
+
+        public void Update(User editedUser)
+        {
+            User userToBeEdited = GetById(editedUser.Id);
+            userToBeEdited.Name = editedUser.Name;
+            userToBeEdited.LastName = editedUser.LastName;
+            userToBeEdited.DateOfBirth = editedUser.DateOfBirth;
+            userToBeEdited.Email = editedUser.Email;
+            userToBeEdited.PhoneNumber = editedUser.PhoneNumber;
+            userToBeEdited.DriversLicenceNumber = editedUser.DriversLicenceNumber;
+            _context.Set<User>().Update(userToBeEdited);
+            _context.SaveChanges();
+            
+        }
+
+        public void Remove(int id)
+        {
+            User userToBeRemoved = GetById(id);
+            _context.Set<User>().Remove(userToBeRemoved);
+            _context.SaveChanges();
+        }
+    }
 }

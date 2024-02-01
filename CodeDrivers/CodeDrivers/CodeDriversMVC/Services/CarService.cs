@@ -50,11 +50,17 @@ namespace CodeDriversMVC.Services
         {
             for (int i = 0; i < GetAll().Count; i++)
             {
-                if (id == GetAll()[i].Id)
-                {
-                    GetAll().Remove(GetAll()[i]);
-                }
+                Directory.CreateDirectory(uploadsFolder);
             }
+            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                imageFile.CopyTo(fileStream);
+            }
+            return uniqueFileName;
         }
-    };
+        
+
+    }
 }
