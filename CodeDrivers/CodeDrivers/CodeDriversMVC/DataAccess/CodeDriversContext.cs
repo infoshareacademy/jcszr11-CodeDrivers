@@ -19,7 +19,7 @@ namespace CodeDriversMVC.DataAccess
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+           
         }
     }
 }

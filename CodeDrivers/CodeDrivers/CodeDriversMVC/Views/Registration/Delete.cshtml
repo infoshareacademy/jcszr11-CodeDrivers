@@ -1,0 +1,57 @@
+﻿@model CodeDrivers.Models.User
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Usuwanie użytkownika</h1>
+
+<h3>Czy na pewno chcesz usunąć użytkownika?</h3>
+<div>
+    <h4></h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Imię
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            Nazwisko
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt class = "col-sm-2">
+           Email
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class = "col-sm-2">
+            Numer telefonu
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+        <dt class = "col-sm-2">
+            Numer prawa jazdy
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DriversLicenceNumber)
+        </dd>
+        <dt class="col-sm-2">
+            Zarezerwowane auto
+        </dt>
+        <dd class="col-sm-10">
+            
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Email" />
+        <input type="submit" value="Usuń" class="btn btn-danger" /> |
+        <a asp-action="ViewList">Powrót do listy</a>
+    </form>
+</div>

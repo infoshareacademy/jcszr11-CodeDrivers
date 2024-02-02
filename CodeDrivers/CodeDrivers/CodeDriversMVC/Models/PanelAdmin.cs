@@ -1,6 +1,6 @@
 ﻿namespace CodeDriversMVC.Models
 {
-    public class PanelAdmin
+    internal class PanelAdmin
     {
     }
 }
