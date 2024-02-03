@@ -39,9 +39,13 @@
                         }
                         <p style="color: #ff0a21;">@Html.DisplayFor(modelItem => item.PricePerDay) zł</p>
 
-                        <button type="submit" formaction="@Url.Action("Reservation", "CarSearch", new { id = item.Id })">
-                            Zarezerwuj
-                        </button>
+                        @using (Html.BeginForm("Reservation", "CarSearch", FormMethod.Post))
+                        {
+                            @Html.Hidden("startTime", ViewData["DateStart"])
+                            @Html.Hidden("endTime", ViewData["DateEnd"])
+
+                            <button type="submit" formaction="@Url.Action("Reservation", "CarSearch", new { id = item.Id })">Zarezerwuj</button>
+                        }
                     </div>
                 </div>
             }

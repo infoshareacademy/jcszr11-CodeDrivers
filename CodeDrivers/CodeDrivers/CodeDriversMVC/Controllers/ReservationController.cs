@@ -29,11 +29,15 @@ namespace CodeDriversMVC.Controllers
         }
 
         // GET: ReservationController/Create
-        public ActionResult Create(int carId)
+        public ActionResult Create(int carId, DateTime startTime, DateTime endTime)
         {
             ReservationViewModel mymodel = new ReservationViewModel();
             var car = _carService.GetById(carId);
-
+            ViewData["DateStart"] = startTime;
+            ViewData["DateEnd"] = endTime;
+            var durationTime = (endTime - startTime).TotalDays;
+            ViewData["DurationTime"] = durationTime;
+            ViewData["TotalPrice"] = (car.PricePerDay * (int)durationTime);
             mymodel.Car = car;
             mymodel.Reservation = new Reservation();
             mymodel.User = new User();
