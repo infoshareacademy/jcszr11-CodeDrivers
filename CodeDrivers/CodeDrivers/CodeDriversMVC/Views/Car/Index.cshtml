@@ -17,7 +17,7 @@
             <th>
                 <label>Id:</label>
                 <br />
-                <select id="brandFilter" onchange="filterTable('brandFilter', 0)">
+                <select id="idFilter" onchange="filterTable('idFilter', 0)">
                     <option value="">Wszystko</option>
                     @foreach (var id in Model.Select(c => c.Id).Distinct())
                     {
@@ -40,12 +40,11 @@
                 <label>Model:</label>
                 <br />
                 <select id="modelFilter" onchange="filterTable('modelFilter', 2)">
-                <option value="">Wszystko</option>
-                @* @foreach (var model in Model.Select(c => c.Model).Distinct())
-                {
-                        <option>@model</option>
-                }  *@
-                
+                    <option value="">Wszystko</option>
+                    @foreach (var modelCar in Model.SelectMany(c => c.Models).Distinct())
+                    {
+                        <option>@modelCar</option>
+                    }
                 </select>
             </th>
             <th>
@@ -142,3 +141,21 @@
         }
     </tbody>
 </table>
+<script>
+    function filterTable(filterId, columnIndex) {
+        var selectedValue = document.getElementById(filterId).value;
+        var table = document.querySelector('.table tbody');
+        var rows = table.getElementsByTagName('tr');
+
+        for (var i = 0; i < rows.length; i++) {
+            var cells = rows[i].getElementsByTagName('td');
+            var cellValue = cells[columnIndex].innerText || cells[columnIndex].textContent;
+
+            if (selectedValue === "" || cellValue === selectedValue) {
+                rows[i].style.display = "";
+            } else {
+                rows[i].style.display = "none";
+            }
+        }
+    }
+</script>
