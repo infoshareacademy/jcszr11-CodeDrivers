@@ -37,6 +37,7 @@ namespace CodeDriversMVC.Controllers
             mymodel.Car = car;
             mymodel.Reservation = new Reservation();
             mymodel.User = new User();
+            // minimum danych potrzebnych do wyświetlenia
             return View(mymodel);
         }
 
@@ -45,10 +46,14 @@ namespace CodeDriversMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ReservationViewModel model)
         {
+            // zmienić nazwę modelu, np. ReservationRequestModel
             try
             {
+                // rezultat rezerwacji, np. ReservationResultModel
+                // docelowo zrobić z tego klasy statyczne, tzw. mappery
                 _reservationService.ReserveCar(model.Car.Id, model.User.Email, model.Reservation.ReservationFrom, model.Reservation.ReservationTo, model.Car.PricePerDay);
-                return RedirectToAction("Index", "Home");
+                //return RedirectToAction("Success", new { brand = model.Car.Brand, model = model.Car.Model, reservationFrom = model.Reservation.ReservationFrom, reservationTo = model.Reservation.ReservationTo, price = model.Car.PricePerDay });
+                return RedirectToAction("Success", model);
             }
             catch
             {
@@ -57,11 +62,20 @@ namespace CodeDriversMVC.Controllers
         }
 
         // GET: ReservationController/Edit/5
-        public ActionResult Edit(int id)
+        //public ActionResult Success(CarBrand brand, string model, DateTime reservationFrom, DateTime reservationTo, decimal price)
+        //{
+        //    var viewModel = new ReservationViewModel
+        //    {
+        //        Car = new Car { Brand = brand, Model = model},
+        //        Reservation = new Reservation {ReservationFrom = reservationFrom, ReservationTo = reservationTo, TotalReservationPrice = price }
+        //    };
+        //    return View(viewModel);
+        //}
+        public ActionResult Success(ReservationViewModel model)
         {
-            return View();
+            
+            return View(model);
         }
-
         // POST: ReservationController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]

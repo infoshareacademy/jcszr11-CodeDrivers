@@ -21,5 +21,7 @@ namespace CodeDriversMVC.DataAccess
         {
 
         }
+
+        public DbSet<CodeDriversMVC.Models.ReservationViewModel> ReservationViewModel { get; set; } = default!;
     }
 }
