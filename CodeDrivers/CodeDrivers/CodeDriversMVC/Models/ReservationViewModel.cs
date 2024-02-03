@@ -8,6 +8,7 @@ namespace CodeDriversMVC.Models
         public Car Car { get; set; }
         public User User { get; set; }
         public Reservation Reservation { get; set; }
-
+        
+       
     }
 }

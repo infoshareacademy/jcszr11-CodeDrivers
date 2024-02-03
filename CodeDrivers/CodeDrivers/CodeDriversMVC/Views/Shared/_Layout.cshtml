@@ -42,6 +42,19 @@
                 {
                     <p class="alert alert-danger">@TempData["Delete"]</p>
                 }
+                @if (TempData.ContainsKey("SuccessUser"))
+                {
+                    <p class="alert alert-success">@TempData["SuccessUser"]</p>
+                }
+                @if (TempData.ContainsKey("DeleteUser"))
+                {
+                    <p class="alert alert-danger">@TempData["DeleteUser"]</p>
+                }
+                @if (TempData.ContainsKey("SuccessReservation"))
+                {
+                    <p class="alert alert-success">@TempData["SuccessReservation"]</p>
+                }
+               
                 @RenderBody()
             </main>
         </div>

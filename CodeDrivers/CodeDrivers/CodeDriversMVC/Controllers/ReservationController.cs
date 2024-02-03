@@ -48,6 +48,7 @@ namespace CodeDriversMVC.Controllers
             try
             {
                 _reservationService.ReserveCar(model.Car.Id, model.User.Email, model.Reservation.ReservationFrom, model.Reservation.ReservationTo, model.Car.PricePerDay);
+                TempData["SuccessReservation"] = "Auto zostało zarezerwowane.";
                 return RedirectToAction("Index", "Home");
             }
             catch
