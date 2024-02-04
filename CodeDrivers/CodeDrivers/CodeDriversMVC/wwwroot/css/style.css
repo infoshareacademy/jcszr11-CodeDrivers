@@ -148,3 +148,6 @@ body a:hover{
 .link {
     margin-right: 20px; 
 }
+.car-add-button{
+    border-radius: 1rem;
+}

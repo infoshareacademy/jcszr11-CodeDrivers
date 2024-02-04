@@ -35,9 +35,9 @@ namespace CodeDriversMVC.Controllers
             var car = _carService.GetById(carId);
             ViewData["DateStart"] = startTime;
             ViewData["DateEnd"] = endTime;
-            var durationTime = (endTime - startTime).TotalDays;
+            var durationTime = (int)(endTime - startTime).TotalDays;
             ViewData["DurationTime"] = durationTime;
-            ViewData["TotalPrice"] = (car.PricePerDay * (int)durationTime);
+            ViewData["TotalPrice"] = (int)(car.PricePerDay * (int)durationTime);
             mymodel.Car = car;
             mymodel.Reservation = new Reservation();
             mymodel.User = new User();

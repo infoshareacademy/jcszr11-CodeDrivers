@@ -38,6 +38,8 @@
 }
     .car-box-search img {
         height: 6.5rem;
+        min-width: 11rem;
+        max-width: 12rem;
         margin-right: 2rem;
         margin-left: 1rem;
         background-color: red;

@@ -36,7 +36,7 @@ namespace CodeDriversMVC.Controllers
                 && Enum.TryParse(gearTypeDropdownText, out GearType gearType)
                 && Enum.TryParse(motorTypeDropdownText, out MotorType motorType))
             {
-                var carFromBrand = _carService.GetByBrand(brand);
+                var carFromBrand = _carService.GetByAllFilters(brand, segment,gearType,motorType);
                 //var carFromSegment = _carService.GetByAllFilters(brand,segment,gearType,motorType);
                 return View(carFromBrand);
             }
