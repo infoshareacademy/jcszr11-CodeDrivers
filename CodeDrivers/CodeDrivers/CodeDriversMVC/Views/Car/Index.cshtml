@@ -1,13 +1,10 @@
 @using CodeDrivers.Models.Car
 @using CodeDrivers.Models
 @model IEnumerable<CodeDrivers.Models.Car.Car>
-
 @{
     ViewData["Title"] = "Cars";
 }
-
 <h1>Baza pojazdów</h1>
-
 <button class="car-add-button">
     <a asp-action="Create">Dodaj nowy pojazd</a>
 </button>
@@ -57,7 +54,6 @@
                         <option>@segment</option>
                     }
                 </select>
-
             </th>
             <th>
                 <label>Rodzaj napędu:</label>
@@ -146,11 +142,9 @@
         var selectedValue = document.getElementById(filterId).value;
         var table = document.querySelector('.table tbody');
         var rows = table.getElementsByTagName('tr');
-
         for (var i = 0; i < rows.length; i++) {
             var cells = rows[i].getElementsByTagName('td');
             var cellValue = cells[columnIndex].innerText || cells[columnIndex].textContent;
-
             if (selectedValue === "" || cellValue === selectedValue) {
                 rows[i].style.display = "";
             } else {
