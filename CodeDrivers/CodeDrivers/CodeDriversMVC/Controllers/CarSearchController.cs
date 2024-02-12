@@ -28,7 +28,6 @@ namespace CodeDriversMVC.Controllers
         [HttpPost]
         public ActionResult Reservation(int Id)
         {
-            var carById = _carService.GetById(Id);
             return RedirectToAction("Create", "Reservation", new { carId = Id });
         }
     }

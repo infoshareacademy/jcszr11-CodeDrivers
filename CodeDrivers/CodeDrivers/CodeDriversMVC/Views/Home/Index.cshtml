@@ -31,7 +31,7 @@
                     <p style="color: #ff0a21;">@Html.DisplayFor(modelItem => item.PricePerDay) zł</p>
                     
                     <!-- Zamiast Html.HiddenFor -->
-                    <button type="submit" formaction="@Url.Action("Reservation", "CarSearch", new { id = item.Id })">Zarezerwuj
+                    <button type="submit" formaction="@Url.Action("Reservation", "CarSearch", new {Id = item.Id})">Zarezerwuj
                     </button>
                 </div>
             }

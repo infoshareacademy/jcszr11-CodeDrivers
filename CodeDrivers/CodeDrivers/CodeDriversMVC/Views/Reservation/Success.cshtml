@@ -1,4 +1,4 @@
-﻿@model CodeDriversMVC.Models.ReservationViewModel
+﻿@model CodeDriversMVC.Models.ReservationResultModel
 
 @{
     ViewData["Title"] = "Success";
@@ -11,10 +11,10 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            Samochód: @Model.Car.Brand @Model.Car.Model
-            Data odbioru: @Model.Reservation.ReservationFrom
-            Data zwrotu: @Model.Reservation.ReservationTo
-            Cena: @Model.Reservation.TotalReservationPrice
+            Samochód: @Model.Brand @Model.Model
+            Data odbioru: @Model.ReservationFrom
+            Data zwrotu: @Model.ReservationTo
+            Cena: @Model.TotalReservationPrice
 
 
         </dt>
@@ -24,6 +24,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+
     <a asp-action="Index">Back to List</a>
 </div>

@@ -4,6 +4,7 @@ using CodeDriversMVC.Models;
 using CodeDriversMVC.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Drawing.Drawing2D;
 
 namespace CodeDriversMVC.Controllers
 {
@@ -53,7 +54,7 @@ namespace CodeDriversMVC.Controllers
                 // docelowo zrobić z tego klasy statyczne, tzw. mappery
                 _reservationService.ReserveCar(model.Car.Id, model.User.Email, model.Reservation.ReservationFrom, model.Reservation.ReservationTo, model.Car.PricePerDay);
                 //return RedirectToAction("Success", new { brand = model.Car.Brand, model = model.Car.Model, reservationFrom = model.Reservation.ReservationFrom, reservationTo = model.Reservation.ReservationTo, price = model.Car.PricePerDay });
-                return RedirectToAction("Success", model);
+                return RedirectToAction("Success", new ReservationResultModel() { Brand = model.Car.Brand, Model = model.Car.Model, ReservationFrom = model.Reservation.ReservationFrom, ReservationTo = model.Reservation.ReservationTo, TotalReservationPrice = model.Reservation.TotalReservationPrice });
             }
             catch
             {
@@ -66,14 +67,13 @@ namespace CodeDriversMVC.Controllers
         //{
         //    var viewModel = new ReservationViewModel
         //    {
-        //        Car = new Car { Brand = brand, Model = model},
-        //        Reservation = new Reservation {ReservationFrom = reservationFrom, ReservationTo = reservationTo, TotalReservationPrice = price }
+        //        Car = new Car { Brand = brand, Model = model },
+        //        Reservation = new Reservation { ReservationFrom = reservationFrom, ReservationTo = reservationTo, TotalReservationPrice = price }
         //    };
         //    return View(viewModel);
         //}
-        public ActionResult Success(ReservationViewModel model)
+        public ActionResult Success(ReservationResultModel model)
         {
-            
             return View(model);
         }
         // POST: ReservationController/Edit/5
