@@ -12,8 +12,8 @@
     <dl class="row">
         <dt class="col-sm-2">
             Samochód: @Model.Brand @Model.Model
-            Data odbioru: @Model.ReservationFrom
-            Data zwrotu: @Model.ReservationTo
+            Data odbioru: @Model.ReservationFrom.ToShortDateString()
+            Data zwrotu: @Model.ReservationTo.ToShortDateString()
             Cena: @Model.TotalReservationPrice
 
 

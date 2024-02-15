@@ -1,5 +1,7 @@
-﻿using CodeDrivers.Models;
+﻿using AutoMapper;
+using CodeDrivers.Models;
 using CodeDrivers.Models.Car;
+using CodeDriversMVC.Helpers;
 using CodeDriversMVC.Models;
 using CodeDriversMVC.Services;
 using Microsoft.AspNetCore.Http;
@@ -12,10 +14,12 @@ namespace CodeDriversMVC.Controllers
     {
         private readonly CarService _carService;
         private readonly ReservationService _reservationService;
-        public ReservationController(CarService carService, ReservationService reservationService)
+        private readonly IMapper _mapper;
+        public ReservationController(CarService carService, ReservationService reservationService, IMapper mapper)
         {
             _carService = carService;
             _reservationService = reservationService;
+            _mapper = mapper;
         }
         // GET: ReservationController
         public ActionResult Index()
@@ -32,14 +36,16 @@ namespace CodeDriversMVC.Controllers
         // GET: ReservationController/Create
         public ActionResult Create(int carId)
         {
-            ReservationViewModel mymodel = new ReservationViewModel();
             var car = _carService.GetById(carId);
+            ReservationViewModel reservationViewModel = new ReservationViewModel
+            {
+                CarId = carId,
+                Brand = car.Brand,
+                Model = car.Model,
+                PricePerDay = car.PricePerDay
+            };
 
-            mymodel.Car = car;
-            mymodel.Reservation = new Reservation();
-            mymodel.User = new User();
-            // minimum danych potrzebnych do wyświetlenia
-            return View(mymodel);
+            return View(reservationViewModel);
         }
 
         // POST: ReservationController/Create
@@ -50,11 +56,13 @@ namespace CodeDriversMVC.Controllers
             // zmienić nazwę modelu, np. ReservationRequestModel
             try
             {
-                // rezultat rezerwacji, np. ReservationResultModel
                 // docelowo zrobić z tego klasy statyczne, tzw. mappery
-                _reservationService.ReserveCar(model.Car.Id, model.User.Email, model.Reservation.ReservationFrom, model.Reservation.ReservationTo, model.Car.PricePerDay);
-                //return RedirectToAction("Success", new { brand = model.Car.Brand, model = model.Car.Model, reservationFrom = model.Reservation.ReservationFrom, reservationTo = model.Reservation.ReservationTo, price = model.Car.PricePerDay });
-                return RedirectToAction("Success", new ReservationResultModel() { Brand = model.Car.Brand, Model = model.Car.Model, ReservationFrom = model.Reservation.ReservationFrom, ReservationTo = model.Reservation.ReservationTo, TotalReservationPrice = model.Reservation.TotalReservationPrice });
+                //var totalPrice = PriceCalculationHelper.CalculateTotalPrice(model.ReservationFrom, model.ReservationTo, model.PricePerDay);
+                // reservationRequest ma zawierać to samo + policzone totalPrice
+                var reservationRequestModel = _mapper.Map<ReservationRequestModel>(model);
+                var reservationResult = _reservationService.ReserveCar(reservationRequestModel);
+
+                return RedirectToAction("Success", reservationResult);
             }
             catch
             {
@@ -62,19 +70,9 @@ namespace CodeDriversMVC.Controllers
             }
         }
 
-        // GET: ReservationController/Edit/5
-        //public ActionResult Success(CarBrand brand, string model, DateTime reservationFrom, DateTime reservationTo, decimal price)
-        //{
-        //    var viewModel = new ReservationViewModel
-        //    {
-        //        Car = new Car { Brand = brand, Model = model },
-        //        Reservation = new Reservation { ReservationFrom = reservationFrom, ReservationTo = reservationTo, TotalReservationPrice = price }
-        //    };
-        //    return View(viewModel);
-        //}
-        public ActionResult Success(ReservationResultModel model)
+        public ActionResult Success(ReservationResultModel reservationResultModel)
         {
-            return View(model);
+            return View(reservationResultModel);
         }
         // POST: ReservationController/Edit/5
         [HttpPost]

@@ -2,6 +2,7 @@
 using CodeDrivers.Models.Car;
 using CodeDriversMVC.DataAccess;
 using CodeDriversMVC.Helpers;
+using CodeDriversMVC.Models;
 
 namespace CodeDriversMVC.Services
 {
@@ -14,26 +15,36 @@ namespace CodeDriversMVC.Services
             _context = context;
         }
 
-        public void ReserveCar(int carId, string userEmail, DateTime reservationFrom, DateTime reservationTo, decimal pricePerDay)
+        public ReservationResultModel ReserveCar(ReservationRequestModel model)
         {
-            var carToReserve = _context.Set<Car>().FirstOrDefault(car => car.Id == carId);
+            var carToReserve = _context.Set<Car>().FirstOrDefault(car => car.Id == model.CarId);
             carToReserve.IsAvailable = false;
-           
 
-            var owner = _context.Set<User>().FirstOrDefault(user => user.Email == userEmail);
-            var totalPrice = PriceCalculationHelper.CalculateTotalPrice(reservationFrom, reservationTo, pricePerDay);
+            var owner = _context.Set<User>().FirstOrDefault(user => user.Email.ToLower() == model.UserEmail.ToLower());
 
             var reservation = new Reservation
             {
                 Car = carToReserve,
                 Owner = owner,
-                ReservationFrom = reservationFrom,
-                ReservationTo = reservationTo,
-                TotalReservationPrice = totalPrice
+                ReservationFrom = model.ReservationFrom,
+                ReservationTo = model.ReservationTo,
+                TotalReservationPrice = model.TotalReservationPrice
             };
 
             _context.Set<Reservation>().Add(reservation);
             _context.SaveChanges();
+
+            var reservationResult = new ReservationResultModel
+            {
+                Brand = carToReserve.Brand,
+                Model = carToReserve.Model,
+                ReservationDuration = reservation.ReservationTo - reservation.ReservationFrom,
+                ReservationFrom = reservation.ReservationFrom,
+                ReservationTo = reservation.ReservationTo,
+                TotalReservationPrice = reservation.TotalReservationPrice,
+            };
+
+            return reservationResult;
         }
     }
 }
