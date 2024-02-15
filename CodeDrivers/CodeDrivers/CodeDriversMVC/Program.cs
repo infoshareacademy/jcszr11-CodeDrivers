@@ -19,6 +19,7 @@ namespace CodeDriversMVC
             builder.Services.AddScoped<CarService>();
             builder.Services.AddScoped<LoginService>();
             builder.Services.AddScoped<ReservationService>();
+            builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
             var app = builder.Build();
 
