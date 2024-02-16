@@ -34,7 +34,7 @@ namespace CodeDriversMVC.Controllers
         }
 
         // GET: ReservationController/Create
-        public ActionResult Create(int carId)
+        public ActionResult Create(int carId, DateTime startTime, DateTime endTime)
         {
             var car = _carService.GetById(carId);
             ReservationViewModel reservationView = new ReservationViewModel

@@ -18,14 +18,15 @@
         <nav class="navbar-style">
             <div class="container-fluid navbar-contener">
                 <div>
-
                     <a asp-area="" asp-controller="Home" asp-action="Index" class="logo-link">
                         <img src="~/Images/logo.png" alt="logo" class="logo-img">
                     </a>
+                </div>
+                <div>
                     <a asp-area="" asp-controller="Home" asp-action="About">O nas</a>
-                    <a asp-area="" asp-controller="Car" asp-action="Index">Baza pojazdów</a>
                     <a asp-area="" asp-controller="Login" asp-action="Index">Logowanie</a>
                     <a asp-area="" asp-controller="Registration" asp-action="Index">Rejestracja</a>
+                    <a asp-area="" asp-controller="PanelAdmin" asp-action="Index">PanelAdmin</a>
                 </div>
             </div>
         </nav>
@@ -40,6 +41,19 @@
                 {
                     <p class="alert alert-danger">@TempData["Delete"]</p>
                 }
+                @if (TempData.ContainsKey("SuccessUser"))
+                {
+                    <p class="alert alert-success">@TempData["SuccessUser"]</p>
+                }
+                @if (TempData.ContainsKey("DeleteUser"))
+                {
+                    <p class="alert alert-danger">@TempData["DeleteUser"]</p>
+                }
+                @if (TempData.ContainsKey("SuccessReservation"))
+                {
+                    <p class="alert alert-success">@TempData["SuccessReservation"]</p>
+                }
+               
                 @RenderBody()
             </main>
         </div>

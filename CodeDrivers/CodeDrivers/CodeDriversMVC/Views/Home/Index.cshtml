@@ -14,25 +14,39 @@
             @foreach (var item in Model)
             {
                 <div class="car-box-search">
-                    <p>@Html.DisplayFor(modelItem => item.Brand)</p>
-                    <p>@Html.DisplayFor(modelItem => item.Model)</p>
-                    <p>@Html.DisplayFor(modelItem => item.Segment)</p>
-                    <p>@Html.DisplayFor(modelItem => item.GearTransmission)</p>
-                    <p>@Html.DisplayFor(modelItem => item.Motor)</p>
+                    <div class="text-above">
+                        <p>@Html.DisplayFor(modelItem => item.Brand)</p>
+                    </div>
+                    <div class="image-container">
+                        <img src="~/Images/@item.ImageFileName" />
+                        <div class="gray-bar"></div>
+                    </div>
+                    <div class="text-below">
+                        <p>@Html.DisplayFor(modelItem => item.Model)</p>
+                    </div>
+                    <div class="car-details">
+                        <p>@Html.DisplayFor(modelItem => item.Segment)</p>
+                        <p>@Html.DisplayFor(modelItem => item.GearTransmission)</p>
+                        <p>@Html.DisplayFor(modelItem => item.Motor)</p>
 
-                    @if (item.IsAvailable)
-                    {
-                        <p style="color: black;">Dostępny</p>
-                    }
-                    else
-                    {
-                        <p style="color: rgb(70, 82, 78);">Niedostępny</p>
-                    }
-                    <p style="color: #ff0a21;">@Html.DisplayFor(modelItem => item.PricePerDay) zł</p>
-                    
-                    <!-- Zamiast Html.HiddenFor -->
-                    <button type="submit" formaction="@Url.Action("Reservation", "CarSearch", new {Id = item.Id})">Zarezerwuj
-                    </button>
+                        @if (item.IsAvailable)
+                        {
+                            <p style="color: black;">Dostępny</p>
+                        }
+                        else
+                        {
+                            <p style="color: rgb(70, 82, 78);">Niedostępny</p>
+                        }
+                        <p style="color: #ff0a21;">@Html.DisplayFor(modelItem => item.PricePerDay) zł</p>
+
+                        @using (Html.BeginForm("Reservation", "CarSearch", FormMethod.Post))
+                        {
+                            @Html.Hidden("startTime", ViewData["DateStart"])
+                            @Html.Hidden("endTime", ViewData["DateEnd"])
+
+                            <button type="submit" formaction="@Url.Action("Reservation", "CarSearch", new { id = item.Id })">Zarezerwuj</button>
+                        }
+                    </div>
                 </div>
             }
         </div>

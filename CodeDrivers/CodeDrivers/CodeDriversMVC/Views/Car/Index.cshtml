@@ -1,40 +1,101 @@
+@using CodeDrivers.Models.Car
+@using CodeDrivers.Models
 @model IEnumerable<CodeDrivers.Models.Car.Car>
-
 @{
     ViewData["Title"] = "Cars";
 }
-
 <h1>Baza pojazdów</h1>
-
-<p>
+<button class="car-add-button">
     <a asp-action="Create">Dodaj nowy pojazd</a>
-</p>
+</button>
 <table class="table">
     <thead>
         <tr>
             <th>
-                Id
+                <label>Id:</label>
+                <br />
+                <select id="idFilter" onchange="filterTable('idFilter', 0)">
+                    <option value="">Wszystko</option>
+                    @foreach (var id in Model.Select(c => c.Id).Distinct())
+                    {
+                        <option>@id</option>
+                    }
+                </select>
             </th>
             <th>
-                Marka
+                <label>Marka:</label>
+                <br />
+                <select id="brandFilter" onchange="filterTable('brandFilter', 1)">
+                    <option value="">Wszystko</option>
+                    @foreach (var brand in Model.Select(c => c.Brand).Distinct())
+                    {
+                        <option>@brand</option>
+                    }
+                </select>
             </th>
             <th>
-                Model
+                <label>Model:</label>
+                <br />
+                <select id="modelFilter" onchange="filterTable('modelFilter', 2)">
+                    <option value="">Wszystko</option>
+                    @foreach (var modelCar in Model.SelectMany(c => c.Models).Distinct())
+                    {
+                        <option>@modelCar</option>
+                    }
+                </select>
             </th>
             <th>
-                Segment
+                <label>Segment:</label>
+                <br />
+                <select id="segmentFilter" onchange="filterTable('segmentFilter', 3)">
+                    <option value="">Wszystko</option>
+                    @foreach (var segment in Model.Select(c => c.Segment).Distinct())
+                    {
+                        <option>@segment</option>
+                    }
+                </select>
             </th>
             <th>
-                Rodzaj napędu
+                <label>Rodzaj napędu:</label>
+                <br />
+                <select id="motorFilter" onchange="filterTable('motorFilter', 4)">
+                    <option value="">Wszystko</option>
+                    @foreach (var motor in Model.Select(c => c.Motor).Distinct())
+                    {
+                        <option>@motor</option>
+                    }
+                </select>
             </th>
             <th>
-                Skrzynia biegów
+                <label>Skrzynia biegów:</label>
+                <br />
+                <select id="gearTransmissionFilter" onchange="filterTable('gearTransmissionFilter', 5)">
+                    <option value="">Wszystko</option>
+                    @foreach (var gearTransmission in Model.Select(c => c.GearTransmission).Distinct())
+                    {
+                        <option>@gearTransmission</option>
+                    }
+                </select>
             </th>
             <th>
-                Dostępność
+                <label>Dostępność:</label>
+                <br />
+                <select id="availabilityFilter" onchange="filterTable('availabilityFilter', 6)">
+                    <option value="">Wszystko</option>
+                    <option>Dostępny</option>
+                    <option>Niedostępny</option>
+                </select>
             </th>
             <th>
-                Stawka za dzień
+                <label>Stawka za dzień:</label>
+                <br />
+                <select id="pricePerDayFilter" onchange="filterTable('pricePerDayFilter', 7)">
+                    <option value="">Wszystko</option>
+                    @foreach (var pricePerDay in Model.Select(c => c.PricePerDay).Distinct())
+                    {
+                        <option>@pricePerDay</option>
+                    }
+                </select>
             </th>
             <th></th>
         </tr>
@@ -68,11 +129,27 @@
                     @Html.DisplayFor(modelItem => item.PricePerDay)
                 </td>
                 <td>
-                    @Html.ActionLink("Edytuj", "Edit", new { id=item.Id }) |
-                    @Html.ActionLink("Szczegóły", "Details", new { id=item.Id }) |
-                    @Html.ActionLink("Usuń", "Delete", new { id=item.Id })
+                    @Html.ActionLink("Edytuj", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Szczegóły", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Usuń", "Delete", new { id = item.Id })
                 </td>
             </tr>
         }
     </tbody>
 </table>
+<script>
+    function filterTable(filterId, columnIndex) {
+        var selectedValue = document.getElementById(filterId).value;
+        var table = document.querySelector('.table tbody');
+        var rows = table.getElementsByTagName('tr');
+        for (var i = 0; i < rows.length; i++) {
+            var cells = rows[i].getElementsByTagName('td');
+            var cellValue = cells[columnIndex].innerText || cells[columnIndex].textContent;
+            if (selectedValue === "" || cellValue === selectedValue) {
+                rows[i].style.display = "";
+            } else {
+                rows[i].style.display = "none";
+            }
+        }
+    }
+</script>

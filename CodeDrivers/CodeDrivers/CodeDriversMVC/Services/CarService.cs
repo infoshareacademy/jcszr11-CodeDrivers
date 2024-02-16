@@ -27,6 +27,10 @@ namespace CodeDriversMVC.Services
         {
             return _context.Set<Car>().Where(car => car.Brand == brand).ToList();
         }
+        public List<Car> GetByAllFilters(CarBrand brand, CarSegment segment, GearType gearType, MotorType motorType)
+        {
+            return _context.Set<Car>().Where(car => car.Brand == brand && car.Segment == segment && car.GearTransmission == gearType && car.Motor == motorType).ToList();
+        }
         public List<Car> GetAll()
         {
             return _context.Set<Car>().ToList();

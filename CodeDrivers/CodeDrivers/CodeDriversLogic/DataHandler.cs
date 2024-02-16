@@ -8,7 +8,7 @@ namespace CodeDrivers
     
     public static class DataHandler
 	{
-        private static string format = "dd/MM/yyyy HH:mm";
+        private static string format = "dd/MM/yyyy";
         private static CultureInfo provider = CultureInfo.InvariantCulture;
 
         public static DateTime? GetDate(string inputMessage) {

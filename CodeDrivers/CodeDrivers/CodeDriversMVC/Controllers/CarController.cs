@@ -21,7 +21,9 @@ namespace CodeDriversMVC.Controllers
         {
             var allCars = _carService.GetAll();
             return View(allCars);
+
         }
+
 
         // GET: CarController/Details/5
         public ActionResult Details(int id)

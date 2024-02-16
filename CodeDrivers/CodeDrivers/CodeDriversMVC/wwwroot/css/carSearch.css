@@ -9,15 +9,22 @@
 }
 .carSearch-container {
     display: grid;
-    grid-gap: 8rem;
-    justify-content: center;
-    grid-template-columns: repeat(auto-fill, minmax(6rem, 10rem));
+    grid-template-columns: auto auto auto;
+    grid-gap: 3rem;
     margin-top: 1.5rem;
+    margin-left: 1.2rem;
+    justify-items: center;
+    position: center;
+    justify-content: center;
+    align-items: center;
+
 }
 .car-box-search {
-    margin-top: 1.5rem;
-    height: 15rem;
-    width: 11rem;
+    display: flex;
+    align-items: center;
+    margin-top: 2rem;
+    height: 12rem;
+    width: 23rem;
     text-align: center;
     font-weight: bold;
     border: none;
@@ -25,6 +32,22 @@
     background-color: white;
     border-radius: .2rem;
     box-shadow: 0 0 5px rgb(128, 128, 128);
+    position: relative;
+    text-align: center;
+
+}
+    .car-box-search img {
+        height: 6.5rem;
+        min-width: 11rem;
+        max-width: 12rem;
+        margin-right: 2rem;
+        margin-left: 1rem;
+        background-color: red;
+        box-shadow: 0 0 15px rgb(128, 128, 128);
+        display: block;
+    }
+.car-details{
+    flex-grow:1;
 }
     .car-box-search p {
         margin: auto;
@@ -42,6 +65,7 @@
         text-align: center;
         color: white;
         font-weight: bold;
+        z-index:1;
     }
 .car-box-search button:hover{
     color:black;
@@ -49,4 +73,39 @@
     outline: .1rem solid red;
 
 }
+.text-above,
+.text-below {
+    position: absolute;
+    width: 65%;
+    text-align: center;
+    padding-right: 1rem;
+    color: black;
+}
+.text-above p,
+.text-below p{
+    color: black;
+    font-weight: bold;
+    font-size: 1.3rem
+}
+
+.text-above {
+    top: 0.5rem;
+}
+
+.text-below {
+    bottom: 0.5rem;
+}
+.image-container{
+    position: relative;
+}
+.gray-bar {
+    position: absolute;
+    bottom: -1.5rem;
+    right: 0;
+    height: 150%;
+    width: 4px;
+    background-color: rgb(70, 72, 74);
+    border-radius: 1rem;
+}
+
 

@@ -29,17 +29,21 @@ namespace CodeDriversMVC.Controllers
         [HttpPost]
         public IActionResult Index(string searchTextBrand, string segmentDropdownText, string gearTypeDropdownText, string motorTypeDropdownText, DateTime dateStart, DateTime dateEnd)
         {
+            ViewData["DateStart"] = dateStart;
+            ViewData["DateEnd"] = dateEnd;
             if (Enum.TryParse(searchTextBrand, out CarBrand brand)
                 && Enum.TryParse(segmentDropdownText, out CarSegment segment)
                 && Enum.TryParse(gearTypeDropdownText, out GearType gearType)
                 && Enum.TryParse(motorTypeDropdownText, out MotorType motorType))
             {
-                var carFromBrand = _carService.GetByBrand(brand);
+                var carFromBrand = _carService.GetByAllFilters(brand, segment,gearType,motorType);
                 //var carFromSegment = _carService.GetByAllFilters(brand,segment,gearType,motorType);
                 return View(carFromBrand);
             }
             if (searchTextBrand == "Wszystko")
             {
+
+
                 var allCars = _carService.GetAll();
                 return View(allCars);
             }

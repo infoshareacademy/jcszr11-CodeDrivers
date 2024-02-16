@@ -26,9 +26,16 @@ namespace CodeDriversMVC.Controllers
 
         // POST: CarSearchController/Reservation
         [HttpPost]
-        public ActionResult Reservation(int Id)
-        {
-            return RedirectToAction("Create", "Reservation", new { carId = Id });
+        public ActionResult Reservation(int Id, DateTime startTime, DateTime endTime)
+        {startTime = (startTime < DateTime.Now) ? DateTime.Now : startTime;
+            endTime = (endTime < DateTime.Now) ? DateTime.Now : endTime;
+return RedirectToAction("Create", "Reservation", new { carId = Id, startTime, endTime});
+            startTime = (startTime < DateTime.Now) ? DateTime.Now : startTime;
+            endTime = (endTime < DateTime.Now) ? DateTime.Now : endTime;
+
+           
+            return RedirectToAction("Create", "Reservation", new { carId = Id, startTime, endTime});
+
         }
     }
 }
