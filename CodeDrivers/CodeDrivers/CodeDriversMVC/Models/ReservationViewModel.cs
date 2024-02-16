@@ -11,7 +11,7 @@ namespace CodeDriversMVC.Models
         public decimal PricePerDay { get; set; }
         public DateTime ReservationFrom { get; set; }
         public DateTime ReservationTo { get; set; }
-        public int ReservationDuration { get; set; }
+        public TimeSpan ReservationDuration { get; set; }
         public string UserEmail { get; set; }
 
     }

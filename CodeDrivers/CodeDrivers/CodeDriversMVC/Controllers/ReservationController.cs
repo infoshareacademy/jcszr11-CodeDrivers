@@ -37,7 +37,7 @@ namespace CodeDriversMVC.Controllers
         public ActionResult Create(int carId)
         {
             var car = _carService.GetById(carId);
-            ReservationViewModel reservationViewModel = new ReservationViewModel
+            ReservationViewModel reservationView = new ReservationViewModel
             {
                 CarId = carId,
                 Brand = car.Brand,
@@ -45,28 +45,24 @@ namespace CodeDriversMVC.Controllers
                 PricePerDay = car.PricePerDay
             };
 
-            return View(reservationViewModel);
+            return View(reservationView);
         }
 
         // POST: ReservationController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ReservationViewModel model)
+        public ActionResult Create(ReservationViewModel reservationView)
         {
-            // zmienić nazwę modelu, np. ReservationRequestModel
             try
             {
-                // docelowo zrobić z tego klasy statyczne, tzw. mappery
-                //var totalPrice = PriceCalculationHelper.CalculateTotalPrice(model.ReservationFrom, model.ReservationTo, model.PricePerDay);
-                // reservationRequest ma zawierać to samo + policzone totalPrice
-                var reservationRequestModel = _mapper.Map<ReservationRequestModel>(model);
-                var reservationResult = _reservationService.ReserveCar(reservationRequestModel);
+                var reservationRequest = _mapper.Map<ReservationRequestModel>(reservationView) ;
+                var reservationResult = _reservationService.ReserveCar(reservationRequest);
 
                 return RedirectToAction("Success", reservationResult);
             }
             catch
             {
-                return View(model);
+                return View(reservationView);
             }
         }
 
