@@ -14,7 +14,7 @@
             <input type="hidden" asp-for="@Model.CarId" />
             <input type="hidden" asp-for="@Model.Brand" />
             <input type="hidden" asp-for="@Model.Model" />
-           
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="UserEmail" class="control-label">Twój adres e-mail</label>
@@ -46,7 +46,7 @@
                 <label asp-for="ReservationDuration" class="control-label">Łączny czas wynajmu</label>
                 <div class="form-control" id="ReservationDuration">0.00</div>
                 <span asp-validation-for="ReservationDuration" class="text-danger"></span>
-            </div>         
+            </div>
             <div class="form-group">
                 <label for="TotalReservationPrice">Cena całkowita</label>
                 <div class="form-control" id="TotalPrice">0.00 zł</div>
@@ -82,26 +82,17 @@
         pricePerDayElement.addEventListener('change', calculateTotalPrice);
 
         function calculateTotalPrice() {
-            var reservationFromValue = reservationFromElement.value;
-            var reservationToValue = reservationToElement.value;
-
-
-            var reservationFrom = new Date(reservationFromValue);
-            var reservationTo = new Date(reservationToValue);
-
-
-            var pricePerDay = parseFloat(pricePerDayElement.value) || 0;
-
+            var reservationFrom = new Date(reservationFromElement.value);
+            var reservationTo = new Date(reservationToElement.value);
+            var pricePerDay = parseFloat(pricePerDayElement.value);
 
             var durationTime = (reservationTo - reservationFrom) / (1000 * 60 * 60 * 24);
 
-
-            var totalPrice = durationTime * pricePerDay "dni";
+            var totalPrice = durationTime * pricePerDay;
 
             var totalPriceElement = document.getElementById('TotalPrice');
             totalPriceElement.textContent = totalPrice.toFixed(2);
             durationTimeElement.textContent = durationTime;
         }
     </script>
-
 }
