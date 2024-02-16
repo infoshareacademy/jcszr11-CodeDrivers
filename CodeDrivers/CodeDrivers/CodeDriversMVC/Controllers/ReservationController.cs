@@ -1,9 +1,12 @@
-﻿using CodeDrivers.Models;
+﻿using AutoMapper;
+using CodeDrivers.Models;
 using CodeDrivers.Models.Car;
+using CodeDriversMVC.Helpers;
 using CodeDriversMVC.Models;
 using CodeDriversMVC.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Drawing.Drawing2D;
 
 namespace CodeDriversMVC.Controllers
 {
@@ -11,10 +14,12 @@ namespace CodeDriversMVC.Controllers
     {
         private readonly CarService _carService;
         private readonly ReservationService _reservationService;
-        public ReservationController(CarService carService, ReservationService reservationService)
+        private readonly IMapper _mapper;
+        public ReservationController(CarService carService, ReservationService reservationService, IMapper mapper)
         {
             _carService = carService;
             _reservationService = reservationService;
+            _mapper = mapper;
         }
         // GET: ReservationController
         public ActionResult Index()
@@ -31,42 +36,40 @@ namespace CodeDriversMVC.Controllers
         // GET: ReservationController/Create
         public ActionResult Create(int carId, DateTime startTime, DateTime endTime)
         {
-            ReservationViewModel mymodel = new ReservationViewModel();
             var car = _carService.GetById(carId);
-            ViewData["DateStart"] = startTime;
-            ViewData["DateEnd"] = endTime;
-            var durationTime = (int)(endTime - startTime).TotalDays;
-            ViewData["DurationTime"] = durationTime;
-            ViewData["TotalPrice"] = (int)(car.PricePerDay * (int)durationTime);
-            mymodel.Car = car;
-            mymodel.Reservation = new Reservation();
-            mymodel.User = new User();
-            return View(mymodel);
+            ReservationViewModel reservationView = new ReservationViewModel
+            {
+                CarId = carId,
+                Brand = car.Brand,
+                Model = car.Model,
+                PricePerDay = car.PricePerDay
+            };
+
+            return View(reservationView);
         }
 
         // POST: ReservationController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ReservationViewModel model)
+        public ActionResult Create(ReservationViewModel reservationView)
         {
             try
             {
-                _reservationService.ReserveCar(model.Car.Id, model.User.Email, model.Reservation.ReservationFrom, model.Reservation.ReservationTo, model.Car.PricePerDay);
-                TempData["SuccessReservation"] = "Auto zostało zarezerwowane.";
-                return RedirectToAction("Index", "Home");
+                var reservationRequest = _mapper.Map<ReservationRequestModel>(reservationView) ;
+                var reservationResult = _reservationService.ReserveCar(reservationRequest);
+
+                return RedirectToAction("Success", reservationResult);
             }
             catch
             {
-                return View(model);
+                return View(reservationView);
             }
         }
 
-        // GET: ReservationController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Success(ReservationResultModel reservationResultModel)
         {
-            return View();
+            return View(reservationResultModel);
         }
-
         // POST: ReservationController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]

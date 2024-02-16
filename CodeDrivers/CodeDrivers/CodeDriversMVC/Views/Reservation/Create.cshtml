@@ -5,52 +5,52 @@
 }
 <div class="login-panel">
     <div class="col-md-4">
-        <input type="hidden" asp-for="Car.Id" />
-        <h1>Rezerwacja pojazdu @Model.Car.Brand @Model.Car.Model</h1>
+
+        <h1>Rezerwacja pojazdu @Model.Brand @Model.Model</h1>
 
         <p>Wybierz zakres dat dla Twojej rezerwacji</p>
         <hr />
         <form asp-action="Create">
+            <input type="hidden" asp-for="@Model.CarId" />
+            <input type="hidden" asp-for="@Model.Brand" />
+            <input type="hidden" asp-for="@Model.Model" />
+           
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="User.Email" class="control-label">Twój adres e-mail</label>
-                <input asp-for="User.Email" class="form-control" />
-                <span asp-validation-for="User.Email" class="text-danger"></span>
+                <label asp-for="UserEmail" class="control-label">Twój adres e-mail</label>
+                <input asp-for="UserEmail" class="form-control" />
+                <span asp-validation-for="UserEmail" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="Reservation.ReservationFrom" class="control-label">Początek rezerwacji</label>
-                <input asp-for="Reservation.ReservationFrom" id="ReservationFrom" class="form-control" type="date" value="@(((DateTime)ViewData["DateStart"]).ToString("yyyy-MM-dd"))" />
-                <span asp-validation-for="Reservation.ReservationFrom" class="text-danger"></span>
+                <label asp-for="ReservationFrom" class="control-label">Początek rezerwacji</label>
+                <input asp-for="ReservationFrom" id="ReservationFrom" class="form-control" type="date" value="@DateTime.Today.ToString("yyyy-MM-dd")" />
+                <span asp-validation-for="ReservationFrom" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Reservation.ReservationTo" class="control-label">Koniec rezerwacji</label>
-                <input asp-for="Reservation.ReservationTo" id="ReservationTo" class="form-control" type="date" value="@(((DateTime)ViewData["DateEnd"]).ToString("yyyy-MM-dd"))" />
-                <span asp-validation-for="Reservation.ReservationTo" class="text-danger"></span>
+                <label asp-for="ReservationTo" class="control-label">Koniec rezerwacji</label>
+                <input asp-for="ReservationTo" id="ReservationTo" class="form-control" type="date" value="@DateTime.Today.ToString("yyyy-MM-dd")" />
+                <span asp-validation-for="ReservationTo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Car.PricePerDay" class="control-label">Cena za dzień wynajmu</label>
+                <label asp-for="PricePerDay" class="control-label">Cena za dzień wynajmu</label>
                 <div class="input-group">
-                    <input asp-for="Car.PricePerDay" id="PricePerDay" class="form-control" readonly type="number"/>
+                    <input asp-for="PricePerDay" id="PricePerDay" class="form-control" />
                     <div class="input-group-append">
                         <span class="input-group-text">zł</span>
                     </div>
                 </div>
-                <span asp-validation-for="Car.PricePerDay" class="text-danger"></span>
+                <span asp-validation-for="PricePerDay" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Reservation.DurationTime" class="control-label">Łączny czas wynajmu</label>
-                <div class="form-control" id="DurationTime">@ViewData["DurationTime"] dni</div>
-                <span asp-validation-for="Reservation.DurationTime" class="text-danger"></span>
-            </div>
-
+                <label asp-for="ReservationDuration" class="control-label">Łączny czas wynajmu</label>
+                <div class="form-control" id="ReservationDuration">0.00</div>
+                <span asp-validation-for="ReservationDuration" class="text-danger"></span>
+            </div>         
             <div class="form-group">
-                <label asp-for="Reservation.TotalReservationPrice" class="control-label">Cena całkowita</label>
-                <div class="form-control" id="TotalPrice">@ViewData["TotalPrice"] zł</div>
-
-                <span asp-validation-for="Reservation.TotalReservationPrice" class="text-danger"></span>
+                <label for="TotalReservationPrice">Cena całkowita</label>
+                <div class="form-control" id="TotalPrice">0.00 zł</div>
             </div>
-            <input type="hidden" asp-for="Car.Id" />
 
             <br />
             <div class="form-group">
@@ -73,12 +73,14 @@
 
         var reservationFromElement = document.getElementById('ReservationFrom');
         var reservationToElement = document.getElementById('ReservationTo');
-        var durationTimeElement = document.getElementById('DurationTime');
+        var durationTimeElement = document.getElementById('ReservationDuration');
         var pricePerDayElement = document.getElementById('PricePerDay');
 
-        reservationFromElement.addEventListener('input', calculateTotalPrice);
-        reservationToElement.addEventListener('input', calculateTotalPrice);
-        console.log('Reservation From:', reservationFromValue);
+
+        reservationFromElement.addEventListener('change', calculateTotalPrice);
+        reservationToElement.addEventListener('change', calculateTotalPrice);
+        pricePerDayElement.addEventListener('change', calculateTotalPrice);
+
         function calculateTotalPrice() {
             var reservationFromValue = reservationFromElement.value;
             var reservationToValue = reservationToElement.value;
@@ -97,15 +99,8 @@
             var totalPrice = durationTime * pricePerDay "dni";
 
             var totalPriceElement = document.getElementById('TotalPrice');
-            var durationTimeElement = document.getElementById('DurationTime');
-
-            if (!isNaN(durationTime) && durationTime >= 0) {
-                durationTimeElement.textContent = durationTime.toFixed(2);
-                totalPriceElement.textContent = totalPrice.toFixed(2);
-            } else {
-                durationTimeElement.textContent = "0.00";
-                totalPriceElement.textContent = "0.00";
-            }
+            totalPriceElement.textContent = totalPrice.toFixed(2);
+            durationTimeElement.textContent = durationTime;
         }
     </script>
 
