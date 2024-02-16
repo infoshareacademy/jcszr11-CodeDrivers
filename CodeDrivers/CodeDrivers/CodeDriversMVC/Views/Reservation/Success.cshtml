@@ -9,14 +9,15 @@
 <div>
     <h4>Poniżej znajdziesz szczegóły swojej rezerwacji</h4>
     <hr />
-    <dl class="row">
+    <dl class="login-panel">
         <dt class="col-sm-2">
             Samochód: @Model.Brand @Model.Model
             Data odbioru: @Model.ReservationFrom.ToShortDateString()
             Data zwrotu: @Model.ReservationTo.ToShortDateString()
+            Łączny czas wypożyczenia samochodu: @Model.ReservationDuration.Days
             Cena: @Model.TotalReservationPrice
 
-
+            Miejsce odbioru: Lotnisko Chopina, Warszawa
         </dt>
         <dd class="col-sm-10">
         </dd>
@@ -24,6 +25,5 @@
     </dl>
 </div>
 <div>
-
-    <a asp-action="Index">Back to List</a>
+   <a asp-controller="Home" asp-action="Index">Strona główna</a>
 </div>
