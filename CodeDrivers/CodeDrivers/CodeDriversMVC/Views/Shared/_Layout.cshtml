@@ -26,7 +26,11 @@
                     <a asp-area="" asp-controller="Home" asp-action="About">O nas</a>
                     <a asp-area="" asp-controller="Login" asp-action="Index">Logowanie</a>
                     <a asp-area="" asp-controller="Registration" asp-action="Index">Rejestracja</a>
-                    <a asp-area="" asp-controller="PanelAdmin" asp-action="Index">PanelAdmin</a>
+                    <a asp-area="" asp-controller="PanelAdmin" asp-action="Index">Panel Admina</a>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a>@User.Identity.Name</a>
+                    }
                 </div>
             </div>
         </nav>
