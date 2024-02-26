@@ -24,12 +24,12 @@
 
             <div class="form-group">
                 <label asp-for="ReservationFrom" class="control-label">Początek rezerwacji</label>
-                <input asp-for="ReservationFrom" id="ReservationFrom" class="form-control" type="date" value="@DateTime.Today.ToString("yyyy-MM-dd")" />
+                <input asp-for="ReservationFrom" id="ReservationFrom" class="form-control" type="date" value="@(((DateTime)ViewData["DateStart"]).ToString("yyyy-MM-dd"))" />
                 <span asp-validation-for="ReservationFrom" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ReservationTo" class="control-label">Koniec rezerwacji</label>
-                <input asp-for="ReservationTo" id="ReservationTo" class="form-control" type="date" value="@DateTime.Today.ToString("yyyy-MM-dd")" />
+                <input asp-for="ReservationTo" id="ReservationTo" class="form-control" type="date" value="@(((DateTime)ViewData["DateEnd"]).ToString("yyyy-MM-dd"))" />
                 <span asp-validation-for="ReservationTo" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -44,12 +44,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="ReservationDuration" class="control-label">Łączny czas wynajmu</label>
-                <div class="form-control" id="ReservationDuration">0.00</div>
+                <div class="form-control" id="ReservationDuration">@ViewData["DurationTime"] dni</div>
                 <span asp-validation-for="ReservationDuration" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label for="TotalReservationPrice">Cena całkowita</label>
-                <div class="form-control" id="TotalPrice">0.00 zł</div>
+                <div class="form-control" id="TotalPrice">@ViewData["TotalPrice"] zł</div>
             </div>
 
             <br />

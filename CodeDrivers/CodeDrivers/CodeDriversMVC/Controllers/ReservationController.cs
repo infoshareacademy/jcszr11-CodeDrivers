@@ -37,6 +37,11 @@ namespace CodeDriversMVC.Controllers
         public ActionResult Create(int carId, DateTime startTime, DateTime endTime)
         {
             var car = _carService.GetById(carId);
+            ViewData["DateStart"] = startTime;
+            ViewData["DateEnd"] = endTime;
+            var durationTime = (int)Math.Ceiling((endTime - startTime).TotalDays);
+            ViewData["DurationTime"] = durationTime;
+            ViewData["TotalPrice"] = (int)(car.PricePerDay * (int)durationTime);
             ReservationViewModel reservationView = new ReservationViewModel
             {
                 CarId = carId,
@@ -44,7 +49,6 @@ namespace CodeDriversMVC.Controllers
                 Model = car.Model,
                 PricePerDay = car.PricePerDay
             };
-
             return View(reservationView);
         }
 

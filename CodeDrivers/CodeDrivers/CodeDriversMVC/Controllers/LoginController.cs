@@ -1,10 +1,12 @@
 ﻿using CodeDrivers.Models;
 using CodeDriversMVC.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CodeDriversMVC.Controllers
 {
+    [AllowAnonymous]
     public class LoginController : Controller
     {
         private readonly LoginService _loginService;
@@ -21,9 +23,9 @@ namespace CodeDriversMVC.Controllers
         }
 
         // GET: LoginController/Create
-        public ActionResult SignIn(User user)
+        public async Task<ActionResult> SignIn(User user)
         {
-            if (!_loginService.AuthorizeUser(user.Email, user.Password))
+            if (!await _loginService.AuthorizeUser(user.Email, user.Password))
             {
                 ModelState.AddModelError("CredentialsValidationError", "Nieprawidłowy adres e-mail lub hasło.");
                 return View("Index", user);

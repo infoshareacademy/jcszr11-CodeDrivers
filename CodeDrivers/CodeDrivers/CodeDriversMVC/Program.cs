@@ -20,6 +20,9 @@ namespace CodeDriversMVC
             builder.Services.AddScoped<LoginService>();
             builder.Services.AddScoped<ReservationService>();
             builder.Services.AddAutoMapper(typeof(Program).Assembly);
+            builder.Services.AddHttpContextAccessor();
+            builder.Services.AddAuthentication().AddCookie();
+            builder.Services.AddAuthorization();
 
             var app = builder.Build();
 
@@ -34,8 +37,9 @@ namespace CodeDriversMVC
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            
             app.UseRouting();
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

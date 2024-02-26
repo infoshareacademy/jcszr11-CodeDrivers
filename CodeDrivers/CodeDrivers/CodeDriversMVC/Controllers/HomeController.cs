@@ -20,10 +20,13 @@ namespace CodeDriversMVC.Controllers
             _carService = carService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             ViewBag.CarBrand = Enum.GetValues(typeof(CarBrand)).Cast<CarBrand>();
             var allCars = _carService.GetAll();
+
+            var result = await CatService.GetCatFunFactAsync();
+
             return View(allCars);
         }
         [HttpPost]
@@ -47,6 +50,7 @@ namespace CodeDriversMVC.Controllers
                 var allCars = _carService.GetAll();
                 return View(allCars);
             }
+
 
             return View();
         }
