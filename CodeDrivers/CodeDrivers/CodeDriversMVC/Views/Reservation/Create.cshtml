@@ -21,7 +21,6 @@
                 <input asp-for="UserEmail" class="form-control" />
                 <span asp-validation-for="UserEmail" class="text-danger"></span>
             </div>
-
             <div class="form-group">
                 <label asp-for="ReservationFrom" class="control-label">Początek rezerwacji</label>
                 <input asp-for="ReservationFrom" id="ReservationFrom" class="form-control" type="date" value="@(((DateTime)ViewData["DateStart"]).ToString("yyyy-MM-dd"))" />

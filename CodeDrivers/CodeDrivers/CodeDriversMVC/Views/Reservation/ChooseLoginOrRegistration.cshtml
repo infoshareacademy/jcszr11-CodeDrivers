@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "ChooseLoginOrRegistration";
+}
+<div class="login-panel">
+    <div class="col-md-4">
+    <h1>Wybierz właściwą opcję</h1>
+    <p>Aby dokonać rezerwacji pojazdu, zaloguj się lub zarejestruj</p>
+    <hr />
+</div>
+</div>
+<div style="display: flex; justify-content: center;" class="button-container">
+    <form asp-controller="Login" asp-action="Index" method="post">
+        <input type="submit" value="Logowanie" class="btn-custom btn btn-primary mr-2" />
+    </form>
+    <form asp-controller="Registration" asp-action="Index" method="get">
+        <input type="submit" value="Rejestracja" class="btn-custom btn btn-primary" />
+    </form>
+</div>

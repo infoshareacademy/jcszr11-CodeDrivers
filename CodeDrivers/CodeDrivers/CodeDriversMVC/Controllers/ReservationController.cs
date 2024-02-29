@@ -7,6 +7,7 @@ using CodeDriversMVC.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Drawing.Drawing2D;
+using System.Security.Claims;
 
 namespace CodeDriversMVC.Controllers
 {
@@ -47,8 +48,15 @@ namespace CodeDriversMVC.Controllers
                 CarId = carId,
                 Brand = car.Brand,
                 Model = car.Model,
-                PricePerDay = car.PricePerDay
+                PricePerDay = car.PricePerDay,
+                UserEmail = User.FindFirstValue(ClaimTypes.Email)
             };
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("ChooseLoginOrRegistration");
+            }
+
+
             return View(reservationView);
         }
 
@@ -74,40 +82,10 @@ namespace CodeDriversMVC.Controllers
         {
             return View(reservationResultModel);
         }
-        // POST: ReservationController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: ReservationController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult ChooseLoginOrRegistration()
         {
             return View();
         }
 
-        // POST: ReservationController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }
