@@ -151,3 +151,7 @@ body a:hover{
 .car-add-button{
     border-radius: 1rem;
 }
+
+.btn-custom {
+    margin-right: 10px; 
+}
