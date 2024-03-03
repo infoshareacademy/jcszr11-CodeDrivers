@@ -78,8 +78,9 @@ namespace CodeDriversMVC.Controllers
             }
         }
 
-        public ActionResult Success(ReservationResultModel reservationResultModel)
+        public async Task<ActionResult> Success(ReservationResultModel reservationResultModel)
         {
+            await EmailService.SendEmailAsync("codedrivers@wp.pl", "Potwierdzenie rezerwacji", "qwert");
             return View(reservationResultModel);
         }
         public ActionResult ChooseLoginOrRegistration()
