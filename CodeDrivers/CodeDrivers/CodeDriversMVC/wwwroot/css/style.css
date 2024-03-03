@@ -71,16 +71,20 @@
         }
 .carlist-filter {
     margin: auto;
-    width: 80rem;
-    height: 90rem;
+    width: auto;
+    height: auto;
     background-color: white;
+    border-radius: 5px;
+    width: 105rem;
+    margin-left: -10rem;
+    padding: 0rem 2rem 2rem 2rem;
 }
 body {
     color: black;
     height: 100%;
     padding: 0;
     margin: 0;
-    background: rgba(243, 234, 238, 0.8);
+    background-color: #f0e4ef;
 }
 body a{
     color: black;
