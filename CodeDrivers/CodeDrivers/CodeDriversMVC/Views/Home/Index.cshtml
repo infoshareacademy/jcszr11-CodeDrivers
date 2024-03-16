@@ -9,7 +9,7 @@
 }
 @using (Html.BeginForm("Reservation", "CarSearch", FormMethod.Post))
 {
-    <div class="text-center carlist-filter">
+    <div class="carlist-filter">
         <div class="carSearch-container">
             @foreach (var item in Model)
             {
@@ -32,19 +32,23 @@
                         @if (item.IsAvailable)
                         {
                             <p style="color: black;">Dostępny</p>
+                            <button type="submit" formaction="@Url.Action("Reservation", "CarSearch", new { id = item.Id })">Zarezerwuj</button>
+                            <p style="color: #ff0a21;">@Html.DisplayFor(modelItem => item.PricePerDay) zł</p>
+
                         }
                         else
                         {
                             <p style="color: rgb(70, 82, 78);">Niedostępny</p>
+                            <button disabled type="submit" style="background-color: grey; outline-color: black;">Brak oferty</button>
+                            <p style="color: grey;">@Html.DisplayFor(modelItem => item.PricePerDay) zł</p>
+
                         }
-                        <p style="color: #ff0a21;">@Html.DisplayFor(modelItem => item.PricePerDay) zł</p>
 
                         @using (Html.BeginForm("Reservation", "CarSearch", FormMethod.Post))
                         {
                             @Html.Hidden("startTime", ViewData["DateStart"])
                             @Html.Hidden("endTime", ViewData["DateEnd"])
 
-                            <button type="submit" formaction="@Url.Action("Reservation", "CarSearch", new { id = item.Id })">Zarezerwuj</button>
                         }
                     </div>
                 </div>

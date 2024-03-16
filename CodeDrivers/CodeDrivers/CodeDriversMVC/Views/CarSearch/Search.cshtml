@@ -8,15 +8,14 @@
     @using (Html.BeginForm("Index", "Home", FormMethod.Post))
     {
         <h1>Wyszukaj pojazd</h1>
-        <label for="cars">Filtry:</label>
-        <select id="brandDropdown" name="searchTextBrand">
-            @foreach (var carBrand in Enum.GetValues(typeof(CarBrand)))
-            {
-                <option>@carBrand</option>
-            }
-            <option value="Wszystko">Wszystko</option>
-        </select>
-        <span id="selectModelId">
+        <div class="Filter-Car">
+            <select id="brandDropdown" name="searchTextBrand">
+                <option value="Wszystko">Wszystko</option>
+                @foreach (var carBrand in Enum.GetValues(typeof(CarBrand)))
+                {
+                    <option>@carBrand</option>
+                }
+            </select>
             <select id="segmentDropdown" name="segmentDropdownText">
                 @foreach (var carSegment in Enum.GetValues(typeof(CarSegment)))
                 {
@@ -35,15 +34,15 @@
                     <option>@motorType</option>
                 }
             </select>
-        </span>
-        <p></p>
-        <span id="selectDateTime">
             <label>Początek:</label>
-            <input type="date" class="form-control" data-val="true" data-val-required="To pole jest wymagane." name="dateStart"/>
+            <input type="date" data-val="true" data-val-required="To pole jest wymagane." name="dateStart" value="@DateTime.Today.ToString("yyyy-MM-dd")" />
             <label>Koniec:</label>
-            <input type="date" class="form-control" data-val="true" data-val-required="To pole jest wymagane."  name="dateEnd"/>
-        </span>
-        <button type="submit">Wyszukaj</button>
+            <input type="date" data-val="true" data-val-required="To pole jest wymagane." name="dateEnd" value="@DateTime.Today.ToString("yyyy-MM-dd")" />
+            <button type="submit">Wyszukaj</button>
+
+        </div>
+
+
     }
 </div>
 @section Scripts {

@@ -9,10 +9,9 @@
 }
 .carSearch-container {
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: auto auto auto auto;
     grid-gap: 3rem;
     margin-top: 1.5rem;
-    margin-left: 1.2rem;
     justify-items: center;
     position: center;
     justify-content: center;

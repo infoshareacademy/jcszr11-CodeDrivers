@@ -1,0 +1,82 @@
+﻿.Filter-Car {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+    .Filter-Car select,
+    .Filter-Car input,
+    .Filter-Car label {
+        margin-bottom: 10px;
+        margin-right: 0px;
+    }
+
+    .Filter-Car label {
+        text-align: right;
+        margin-left: 6px;
+    }
+
+    .Filter-Car select,
+    .Filter-Car input {
+        flex: 1;
+        margin-left: 5px;
+        padding: 15px;
+        position: relative;
+    }
+
+    .Filter-Car Select,
+    .Filter-Car input{
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #fff;
+        color: #333;
+    }
+
+    .Filter-Car Option {
+        padding: 8px;
+        font-size: 14px;
+        color: #333;
+    }
+
+    .Filter-Car Select:hover,
+    .Filter-Car Select:focus {
+        border-color: #666;
+    }
+
+    .Filter-Car Option:hover,
+    .Filter-Car Option:focus {
+        background-color: #f0f0f0;
+    }
+
+    .Filter-Car input[type="date"] {
+        width: 12rem;
+        padding-right: 0px; /* Zapewniamy trochę więcej miejsca po prawej stronie dla ikony */
+        box-sizing: border-box; /* Zapewnienie, że padding nie zwiększy szerokości pola */
+    }
+    .Filter-Car button {
+        margin-left: 1rem;
+        margin-bottom: 0.5rem;
+        border: 1px solid #ccc;
+        background-color: #f9f9f9;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 0.5rem;
+        width: 7rem;
+        height: 3rem;
+        font-size: 1.2rem;
+        text-align: center;
+        font-weight: bold;
+        background-color: #54e86f;
+        color: white;
+    }
+        .Filter-Car button:hover {
+            background-color: white;
+            border: 1px solid #54e86f;
+            color: black;
+        }
+
+
