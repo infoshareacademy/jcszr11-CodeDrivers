@@ -3,6 +3,7 @@ using CodeDrivers.Models.Car;
 using CodeDriversMVC.DataAccess;
 using CodeDriversMVC.Helpers;
 using CodeDriversMVC.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CodeDriversMVC.Services
 {
@@ -46,5 +47,12 @@ namespace CodeDriversMVC.Services
 
             return reservationResult;
         }
+
+        public List<ReservationResultModel> GetAllReservations()
+        {
+            var reservationResult= new List<ReservationResultModel>();
+            return reservationResult;
+        }
+        
     }
 }

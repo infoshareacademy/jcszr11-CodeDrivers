@@ -1,0 +1,124 @@
+﻿@model IEnumerable<ReservationResultModel>
+
+<h2>Wszystkie rezerwacje</h2>
+
+<div class="table-container">
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <label>Marka auta:</label>
+                <div class="filters">
+                    
+                    <select id="brandFilter" onchange="filterTable('brandFilter', 0)">
+                        <option value="">Wszystko</option>
+                        @foreach (var brand in Model.Select(c => c.Brand).Distinct())
+                        {
+                            <option>@brand</option>
+                        }
+                    </select>
+            </th>
+            <th>
+                <label>Model auta:</label>
+                <div class="filters">
+                <select id="modelFilter" onchange="filterTable('modelFilter', 1)">
+                    <option value="">Wszystko</option>
+                    @foreach (var carModel in Model.Select(c => c.Model).Distinct())
+                    {
+                        <option>@carModel</option>
+                    }
+                </select>
+            </th>
+            <th>
+                <label>Od kiedy:</label>
+                <div class="filters">
+                <select id="fromDateFilter" onchange="filterTable('fromDateFilter', 2)">
+                    <option value="">Wszystko</option>
+                    @foreach (var fromDate in Model.Select(c => c.ReservationFrom.ToShortDateString()).Distinct())
+                    {
+                        <option>@fromDate</option>
+                    }
+                </select>
+            </th>
+            <th>
+                <label>Do kiedy:</label>
+                <div class="filters">
+                <select id="toDateFilter" onchange="filterTable('toDateFilter', 3)">
+                    <option value="">Wszystko</option>
+                    @foreach (var toDate in Model.Select(c => c.ReservationTo.ToShortDateString()).Distinct())
+                    {
+                        <option>@toDate</option>
+                    }
+                </select>
+            </th>
+            <th>
+                <label>Cena wynajmu:</label>
+                <div class="filters">
+                <select id="priceFilter" onchange="filterTable('priceFilter', 4)">
+                    <option value="">Wszystko</option>
+                    @foreach (var price in Model.Select(c => c.TotalReservationPrice).Distinct())
+                    {
+                        <option>@price</option>
+                    }
+                </select>
+            </th>
+            <th>
+                <label>Email użytkownika:</label>
+                <div class="filters">
+                <select id="emailFilter" onchange="filterTable('emailFilter', 5)">
+                    <option value="">Wszystko</option>
+                    @foreach (var email in Model.Select(c => c.UserEmail).Distinct())
+                    {
+                        <option>@email</option>
+                    }
+                </select>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var reservation in Model)
+        {
+            <tr>
+                <td>@reservation.Brand</td>
+                <td>@reservation.Model</td>
+                <td>@reservation.ReservationFrom.ToShortDateString()</td>
+                <td>@reservation.ReservationTo.ToShortDateString()</td>
+                <td>@reservation.TotalReservationPrice</td>
+                <td>@reservation.UserEmail</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+</div>
+
+<script>
+    function filterTable(filterId, columnIndex) {
+        var selectedValue = document.getElementById(filterId).value;
+        var table = document.querySelector('.table tbody');
+        var rows = table.getElementsByTagName('tr');
+        for (var i = 0; i < rows.length; i++) {
+            var cells = rows[i].getElementsByTagName('td');
+            var cellValue = cells[columnIndex].innerText || cells[columnIndex].textContent;
+            if (selectedValue === "" || cellValue === selectedValue) {
+                rows[i].style.display = "";
+            } else {
+                rows[i].style.display = "none";
+            }
+        }
+    }
+    function GetReservationColor(reservation) {
+        var now = new Date();
+        var fromDate = new Date(reservation.ReservationFrom);
+        var toDate = new Date(reservation.ReservationTo);
+
+        if (toDate < now) {
+            return "gray"; 
+        } else if (fromDate <= now && toDate >= now) {
+            return "green"; 
+        } else {
+            return "blue"; 
+        }
+    }
+     
+</script>

@@ -87,6 +87,11 @@ namespace CodeDriversMVC.Controllers
         {
             return View();
         }
+        public IActionResult ViewAllReservations()
+        {
+            List<ReservationResultModel> reservations = _reservationService.GetAllReservations();
+            return View(reservations);
+        }
 
     }
 }
