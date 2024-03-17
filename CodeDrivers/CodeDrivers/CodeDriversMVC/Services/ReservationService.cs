@@ -42,6 +42,7 @@ namespace CodeDriversMVC.Services
                 ReservationFrom = reservation.ReservationFrom,
                 ReservationTo = reservation.ReservationTo,
                 TotalReservationPrice = reservation.TotalReservationPrice,
+                OwnerEmail = reservation.Owner.Email
             };
 
             return reservationResult;
@@ -49,22 +50,9 @@ namespace CodeDriversMVC.Services
 
         public bool IsCarAvailable(int carId, DateTime newReservationFrom, DateTime newReservationTo)
         {
-            var reservations = _context.Reservations.Where(r => r.Car.Id == carId).ToList();
-
-            if (reservations.Count == 0)
-            {
-                return true;
-            }
-
-            foreach (var reservation in reservations)
-            {
-                if (!(reservation.ReservationTo <= newReservationFrom || reservation.ReservationFrom >= newReservationTo))
-                {
-                    return false;
-                }
-            }
-
-            return true;
+            return !_context.Reservations.Where(r => r.Car.Id == carId)
+                .Where(r => !(r.ReservationTo <= newReservationFrom || r.ReservationFrom >= newReservationTo))
+                .Any();
         }
     }
 }
