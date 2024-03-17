@@ -48,11 +48,32 @@ namespace CodeDriversMVC.Services
             return reservationResult;
         }
 
+
         public List<ReservationResultModel> GetAllReservations()
         {
             var reservationResult= new List<ReservationResultModel>();
             return reservationResult;
         }
-        
+
+        public bool IsCarAvailable(int carId, DateTime newReservationFrom, DateTime newReservationTo)
+        {
+            var reservations = _context.Reservations.Where(r => r.Car.Id == carId).ToList();
+
+            if (reservations.Count == 0)
+            {
+                return true;
+            }
+
+            foreach (var reservation in reservations)
+            {
+                if (!(reservation.ReservationTo <= newReservationFrom || reservation.ReservationFrom >= newReservationTo))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
     }
 }

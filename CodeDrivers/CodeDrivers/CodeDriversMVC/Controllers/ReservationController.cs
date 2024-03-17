@@ -1,12 +1,7 @@
 ﻿using AutoMapper;
-using CodeDrivers.Models;
-using CodeDrivers.Models.Car;
-using CodeDriversMVC.Helpers;
 using CodeDriversMVC.Models;
 using CodeDriversMVC.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Drawing.Drawing2D;
 using System.Security.Claims;
 
 namespace CodeDriversMVC.Controllers
@@ -80,7 +75,8 @@ namespace CodeDriversMVC.Controllers
 
         public async Task<ActionResult> Success(ReservationResultModel reservationResultModel)
         {
-            await EmailService.SendEmailAsync("codedrivers@wp.pl", "Potwierdzenie rezerwacji", "qwert");
+            var message = EmailService.GenerateEmailContent(reservationResultModel);
+            await EmailService.SendEmailAsync("codedrivers@wp.pl", "Potwierdzenie rezerwacji", message);
             return View(reservationResultModel);
         }
         public ActionResult ChooseLoginOrRegistration()
