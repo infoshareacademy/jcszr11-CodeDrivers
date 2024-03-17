@@ -4,6 +4,7 @@ namespace CodeDriversMVC.Models
 {
     public class ReservationResultModel
     {
+        public string OwnerEmail { get; set; }
         public CarBrand Brand { get; set; }
         public string Model { get; set; }
         public DateTime ReservationFrom { get; set; }

@@ -14,7 +14,11 @@ namespace CodeDriversMVC.DataAccess
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+<<<<<<< HEAD
             optionsBuilder.UseSqlServer("Server = localhost; Database = CodeDrivers; Trusted_Connection = True; TrustServerCertificate=True;");
+=======
+            optionsBuilder.UseSqlServer("Data Source=95.111.245.132;Initial Catalog=CodeDrivers;User ID=sa;Password=StrongDevPass1!; TrustServerCertificate=True");
+>>>>>>> 24a9e4c46ac3625a8eb6753856e7fbcb2011f397
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
