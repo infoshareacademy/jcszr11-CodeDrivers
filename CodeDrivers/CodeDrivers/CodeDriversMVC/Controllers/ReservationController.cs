@@ -76,7 +76,7 @@ namespace CodeDriversMVC.Controllers
         public async Task<ActionResult> Success(ReservationResultModel reservationResultModel)
         {
             var message = EmailService.GenerateEmailContent(reservationResultModel);
-            await EmailService.SendEmailAsync("codedrivers@wp.pl", "Potwierdzenie rezerwacji", message);
+            await EmailService.SendEmailAsync(reservationResultModel.OwnerEmail, "Potwierdzenie rezerwacji", message);
             return View(reservationResultModel);
         }
         public ActionResult ChooseLoginOrRegistration()
