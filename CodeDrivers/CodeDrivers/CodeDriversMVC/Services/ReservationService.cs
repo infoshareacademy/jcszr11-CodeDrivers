@@ -54,5 +54,11 @@ namespace CodeDriversMVC.Services
                 .Where(r => !(r.ReservationTo <= newReservationFrom || r.ReservationFrom >= newReservationTo))
                 .Any();
         }
+
+        public bool IsCarAvailable2(int carId, DateTime newReservationFrom, DateTime newReservationTo)
+        {
+            return !_context.Cars.Where(r => r.Id == carId)
+                .Any();
+        }
     }
 }
