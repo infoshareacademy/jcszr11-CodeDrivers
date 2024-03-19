@@ -55,10 +55,5 @@ namespace CodeDriversMVC.Services
                 .Any();
         }
 
-        public bool IsCarAvailable2(int carId, DateTime newReservationFrom, DateTime newReservationTo)
-        {
-            return !_context.Cars.Where(r => r.Id == carId)
-                .Any();
-        }
     }
 }
