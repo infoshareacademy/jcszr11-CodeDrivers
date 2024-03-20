@@ -10,47 +10,47 @@
     <h4>Użytkownik</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             Imię
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Name)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             Nazwisko
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.LastName)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             Email
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Email)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             Numer telefonu
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.PhoneNumber)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             Numer prawa jazdy
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.DriversLicenceNumber)
         </dd>
         <dt class="col-sm-2">
             Zarezerwowane auto
         </dt>
         <dd class="col-sm-10">
-          @*   @if (Model.ReservedCar != null)
+            @*   @if (Model.ReservedCar != null)
             {
-                <p>@Model.ReservedCar.Brand @Model.ReservedCar.Model</p>
+            <p>@Model.ReservedCar.Brand @Model.ReservedCar.Model</p>
             }
             else
             {
-                <p>Brak zarezerwowanego auta</p>
+            <p>Brak zarezerwowanego auta</p>
             } *@
         </dd>
     </dl>
@@ -59,3 +59,39 @@
     <a asp-action="Edit" asp-route-email="@Model?.Email">Edytuj</a> |
     <a asp-action="ViewList">Powrót do listy</a>
 </div>
+<style>
+    div a {
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    div a[href*="Edit"] {
+        padding: 0.5rem 1rem;
+        border: 1px solid transparent;
+        border-radius: 0.25rem;
+        transition: border-color 0.3s, background-color 0.3s;
+        background-color: #54e86f;
+        font-weight: 500;
+        border-color: white;
+        color: white;
+    }
+
+    div a[href*="Edit"]:hover {
+        border-color: #54e86f;
+        color: black;
+        background-color: white;
+        font-weight: bold;
+    }
+
+    div a[href*="Edit"]:active {
+        background-color: #54e86f;
+        border-color: white;
+        color: white;
+        border: none;
+    }
+
+  
+    div a[href*="ViewList"]:hover{
+        color:gray;
+    }
+</style>

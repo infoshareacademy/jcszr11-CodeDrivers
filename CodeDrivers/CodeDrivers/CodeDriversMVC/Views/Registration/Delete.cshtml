@@ -55,3 +55,14 @@
         <a asp-action="ViewList">Powrót do listy</a>
     </form>
 </div>
+
+<style>
+    div a {
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+        div a[href*="ViewList"]:hover {
+            color: gray;
+        }
+</style>
