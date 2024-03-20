@@ -3,6 +3,8 @@ using CodeDriversMVC.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System.Threading.RateLimiting;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 
 namespace CodeDriversMVC
 {
@@ -25,6 +27,13 @@ namespace CodeDriversMVC
             builder.Services.AddAuthorization();
 
             var app = builder.Build();
+
+            var supportedCultures = new[] { "pl-PL" };
+            var localizationOptions = new RequestLocalizationOptions()
+                .SetDefaultCulture(supportedCultures[0])
+                .AddSupportedCultures(supportedCultures)
+                .AddSupportedUICultures(supportedCultures);
+            app.UseRequestLocalization(localizationOptions);
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
