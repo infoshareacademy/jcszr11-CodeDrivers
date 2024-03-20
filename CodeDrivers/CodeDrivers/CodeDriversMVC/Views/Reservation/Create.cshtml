@@ -10,7 +10,7 @@
 
         <p>Wybierz zakres dat dla Twojej rezerwacji</p>
         <hr />
-        <form asp-action="Create">
+        <form asp-action="Create" class="Reservation-Container">
             <input type="hidden" asp-for="@Model.CarId" />
             <input type="hidden" asp-for="@Model.Brand" />
             <input type="hidden" asp-for="@Model.Model" />
@@ -18,23 +18,23 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="UserEmail" class="control-label">Twój adres e-mail</label>
-                <input asp-for="UserEmail" class="form-control" />
+                <input asp-for="UserEmail" class="form-control" style="text-align:center;" />
                 <span asp-validation-for="UserEmail" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ReservationFrom" class="control-label">Początek rezerwacji</label>
-                <input asp-for="ReservationFrom" id="ReservationFrom" class="form-control" type="date" value="@(((DateTime)ViewData["DateStart"]).ToString("yyyy-MM-dd"))" />
+                <input asp-for="ReservationFrom" id="ReservationFrom" class="form-control" style="text-align:center;" type="date" value="@(((DateTime)ViewData["DateStart"]).ToString("yyyy-MM-dd"))" />
                 <span asp-validation-for="ReservationFrom" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ReservationTo" class="control-label">Koniec rezerwacji</label>
-                <input asp-for="ReservationTo" id="ReservationTo" class="form-control" type="date" value="@(((DateTime)ViewData["DateEnd"]).ToString("yyyy-MM-dd"))" />
+                <input asp-for="ReservationTo" id="ReservationTo" class="form-control" style="text-align:center;" type="date" value="@(((DateTime)ViewData["DateEnd"]).ToString("yyyy-MM-dd"))" />
                 <span asp-validation-for="ReservationTo" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="PricePerDay" class="control-label">Cena za dzień wynajmu</label>
                 <div class="input-group">
-                    <input asp-for="PricePerDay" type="number" id="PricePerDay" class="form-control" readonly style="background-color: #f8f9fa; cursor: not-allowed;" />
+                    <input asp-for="PricePerDay" type="number" id="PricePerDay" style="text-align:center;" class="form-control" readonly style="background-color: #f8f9fa; cursor: not-allowed;" />
                     <div class="input-group-append">
                         <span class="input-group-text">zł</span>
                     </div>

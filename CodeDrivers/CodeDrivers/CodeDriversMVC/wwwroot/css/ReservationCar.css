@@ -1,0 +1,8 @@
+﻿.Reservation-Container #UserEmail, /* Selektor dla pola UserEmail */
+.Reservation-Container #ReservationFrom, /* Selektor dla pola ReservationFrom */
+.Reservation-Container #ReservationTo, /* Selektor dla pola ReservationTo */
+.Reservation-Container #PricePerDay, /* Selektor dla pola PricePerDay */
+.Reservation-Container #TotalPrice { /* Selektor dla pola TotalPrice */
+    text-align: center;
+    background-color: red;
+}
