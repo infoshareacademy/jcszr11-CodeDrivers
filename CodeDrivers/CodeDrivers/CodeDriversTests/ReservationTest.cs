@@ -30,14 +30,18 @@ namespace CodeDriversTests
             var reservationService = new ReservationService(mockContext.Object);
 
             var carId = 3;
-            var newReservationFrom = DateTime.Now.AddDays(1);
-            var newReservationTo = DateTime.Now.AddDays(3);
+            var newReservationFrom = DateTime.Now.AddDays(5);
+            var newReservationTo = DateTime.Now.AddDays(8);
 
             // Act
             var isAvailable = reservationService.IsCarAvailable(carId, newReservationFrom, newReservationTo);
 
             // Assert
             Assert.True(isAvailable);
+        }
+        public void IsCarAvailable_WhenNoReservations_ReturnsFalse()
+        {
+
         }
 
 
