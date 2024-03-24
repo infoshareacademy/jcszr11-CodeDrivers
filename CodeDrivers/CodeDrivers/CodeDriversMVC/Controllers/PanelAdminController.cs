@@ -1,4 +1,5 @@
-﻿using CodeDriversMVC.Models;
+﻿using CodeDriversMVC.DataAccess;
+using CodeDriversMVC.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,15 +7,11 @@ namespace CodeDriversMVC.Controllers
 {
     public class PanelAdminController : Controller
     {
-        private readonly PanelAdmin panelAdmin;
-        public PanelAdminController()
-        {
-            panelAdmin = new PanelAdmin();
-        }
+        
         // GET: PanelAdminController
         public ActionResult Index()
         {
-            
+
             return View();
         }
 

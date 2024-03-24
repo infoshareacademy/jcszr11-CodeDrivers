@@ -1,0 +1,254 @@
+﻿@using CodeDriversMVC.Controllers
+@model IEnumerable<ReservationReportModel>
+
+<h2>Wszystkie rezerwacje</h2>
+@{
+    ViewBag.Title = "Wszystkie rezerwacje";
+}
+<div class="table-container">
+    <button onclick="resetFilters()" style="background-color:azure; border-radius:0.5rem; width: 9rem;height: 2.5rem; font-size: 1.2rem; border: 3px solid #ccc;"
+            onmousedown="this.style.fontWeight='bold'" onmouseup="this.style.fontWeight='normal'">
+        Resetuj filtry
+    </button>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <label>Marka auta:</label>
+                    <div class="filters">
+                        <select id="brandFilter" onchange="filterTable('brandFilter', 0)">
+                            <option value="">Wszystko</option>
+                            @foreach (var brand in Model.Select(c => c.Brand).Distinct())
+                            {
+                                <option>@brand</option>
+                            }
+                        </select>
+                    </div>
+                </th>
+                <th>
+                    <label>Model auta:</label>
+                    <div class="filters">
+                        <select id="modelFilter" onchange="filterTable('modelFilter', 1)">
+                            <option value="">Wszystko</option>
+                            @foreach (var carModel in Model.Select(c => c.Model).Distinct())
+                            {
+                                <option>@carModel</option>
+                            }
+                        </select>
+                    </div>
+                </th>
+                <th>
+                    <label>Od kiedy:</label>
+                    <div class="filters">
+                        <select id="fromDateFilter" onchange="filterTable('fromDateFilter', 2)">
+                            <option value="">Wszystko</option>
+                            @foreach (var fromDate in Model.Select(c => c.ReservationFrom.ToShortDateString()).Distinct())
+                            {
+                                <option>@fromDate</option>
+                            }
+                        </select>
+                    </div>
+                </th>
+                <th>
+                    <label>Do kiedy:</label>
+                    <div class="filters">
+                        <select id="toDateFilter" onchange="filterTable('toDateFilter', 3)">
+                            <option value="">Wszystko</option>
+                            @foreach (var toDate in Model.Select(c => c.ReservationTo.ToShortDateString()).Distinct())
+                            {
+                                <option>@toDate</option>
+                            }
+                        </select>
+                    </div>
+                </th>
+                <th>
+                    <label>Cena wynajmu:</label>
+                    <div class="filters">
+                        <select id="priceFilter" onchange="filterTable('priceFilter', 4)">
+                            <option value="">Wszystko</option>
+                            @foreach (var price in Model.Select(c => c.TotalReservationPrice).Distinct())
+                            {
+                                <option>@price</option>
+                            }
+                        </select>
+                    </div>
+                </th>
+                <th>
+                    <label>Email użytkownika:</label>
+                    <div class="filters">
+                        <select id="emailFilter" onchange="filterTable('emailFilter', 5)">
+                            <option value="">Wszystko</option>
+                            @foreach (var email in Model.Select(c => c.OwnerEmail).Distinct())
+                            {
+                                <option>@email</option>
+                            }
+                        </select>
+                    </div>
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var reservation in Model)
+            {
+                <tr style="color: @Html.Raw((new ReservationController(null, null, null)).GetReservationColor(reservation))" font-weight: "bold ">
+                    <td>@reservation.Brand</td>
+                    <td>@reservation.Model</td>
+                    <td>@reservation.ReservationFrom.ToShortDateString()</td>
+                    <td>@reservation.ReservationTo.ToShortDateString()</td>
+                    <td>@reservation.TotalReservationPrice</td>
+                    <td>@reservation.OwnerEmail</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div style="text-align: right; margin-bottom: 10px; font-size: 1.2rem; font-weight: bold">
+        <button class="Filter-Car" onclick="generatePDF()" style="background-color:#54e86f; color:white; border: 1px solid #ccc;"
+                onmouseover="this.style.backgroundColor='#ffffff'; this.style.color='black';"
+                onmouseout="this.style.backgroundColor='#54e86f'; this.style.color='white';">
+            Generuj raport w PDF
+        </button>
+    </div>
+</div>
+
+<script>
+    var previousFilterValues = {};
+
+    function filterTable(filterId, columnIndex) {
+        var selectedValue = document.getElementById(filterId).value;
+        var table = document.querySelector('.table tbody');
+        var rows = table.getElementsByTagName('tr');
+        var uniqueValues = [""];
+
+
+        for (var i = 0; i < rows.length; i++) {
+            var cells = rows[i].getElementsByTagName('td');
+            var cellValue = cells[columnIndex].innerText || cells[columnIndex].textContent;
+            if ((!selectedValue || cellValue === selectedValue) && (checkFilters(rows[i]))) {
+                if (!uniqueValues.includes(cellValue)) {
+                    uniqueValues.push(cellValue);
+                }
+            }
+        }
+
+
+        var select = document.getElementById(filterId);
+        var currentFilterValue = select.value;
+        select.innerHTML = '';
+
+        var allOption = document.createElement('option');
+        allOption.text = "Wszystko";
+        allOption.value = "";
+        select.add(allOption);
+
+
+        uniqueValues.forEach(function (value) {
+            if (value !== "") {
+                var option = document.createElement('option');
+                option.text = value;
+                option.value = value;
+                select.add(option);
+            }
+        });
+
+
+        if (uniqueValues.includes(currentFilterValue)) {
+            select.value = currentFilterValue;
+        }
+
+
+        if (selectedValue !== "") {
+            previousFilterValues[filterId] = selectedValue;
+        }
+
+
+        for (var i = 0; i < rows.length; i++) {
+            var cells = rows[i].getElementsByTagName('td');
+            var cellValue = cells[columnIndex].innerText || cells[columnIndex].textContent;
+            if ((!selectedValue || cellValue === selectedValue) && (checkFilters(rows[i]))) {
+                rows[i].style.display = "";
+            } else {
+                rows[i].style.display = "none";
+            }
+        }
+    }
+
+    function checkFilters(row) {
+
+        var brandFilter = document.getElementById("brandFilter").value;
+        var modelFilter = document.getElementById("modelFilter").value;
+        var fromDateFilter = document.getElementById("fromDateFilter").value;
+        var toDateFilter = document.getElementById("toDateFilter").value;
+        var priceFilter = document.getElementById("priceFilter").value;
+        var emailFilter = document.getElementById("emailFilter").value;
+
+        var cells = row.getElementsByTagName('td');
+        var brand = cells[0].innerText || cells[0].textContent;
+        var model = cells[1].innerText || cells[1].textContent;
+        var fromDate = cells[2].innerText || cells[2].textContent;
+        var toDate = cells[3].innerText || cells[3].textContent;
+        var price = cells[4].innerText || cells[4].textContent;
+        var email = cells[5].innerText || cells[5].textContent;
+
+        return (!brandFilter || brand === brandFilter) &&
+            (!modelFilter || model === modelFilter) &&
+            (!fromDateFilter || fromDate === fromDateFilter) &&
+            (!toDateFilter || toDate === toDateFilter) &&
+            (!priceFilter || price === priceFilter) &&
+            (!emailFilter || email === emailFilter);
+    }
+
+    function resetFilters() {
+
+        var selects = document.querySelectorAll('select');
+        selects.forEach(function (select) {
+            select.value = "";
+        });
+
+        filterTable('brandFilter', 0);
+        filterTable('modelFilter', 1);
+        filterTable('fromDateFilter', 2);
+        filterTable('toDateFilter', 3);
+        filterTable('priceFilter', 4);
+        filterTable('emailFilter', 5);
+    }
+    function generatePDF() {
+        var filters = {
+            brandFilter: document.getElementById("brandFilter").value,
+            modelFilter: document.getElementById("modelFilter").value,
+            fromDateFilter: document.getElementById("fromDateFilter").value,
+            toDateFilter: document.getElementById("toDateFilter").value,
+            priceFilter: document.getElementById("priceFilter").value,
+            emailFilter: document.getElementById("emailFilter").value
+        };
+
+        fetch('@Url.Action("GeneratePDFReport", "Reservation")?brandFilter=' + filters.brandFilter +
+            '&modelFilter=' + filters.modelFilter +
+            '&fromDateFilter=' + filters.fromDateFilter +
+            '&toDateFilter=' + filters.toDateFilter +
+            '&priceFilter=' + filters.priceFilter +
+            '&emailFilter=' + filters.emailFilter, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => response.blob())
+            .then(blob => {
+                const url = window.URL.createObjectURL(new Blob([blob]));
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'raport.pdf';
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+            })
+            .catch(error => console.error('Błąd:', error));
+    }
+
+
+
+
+
+</script>

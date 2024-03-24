@@ -10,7 +10,7 @@
 
         <p>Wybierz zakres dat dla Twojej rezerwacji</p>
         <hr />
-        <form asp-action="Create" class="Reservation-Container">
+        <form asp-action="Create">
             <input type="hidden" asp-for="@Model.CarId" />
             <input type="hidden" asp-for="@Model.Brand" />
             <input type="hidden" asp-for="@Model.Model" />
@@ -18,7 +18,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="UserEmail" class="control-label">Twój adres e-mail</label>
-                <input asp-for="UserEmail" class="form-control" style="text-align:center;" />
+                <input asp-for="UserEmail" class="form-control" readonly style="background-color: #f8f9fa; cursor: not-allowed;  />
                 <span asp-validation-for="UserEmail" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -60,7 +60,7 @@
 </div>
 
 <div style="display: flex; justify-content: center;">
-    <a asp-action="Index">Wróć do wyboru aut</a>
+    <a asp-controller="Home" asp-action="Index">Wróć do wyboru aut</a>
 </div>
 
 @section Scripts {
