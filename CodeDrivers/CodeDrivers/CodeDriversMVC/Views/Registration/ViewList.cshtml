@@ -6,7 +6,7 @@
 
 <h1>Lista użytkowników</h1>
 
-<p>
+<p class="ViewList">
     <a asp-action="Create">Dodaj nowego użytkownika</a>
 </p>
 <table class="table">
@@ -59,7 +59,7 @@
     </tbody>
 </table>
 <style>
-    p a {
+    .ViewList a {
         margin-left: 1rem;
         margin-bottom: 0.5rem;
         border: 1px solid #ccc;
@@ -79,7 +79,7 @@
 
     }
 
-    p a:hover {
+    .ViewList a:hover {
         color: black;
         background-color: white;
         border-color: #54e86f;
@@ -105,6 +105,4 @@
             border-color: white;
             color: white; 
         }
-
-
 </style>

@@ -550,7 +550,25 @@ label {
     max-width: 1400px;
     margin: 0 auto;
 }
-
+    .car-button-add a{
+        margin-left: 1rem;
+        margin-bottom: 0.5rem;
+        border: 1px solid #ccc;
+        background-color: #f9f9f9;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 0.5rem;
+        width: 15rem;
+        height: 2.5rem;
+        font-size: 1rem;
+        text-align: center;
+        font-weight: bold;
+        background-color: #54e86f;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+    }
 .car-add-button {
     margin-bottom: 20px;
 }
@@ -659,8 +677,9 @@ label {
         margin-left: -150px;
     }
     .edit-car-panel .form-group {
-        width: 80%;
+        width: 260%;
         margin-bottom: 20px;
+        margin-left: -100px
     }
 
     .edit-car-panel h1 {
