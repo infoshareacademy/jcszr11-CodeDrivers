@@ -5,89 +5,72 @@
 }
 
 
-<div class="login-panel">
-    <div class="col-md-4">
-        <h1>Formularz rejestracji</h1>
-        <p>Aby dokonać rezerwacji pojazdu, uzupełnij poniższe pola</p>
-        <hr />
-        <form asp-action="Register">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
-            <div class="form-group">
-                <label asp-for="Name" class="control-label">Imię</label>
-                <input asp-for="Name" class="form-control" data-val="true" data-val-required="To pole jest wymagane." />
-                <span asp-validation-for="Name" class="text-danger"></span>
+<div class="register-panel">
+    <h1>Formularz rejestracji</h1>
+    <p>Aby dokonać rejestracji, uzupełnij poniższe pola</p>
+    <hr />
+    <form asp-action="Register">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label for="Name">Imię</label>
+            <input id="Name" asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="LastName">Nazwisko</label>
+            <input id="LastName" asp-for="LastName" class="form-control" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="DateOfBirth">Data urodzenia</label>
+            <input id="DateOfBirth" type="date" asp-for="DateOfBirth" class="form-control" />
+            <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="Email">Adres e-mail</label>
+            <input id="Email" asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="Password">Hasło</label>
+            <input id="Password" type="password" asp-for="Password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="PasswordConfirmation">Potwierdź hasło</label>
+            <input id="PasswordConfirmation" type="password" name="PasswordConfirmation" class="form-control" />
+            <span class="text-danger">@Html.ValidationMessage("PasswordValidationError")</span>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <input class="form-check-input" type="checkbox" id="passwordShowCheckbox">
+                <label class="form-check-label" for="passwordShowCheckbox">
+                    Pokaż hasło
+                </label>
             </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label">Nazwisko</label>
-                <input asp-for="LastName" class="form-control" data-val="true" data-val-required="To pole jest wymagane." />
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateOfBirth" class="control-label">Data urodzenia</label>
-                <input asp-for="DateOfBirth" type="date" class="form-control" data-val="true" data-val-required="To pole jest wymagane." />
-                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
-                <span class="text-danger">@Html.ValidationMessage("DateOfBirthValidationError")</span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label">Adres e-mail</label>
-                <input asp-for="Email" class="form-control" data-val="true" data-val-required="To pole jest wymagane." />
-                <span asp-validation-for="Email" class="text-danger"></span>
-                <span class="text-danger">@Html.ValidationMessage("UserAlreadyExists")</span>
-                <span class="text-danger">@Html.ValidationMessage("EmailValidationError")</span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">Hasło</label>
-                <div class="input-group">
-                    <input asp-for="Password" class="form-control" type="password" data-val="true" data-val-required="To pole jest wymagane." id="passwordTextField" />
-                </div>
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">Potwierdź hasło</label>
-                <div class="input-group">
-                    <input name="PasswordConfirmation" class="form-control" type="password" data-val="true" data-val-required="To pole jest wymagane." id="passwordConfirmationTextField" />
-                </div>
-                <span class="text-danger">@Html.ValidationMessage("PasswordValidationError")</span>
-            </div>
-
-            @if (TempData["ErrorMessage"] != null)
-            {
-                <div class="text-danger">
-                    @TempData["ErrorMessage"]
-                </div>
-            }
-            <div class="form-group">
-                <div class="input-group">
-                    <input class="form-check-input" type="checkbox" id="passwordShowCheckbox">
-                    <label class="form-check-label" for="passwordShowCheckbox">
-                        Pokaż hasło
-                    </label>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="PhoneNumber" class="control-label">Numer telefonu</label>
-                <input asp-for="PhoneNumber" class="form-control" data-val="true" data-val-required="To pole jest wymagane." />
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-                <span class="text-danger">@Html.ValidationMessage("PhoneValidationError")</div>
-            <div class="form-group">
-                <label asp-for="DriversLicenceNumber" class="control-label">Numer prawa jazdy</label>
-                <input asp-for="DriversLicenceNumber" class="form-control" datDriversLicenceNumberl-required="To pole jest wymagane." />
-                <span asp-validation-for="DriversLicenceNumber" class="text-danger"></span>
-            </div>
-            <div class="text-danger">
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            </div>
-            <br />
-            <div class="form-group">
-                <input type="submit" value="Zapisz" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+        </div>
+        <div class="form-group">
+            <label for="PhoneNumber">Numer telefonu</label>
+            <input id="PhoneNumber" asp-for="PhoneNumber" class="form-control" />
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="DriversLicenceNumber">Numer prawa jazdy</label>
+            <input id="DriversLicenceNumber" asp-for="DriversLicenceNumber" class="form-control" />
+            <span asp-validation-for="DriversLicenceNumber" class="text-danger"></span>
+        </div>
+        <div class="text-danger">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Zapisz" class="btn btn-primary" />
+        </div>
+    </form>
 </div>
-<br />
-<div style="display: flex; justify-content: center;">
-    <a asp-action="Index">Back to List</a></div>
+
+<div class="back-container">
+    <a asp-action="Index">Wróć do listy</a>
+</div>
 
 
 @section Scripts {

@@ -4,57 +4,28 @@
     ViewData["Title"] = "ViewList";
 }
 
-<h1>Lista użytkowników</h1>
+<h1 style="text-align:center;">Lista użytkowników</h1>
 
-<p>
+<p class="add-user-button">
     <a asp-action="Create">Dodaj nowego użytkownika</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Imię
-            </th>
-            <th>
-                Nazwisko
-            </th>
-            <th>
-                Email
-            </th>
-            <th>
-                Numer telefonu
-            </th>
-            <th>
-                Numer prawa jazdy
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PhoneNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DriversLicenceNumber)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-email="@item.Email">Edytuj</a> |
-                    <a asp-action="Details" asp-route-email="@item.Email">Szczegóły</a> |
-                    <a asp-action="Delete" asp-route-email="@item.Email">Usuń</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+
+<div class="user-list">
+    @foreach (var item in Model)
+    {
+        <div class="user-card">
+            <div class="user-info">
+                <p><strong>Imię:</strong> @Html.DisplayFor(modelItem => item.Name)</p>
+                <p><strong>Nazwisko:</strong> @Html.DisplayFor(modelItem => item.LastName)</p>
+                <p><strong>Email:</strong> @Html.DisplayFor(modelItem => item.Email)</p>
+                <p><strong>Numer telefonu:</strong> @Html.DisplayFor(modelItem => item.PhoneNumber)</p>
+                <p><strong>Numer prawa jazdy:</strong> @Html.DisplayFor(modelItem => item.DriversLicenceNumber)</p>
+            </div>
+            <div class="user-actions">
+                <a asp-action="Edit" asp-route-email="@item.Email" class="action-link btn-edit">Edytuj</a>
+                <a asp-action="Details" asp-route-email="@item.Email" class="action-link btn-details">Szczegóły</a>
+                <a asp-action="Delete" asp-route-email="@item.Email" class="action-link btn-delete">Usuń</a>
+            </div>
+        </div>
+    }
+</div>

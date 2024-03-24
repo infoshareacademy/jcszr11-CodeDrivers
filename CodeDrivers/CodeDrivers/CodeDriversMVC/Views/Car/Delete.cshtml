@@ -4,59 +4,32 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<div class="delete-panel">
+    <h1 style="text-align: center;">Czy napewno chcesz usunąć to auto?</h1>
 
-<h3>Czy napewno chcesz usunąć to auto?</h3>
-<div>
-    <h4>Car</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            Id
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            Marka
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Brand)
-        </dd>
-        <dt class = "col-sm-2">
-            Model
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Model)
-        </dd>
-        <dt class = "col-sm-2">
-            Segment
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Segment)
-        </dd>
-        <dt class = "col-sm-2">
-            Skrzynia biegów
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.GearTransmission)
-        </dd>
-        <dt class = "col-sm-2">
-            Dostępność
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsAvailable)
-        </dd>
-        <dt class = "col-sm-2">
-            Stawka za dzień
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PricePerDay)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="submit" value="Usuń" class="btn btn-danger" /> |
-        <a asp-action="Index" class="custom-link">Wróć do listy</a>
-    </form>
+    <div>
+        <hr />
+        <dl>
+            <dt>Id</dt>
+            <dd>1</dd>
+            <dt>Marka</dt>
+            <dd>Toyota</dd>
+            <dt>Model</dt>
+            <dd>Corolla</dd>
+            <dt>Segment</dt>
+            <dd>Kompakt</dd>
+            <dt>Skrzynia biegów</dt>
+            <dd>Manualna</dd>
+            <dt>Dostępność</dt>
+            <dd>Tak</dd>
+            <dt>Stawka za dzień</dt>
+            <dd>100 PLN</dd>
+        </dl>
+
+        <form asp-action="Delete" method="POST" style="text-align: center;">
+            <input type="submit" value="Usuń" />
+            <a href="#" class="custom-link">Wróć do listy</a>
+        </form>
+    </div>
 </div>
+

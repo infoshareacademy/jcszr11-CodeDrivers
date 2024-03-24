@@ -1,8 +1,8 @@
-﻿.Reservation-Container #UserEmail, /* Selektor dla pola UserEmail */
-.Reservation-Container #ReservationFrom, /* Selektor dla pola ReservationFrom */
-.Reservation-Container #ReservationTo, /* Selektor dla pola ReservationTo */
-.Reservation-Container #PricePerDay, /* Selektor dla pola PricePerDay */
-.Reservation-Container #TotalPrice { /* Selektor dla pola TotalPrice */
+﻿.Reservation-Container #UserEmail,
+.Reservation-Container #ReservationFrom,
+.Reservation-Container #ReservationTo,
+.Reservation-Container #PricePerDay,
+.Reservation-Container #TotalPrice { 
     text-align: center;
     background-color: red;
 }

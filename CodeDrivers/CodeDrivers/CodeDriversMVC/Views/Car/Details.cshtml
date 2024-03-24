@@ -6,7 +6,7 @@
 
 <h1>Szczegóły</h1>
 
-<div>
+<div class="details-panel">
     <h4>Car</h4>
     <hr />
     <dl class="row">
@@ -41,9 +41,9 @@
             @Html.DisplayFor(model => model.GearTransmission)
         </dd>
         <dt class = "col-sm-2">
-            Dostępność
+            Dostępność: 
         </dt>
-        <dd class = "col-sm-10">
+        <dd>
             @Html.DisplayFor(model => model.IsAvailable)
         </dd>
         <dt class = "col-sm-2">
@@ -54,7 +54,7 @@
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id" class="custom-link">Edytuj</a>
-    <a asp-action="Index" class="custom-link">Wróć do listy</a>
+<div class="car-actions">
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="back-container">Edytuj</a>
+    <a asp-action="Index" class="back-container">Wróć do listy</a>
 </div>

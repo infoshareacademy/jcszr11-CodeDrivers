@@ -5,25 +5,23 @@
 }
 
 
-<div class="row center-form">
-    <div class="col-md-4">
+<div class="center-form">
+    <div class="form-container">
         <h1>Dodawanie pojazdów</h1>
-
         <p>Aby dodać pojazd, uzupełnij poniższe pola</p>
         <hr />
         <form asp-action="Create" method="post" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger" ></div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="form-group">
-                <label asp-for="Brand" class="control-label">Marka pojazdu</label>
+            <div class="form-field">
+                <label asp-for="Brand" class="control-label smaller-label">Marka pojazdu</label>
                 <select asp-for="Brand" class="form-control" id="brandDropdown" asp-items="Html.GetEnumSelectList<CodeDrivers.Models.Car.CarBrand>()">
                 </select>
             </div>
-            <div class="form-group">
-                <label asp-for="Model" class="control-label">Model pojazdu</label>
+            <div class="form-field">
+                <label asp-for="Model" class="control-label smaller-label">Model pojazdu</label>
                 <span asp-validation-for="Model" class="text-danger"></span>
                 <span id="selectModelId">
-
                     <select asp-for="Model" class="form-control" id="modelDropdown" name="Model">
                         @foreach (var car in Model.Models)
                         {
@@ -32,48 +30,51 @@
                     </select>
                 </span>
             </div>
-         
-            <div class="form-group">
-                <label asp-for="Segment" class="control-label">Segment</label>
+            <div class="form-field">
+                <label asp-for="Segment" class="control-label smaller-label">Segment</label>
                 <span asp-validation-for="Segment" class="text-danger"></span>
                 <select asp-for="Segment" class="form-control" asp-items="Html.GetEnumSelectList<CodeDrivers.Models.Car.CarSegment>()">
                 </select>
             </div>
-            <div class="form-group">
-                <label asp-for="Motor" class="control-label">Rodzaj napędu</label>
+            <div class="form-field">
+                <label asp-for="Motor" class="control-label smaller-label">Rodzaj napędu</label>
                 <select asp-for="Motor" class="form-control" asp-items="Html.GetEnumSelectList<CodeDrivers.Models.Car.MotorType>()">
                 </select>
             </div>
-            <div class="form-group">
-                <label asp-for="GearTransmission" class="control-label">Skrzynia biegów</label>
+            <div class="form-field">
+                <label asp-for="GearTransmission" class="control-label smaller-label">Skrzynia biegów</label>
                 <select asp-for="GearTransmission" class="form-control" asp-items="Html.GetEnumSelectList<CodeDrivers.Models.Car.GearType>()">
                 </select>
             </div>
-            <div class="form-group">
-                <label asp-for="PricePerDay" class="control-label">Stawka za dzień</label>
+            <div class="form-field">
+                <label asp-for="PricePerDay" class="control-label smaller-label">Stawka za dzień</label>
                 <input asp-for="PricePerDay" class="form-control" data-val="true" data-val-required="To pole jest wymagane." />
                 <span asp-validation-for="PricePerDay" class="text-danger"></span>
                 <span class="text-danger">@Html.ValidationMessage("PriceIsLessThan50Error")</span>
             </div>
-                <div class="form-group">
-                    <label asp-for="ImageFile">Zdjęcie</label>
-                    <input asp-for="ImageFile" type="file" class="form-control" />
+            <div class="form-field">
+                <label asp-for="ImageFile" class="control-label smaller-label">Zdjęcie</label>
+                <input asp-for="ImageFile" type="file" class="form-control" />
                 <span asp-validation-for="ImageFile" class="text-danger"></span>
-                </div>
-            <br>
-            <div class="form-group">
+            </div>
+            <div class="form-field">
                 <input type="submit" value="Dodaj pojazd" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-<div style="display: flex; justify-content: center;">
+<div class="center">
     <a asp-action="Index" class="custom-link">Wróć do listy</a>
 </div>
 
+
+
+
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 
     <script type="text/javascript">
         $(document).ready(function () {

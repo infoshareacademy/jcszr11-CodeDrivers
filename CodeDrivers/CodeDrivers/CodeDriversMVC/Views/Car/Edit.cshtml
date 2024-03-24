@@ -4,13 +4,13 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1 style="text-align:center;">Edit</h1>
 
-<h4>Edytuj auto</h4>
+<h4 style="text-align:center;">Edytuj auto</h4>
 <hr />
-<div class="row">
+<div class="edit-car-panel">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Brand" class="control-label">Marka</label>
@@ -28,7 +28,7 @@
                 <span asp-validation-for="Segment" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="GearTransmission" class="control-label">Skrzynia biegów</label>
+                <label asp-for="GearTransmission">Skrzynia biegów</label>
                 <input asp-for="GearTransmission" class="form-control" />
                 <span asp-validation-for="GearTransmission" class="text-danger"></span>
             </div>
@@ -39,20 +39,32 @@
             </div>
             <div class="form-group">
                 <label asp-for="PricePerDay" class="control-label">Stawka dzienna</label>
-                <input asp-for="PricePerDay" class="form-control" type="number"/>
+                <input asp-for="PricePerDay" class="form-control" type="number" />
                 <span asp-validation-for="PricePerDay" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Zapisz" class="btn btn-primary" />
+                <label asp-for="ImageFile" class="control-label">Zdjęcie</label>
+                <input asp-for="ImageFile" type="file" class="form-control" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Zapisz" />
             </div>
         </form>
     </div>
+    <div class="edit-image-car">
+        <img class="edit-image-car" src="~/Images/@Model.ImageFileName" />
+    </div>
 </div>
 
-<div>
+<div class="back-container">
     <a class="custom-link" asp-action="Index">Wróć do listy</a>
 </div>
 
+
+
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
